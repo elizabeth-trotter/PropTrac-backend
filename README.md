@@ -1,54 +1,53 @@
-PropTrac Objective:
-Create an API & Database for our front end.
+### PropTrac Objective:
+**Create an API & Database for our front end.**
 
-Requirements:
-    - 
-    
-    Pages
-        - Login
-            - create manager account
-            - login manager
-            - login tenant
+### Requirements:
+
+- Pages
+    - Login
+        - create manager account
+        - login manager
+        - login tenant
         
-        MANAGER:
-            - AdminDash
-                - display property review overview graph
-                - display maintenance requests
-                - display active tenants, open listing, properties
-                - display..
-                - (*no add, edit, or delete on dash)
+    - MANAGER:
+        - AdminDash
+            - display property review overview graph
+            - display maintenance requests
+            - display active tenants, open listing, properties
+            - display..
+            - (*no add, edit, or delete on dash)
 
-            - Properties
-                - add property
+        - Properties
+            - add property
 
-            - Property Details
-                - edit property
-                - delete property
+        - Property Details
+            - edit property
+            - delete property
 
-            - Account
-                - edit account
-                - add file
-                - remove file
+        - Account
+            - edit account
+            - add file
+            - remove file
 
-            - Payments
+        - Payments
 
-            - Tenants
-                - add tenant
-                - edit tenant
-                - remove tenant
+        - Tenants
+            - add tenant
+            - edit tenant
+            - remove tenant
 
-            - Service
-                - add maintenance request
-                - edit maintenance request
-                - remove maintenance request
+        - Service
+            - add maintenance request
+            - edit maintenance request
+            - remove maintenance request
 
-        TENANTS:
-            - TenantDash
-                - get file
-                - add maintenance request
+    - TENANTS:
+        - TenantDash
+            - get file
+            - add maintenance request
 
 
-Controllers / folder
+- Controllers / folder
     - UserController / file
         - Create user / endpoint | C
         - Login user / endpoint  | R
@@ -90,7 +89,7 @@ Controllers / folder
         - Get payments from Stripe?
 
 
-Services / folder
+- Services / folder
     - Context / folder
         - DataContext / file
 
@@ -140,7 +139,7 @@ Services / folder
 
     
 ### Need to finish models (need to change ERD to match)
-Models / folder
+- Models / folder
     - UserModel / file
         int ID
         string Username
