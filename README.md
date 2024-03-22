@@ -141,33 +141,33 @@
 ### Need to finish models (need to change ERD to match)
 - Models / folder
     - UserModel / file
-        int ID
-        string Username
-        string Salt
-        string Hash
+        - int ID
+        - string Username
+        - string Salt
+        - string Hash
 
     - BlogItemModel / file (model for each blog item)
-        int ID
-        int UserID
-        string PublishedName
-        string Date
-        string Title
-        string Description
-        string Image
-        string Tags
-        string Categories
-        bool IsPublished
-        bool IsDeleted (soft delete, still in database. can be recovered.)
+        - int ID
+        - int UserID
+        - string PublishedName
+        - string Date
+        - string Title
+        - string Description
+        - string Image
+        - string Tags
+        - string Categories
+        - bool IsPublished
+        - bool IsDeleted (soft delete, still in database. can be recovered.)
 
         - DTOs / folder (data transfer object)
             - LoginDTO
-                string Username
-                string Password
+                - string Username
+                - string Password
             - CreateAccountDTO / file
-                int ID = 0
-                string Username
-                string Password
+                - int ID = 0
+                - string Username
+                - string Password
             - PasswordDTO / file
-                string Salt
-                string Hash
+                - string Salt
+                - string Hash
 
