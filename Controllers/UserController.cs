@@ -21,10 +21,12 @@ namespace PropTrac_backend.Controllers
         // Login endpoint
 
         // AddUser endpoint
-            // if user already exists
-            // if user does not exist, create new account
-            // else return false
+        // if user already exists
+        // if user does not exist, create new account
+        // else return false
 
+        [HttpPost]
+        [Route("AddUser")]
         public bool AddUser(CreateAccountDTO UserToAdd)
         {
             return _data.AddUser(UserToAdd);
