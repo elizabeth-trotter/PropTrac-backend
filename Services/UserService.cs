@@ -1,15 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Services.Context;
 
 namespace PropTrac_backend.Services
 {
-    public class UserService
+    public class UserService : ControllerBase
     {
         private readonly DataContext _context;
         public UserService(DataContext context)
@@ -97,5 +102,58 @@ namespace PropTrac_backend.Services
 
             return newHash == storedHash;
         }
+
+        public IActionResult Login(LoginDTO User)
+        {
+            IActionResult Result = Unauthorized();
+
+            //check if user exists
+            if (DoesUserExist(User.Username))
+            {
+                //if true, continue with authentication
+                //if true, store our user object
+
+                UserModel foundUser = GetUserByUsername(User.Username);
+
+                //check if password is correct
+                if (VerifyUsersPassword(User.Password, foundUser.Hash, foundUser.Salt))
+                {
+                    //anyone with this code can access the login
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+
+                    //sign in credentials
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                    //generate new token and log user out after 30 min
+                    var tokeOptions = new JwtSecurityToken(
+                        issuer: "http://localhost:5000",
+                        audience: "http://localhost:5000",
+                        claims: new List<Claim>(), // Claims can be added here if needed
+                        expires: DateTime.Now.AddMinutes(30), // Set token expiration time (e.g., 30 minutes)
+                        signingCredentials: signinCredentials // Set signing credentials
+                    );
+
+                    // Generate JWT token as a string
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+
+                    //return JWT token through http response with status code 200
+                    Result = Ok(new { Token = tokenString });
+                }
+
+                //Token:
+                // asdsafdafdafdf. = header
+                // cmsjdjadds. = Payload: contains claims such as expiration time
+                // iweoiwidjin. = signature encrypts and combines header and payload using secret key
+            }
+
+            return Result;
+        }
+
+        public UserModel GetUserByUsername(string username)
+        {
+            return _context.UserInfo.SingleOrDefault(user => user.Username == username);
+        }
+
+        
     }
 }

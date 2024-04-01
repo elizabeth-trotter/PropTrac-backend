@@ -19,6 +19,11 @@ namespace PropTrac_backend.Controllers
         }
 
         // Login endpoint
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login([FromBody] LoginDTO User){
+            return _data.Login(User);
+        }
 
         // AddUser endpoint
         // if user already exists
