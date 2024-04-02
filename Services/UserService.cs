@@ -21,20 +21,20 @@ namespace PropTrac_backend.Services
         {
             _context = context;
         }
-        public bool DoesUserExist(string Username)
+        public bool DoesUserExist(string usernameOrEmail)
         {
-            //check if username exists
+            //check if username or email exists
             //if 1 matches, then return the item
             //if no item matches, then return null
 
-            return _context.UserInfo.SingleOrDefault(user => user.Username == Username) != null;
+            return _context.UserInfo.SingleOrDefault(user => user.Username == usernameOrEmail || user.Email == usernameOrEmail) != null;
         }
         public bool AddUser(CreateAccountDTO UserToAdd)
         {
             bool result = false;
 
             //if user doesn't exist, add user
-            if (!DoesUserExist(UserToAdd.Username))
+            if (!(DoesUserExist(UserToAdd.Username) || DoesUserExist(UserToAdd.Email)))
             {
                 UserModel newUser = new UserModel();
 
@@ -44,6 +44,7 @@ namespace PropTrac_backend.Services
                 newUser.Username = UserToAdd.Username;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
+                newUser.Email = UserToAdd.Email;
 
                 //adds newUser to the database
                 _context.Add(newUser);
@@ -108,12 +109,12 @@ namespace PropTrac_backend.Services
             IActionResult Result = Unauthorized();
 
             //check if user exists
-            if (DoesUserExist(User.Username))
+            if (DoesUserExist(User.UsernameOrEmail))
             {
                 //if true, continue with authentication
                 //if true, store our user object
 
-                UserModel foundUser = GetUserByUsername(User.Username);
+                UserModel foundUser = GetUserByUsernameOrEmail(User.UsernameOrEmail);
 
                 //check if password is correct
                 if (VerifyUsersPassword(User.Password, foundUser.Hash, foundUser.Salt))
@@ -147,6 +148,12 @@ namespace PropTrac_backend.Services
             }
 
             return Result;
+        }
+
+        public UserModel GetUserByUsernameOrEmail(string usernameOrEmail)
+        {
+            // Query the database to find the user by username or email
+            return _context.UserInfo.FirstOrDefault(user => user.Username == usernameOrEmail || user.Email == usernameOrEmail);
         }
 
         public UserModel GetUserByUsername(string username)
