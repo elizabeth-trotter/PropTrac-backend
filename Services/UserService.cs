@@ -45,6 +45,7 @@ namespace PropTrac_backend.Services
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
                 newUser.Email = UserToAdd.Email;
+                newUser.IsManager = UserToAdd.IsManager;
 
                 //adds newUser to the database
                 _context.Add(newUser);
