@@ -154,6 +154,56 @@ namespace PropTrac_backend.Services
             return _context.UserInfo.SingleOrDefault(user => user.Username == username);
         }
 
-        
+        public bool UpdateUser(UserModel userToUpdate)
+        {
+            _context.Update<UserModel>(userToUpdate);
+            return _context.SaveChanges() != 0;
+        }
+
+        public bool UpdateUsername(int id, string username)
+        {
+            //sending over just the id and username
+            //we have to get the object to be updated
+
+            UserModel foundUser = GetUserById(id);
+
+            bool result = false;
+
+            if (foundUser != null)
+            {
+                // a user was found
+                // update foundUser object
+                foundUser.Username = username;
+                _context.Update<UserModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+
+            return result;
+        }
+
+        public UserModel GetUserById(int id)
+        {
+            return _context.UserInfo.SingleOrDefault(user => user.ID == id);
+        }
+
+        public bool DeleteUser(string userToDelete)
+        {
+            //we are only sending over the username
+            //if username found, delete user
+
+            UserModel foundUser = GetUserByUsername(userToDelete);
+
+            bool result = false;
+
+            if (foundUser != null)
+            {
+                //user was found
+
+                _context.Remove<UserModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+
+            return result;
+        }
     }
 }
