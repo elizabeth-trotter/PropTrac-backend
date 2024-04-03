@@ -1,174 +1,29 @@
-### PropTrac Objective:
-**Create an API & Database for our front end.**
-
-### Requirements:
-
-- Pages
-    - Login
-        - create manager account
-        - create tenant account?
-        - login manager
-        - login tenant
-        
-    - MANAGER:
-        - AdminDash
-            - display property review overview graph
-            - display maintenance requests
-            - display active tenants, open listing, properties
-            - display..
-            - (*no add, edit, or delete on dash)
-
-        - Properties
-            - add property
-
-        - Property Details
-            - edit property
-            - delete property
-
-        - Account
-            - edit account
-            - add file
-            - remove file
-
-        - Payments
-
-        - Tenants
-            - add tenant
-            - edit tenant
-            - remove tenant
-
-        - Service
-            - add maintenance request
-            - edit maintenance request
-            - remove maintenance request
-
-    - TENANTS:
-        - TenantDash
-            - get file
-            - add maintenance request
+# PropTrac Backend
 
 
-- Controllers / folder
-    - UserController / file
-        - Create user / endpoint | C
-        - Login user / endpoint  | R
-        - Update user / endpoint | U
-        - Delete user / endpoint | D
-        - Get file by user.id?
+## API
 
-    - TenantUserController / file
-        - Create tenantUser / endpoint | C
-        - Login tenantUser / endpoint  | R
-        - Update tenantUser / endpoint | U
-        - Delete tenantUser / endpoint | D
-        - Get tenantUser by firstName
-        - Get tenantUser by lastName
-        - Get tenantUser by email
-        - Get tenantUser by phone
-        - Get tenantUser by location
-        - Get tenantUser by leaseType
-        - Get tenantUser by leaseStart
-        - Get tenantUser by leaseEnd
-        - Get file by tenantUser?
+**Details:** API is deployed on Azure: https://proptracapi.azurewebsites.net
 
-    - PropertyController / file
-        - Create Property / endpoint | C
-        - Get Property / endpoint    | R
-        - Update Property / endpoint | U
-        - Delete Property / endpoint | D
-        - Get Property by propId? (search functionality not on Figma)
-        - Get Property by address? (key not in ERD)
-        - Get Property by tenants? (search functionality not on Figma)
-
-    - ServiceController / file (not on Figma or ERD)
-        - Create service / endpoint | C
-        - Get service / endpoint    | R
-        - Update service / endpoint | U
-        - Delete service / endpoint | D
-
-    - PaymentsController?
-        - Get payments from Stripe?
+> [!IMPORTANT]
+> Please view the table below for specific endpoints/ requests. 
 
 
-- Services / folder
-    - Context / folder
-        - DataContext / file
+<h2 align="center">PropTrac API Endpoints</h2>
 
-    - PasswordService / file
-        - Hash Password
-        - Verify HashPassword
+| Description | HTTP Method | Endpoint[^1] | Parameter Type (Body or URL) | Parameter Requirements |
+| ------------- | :-------------: | ------------- | ------------- |
+| Create an Account (Manager or Tenant)  | `POST`  | /User/AddUser  | Body | int ID, string Username, string Password, string Email, bool IsManager, string FirstName, string LastName |
+| Login (Manager or Tenant) | `POST`  | /User/Login  | Body | string UsernameOrEmail, string Password |
 
-        - UserController / file
-        - Create user / endpoint | C
-        - Login user / endpoint  | R
-        - Update user / endpoint | U
-        - Delete user / endpoint | D
-        - Get file by user.id?
+[^1]: All fields within { } are required to make an API call
 
-    - TenantUserController / file
-        - Create tenantUser / endpoint | C
-        - Login tenantUser / endpoint  | R
-        - Update tenantUser / endpoint | U
-        - Delete tenantUser / endpoint | D
-        - Get tenantUser by firstName
-        - Get tenantUser by lastName
-        - Get tenantUser by email
-        - Get tenantUser by phone
-        - Get tenantUser by location
-        - Get tenantUser by leaseType
-        - Get tenantUser by leaseStart
-        - Get tenantUser by leaseEnd
-        - Get file by tenantUser?
 
-    - PropertyController / file
-        - Create Property / endpoint | C
-        - Get Property / endpoint    | R
-        - Update Property / endpoint | U
-        - Delete Property / endpoint | D
-        - Get Property by propId? (search functionality not on Figma)
-        - Get Property by address? (key not in ERD)
-        - Get Property by tenants? (search functionality not on Figma)
+## Database
 
-    - ServiceController / file (not on Figma or ERD)
-        - Create service / endpoint | C
-        - Get service / endpoint    | R
-        - Update service / endpoint | U
-        - Delete service / endpoint | D
+**Details:** Database is Azure SQL. (Basic Free Plan)
 
-    - PaymentsController?
-        - Get payments from Stripe?
+<h2 align="center">Entity Relationship Diagram</h2>
 
-    
-### Need to finish models (need to change ERD to match)
-- Models / folder
-    - UserModel / file
-        - int ID
-        - string Username
-        - string Salt
-        - string Hash
-
-    - BlogItemModel / file (model for each blog item)
-        - int ID
-        - int UserID
-        - string PublishedName
-        - string Date
-        - string Title
-        - string Description
-        - string Image
-        - string Tags
-        - string Categories
-        - bool IsPublished
-        - bool IsDeleted (soft delete, still in database. can be recovered.)
-
-        - DTOs / folder (data transfer object)
-            - LoginDTO
-                - string Username
-                - string Password
-            - CreateAccountDTO / file
-                - int ID = 0
-                - string Username
-                - string Password
-            - PasswordDTO / file
-                - string Salt
-                - string Hash
-
+![Entity relationship diagram](ERD_V2_3.25.2024.png)
+<p align="right">Figure 1: ERD illustrating database schema updated March 25, 2024</p>
