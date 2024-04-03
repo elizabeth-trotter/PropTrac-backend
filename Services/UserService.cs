@@ -47,8 +47,31 @@ namespace PropTrac_backend.Services
                 newUser.Email = UserToAdd.Email;
                 newUser.IsManager = UserToAdd.IsManager;
 
-                //adds newUser to the database
-                _context.Add(newUser);
+                //adds newUser to the UserInfo table in database
+                _context.UserInfo.Add(newUser);
+
+                if (!UserToAdd.IsManager)
+                {
+                    var newTenant = new TenantModel
+                    {
+                        FirstName = UserToAdd.FirstName,
+                        LastName = UserToAdd.LastName,
+                        User = newUser // Assigning the user to the Tenant table
+                    };
+
+                    _context.Tenants.Add(newTenant);
+                }
+                else
+                {
+                    var newManager = new ManagerModel
+                    {
+                        FirstName = UserToAdd.FirstName,
+                        LastName = UserToAdd.LastName,
+                        User = newUser // Assigning the user to the Manager table
+                    };
+
+                    _context.Managers.Add(newManager);
+                }
 
                 //save into database, return of number of entries written into database
                 result = _context.SaveChanges() != 0;
