@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace PropTrac_backend.Migrations
 {
     /// <inheritdoc />
@@ -12,7 +14,7 @@ namespace PropTrac_backend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DocumentsModel",
+                name: "Documents",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -24,11 +26,11 @@ namespace PropTrac_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DocumentsModel", x => x.ID);
+                    table.PrimaryKey("PK_Documents", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PropertyInfoModel",
+                name: "PropertyInfo",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -50,7 +52,40 @@ namespace PropTrac_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PropertyInfoModel", x => x.ID);
+                    table.PrimaryKey("PK_PropertyInfo", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SecurityQuestion",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Question = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SecurityQuestion", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoomInfo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomRent = table.Column<int>(type: "int", nullable: false),
+                    PropertyInfoID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoomInfo", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RoomInfo_PropertyInfo_PropertyInfoID",
+                        column: x => x.PropertyInfoID,
+                        principalTable: "PropertyInfo",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,29 +98,17 @@ namespace PropTrac_backend.Migrations
                     Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Hash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsManager = table.Column<bool>(type: "bit", nullable: false)
+                    IsManager = table.Column<bool>(type: "bit", nullable: false),
+                    SecurityAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityQuestionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserInfo", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoomInfoModel",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomRent = table.Column<int>(type: "int", nullable: false),
-                    PropertyInfoID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoomInfoModel", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_RoomInfoModel_PropertyInfoModel_PropertyInfoID",
-                        column: x => x.PropertyInfoID,
-                        principalTable: "PropertyInfoModel",
+                        name: "FK_UserInfo_SecurityQuestion_SecurityQuestionID",
+                        column: x => x.SecurityQuestionID,
+                        principalTable: "SecurityQuestion",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -136,19 +159,19 @@ namespace PropTrac_backend.Migrations
                 {
                     table.PrimaryKey("PK_Tenants", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Tenants_DocumentsModel_DocumentID",
+                        name: "FK_Tenants_Documents_DocumentID",
                         column: x => x.DocumentID,
-                        principalTable: "DocumentsModel",
+                        principalTable: "Documents",
                         principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_Tenants_PropertyInfoModel_PropertyInfoID",
+                        name: "FK_Tenants_PropertyInfo_PropertyInfoID",
                         column: x => x.PropertyInfoID,
-                        principalTable: "PropertyInfoModel",
+                        principalTable: "PropertyInfo",
                         principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_Tenants_RoomInfoModel_RoomInfoID",
+                        name: "FK_Tenants_RoomInfo_RoomInfoID",
                         column: x => x.RoomInfoID,
-                        principalTable: "RoomInfoModel",
+                        principalTable: "RoomInfo",
                         principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Tenants_UserInfo_UserID",
@@ -159,7 +182,7 @@ namespace PropTrac_backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TenantPaymentInfoModel",
+                name: "TenantPaymentInfo",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -172,13 +195,23 @@ namespace PropTrac_backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TenantPaymentInfoModel", x => x.ID);
+                    table.PrimaryKey("PK_TenantPaymentInfo", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_TenantPaymentInfoModel_Tenants_TenantID",
+                        name: "FK_TenantPaymentInfo_Tenants_TenantID",
                         column: x => x.TenantID,
                         principalTable: "Tenants",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "SecurityQuestion",
+                columns: new[] { "ID", "Question" },
+                values: new object[,]
+                {
+                    { 1, "What is your mother's maiden name?" },
+                    { 2, "What is the name of your first pet?" },
+                    { 3, "What was the name of your first stuffed animal?" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -188,13 +221,13 @@ namespace PropTrac_backend.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomInfoModel_PropertyInfoID",
-                table: "RoomInfoModel",
+                name: "IX_RoomInfo_PropertyInfoID",
+                table: "RoomInfo",
                 column: "PropertyInfoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TenantPaymentInfoModel_TenantID",
-                table: "TenantPaymentInfoModel",
+                name: "IX_TenantPaymentInfo_TenantID",
+                table: "TenantPaymentInfo",
                 column: "TenantID",
                 unique: true);
 
@@ -222,6 +255,11 @@ namespace PropTrac_backend.Migrations
                 table: "Tenants",
                 column: "UserID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserInfo_SecurityQuestionID",
+                table: "UserInfo",
+                column: "SecurityQuestionID");
         }
 
         /// <inheritdoc />
@@ -231,22 +269,25 @@ namespace PropTrac_backend.Migrations
                 name: "Managers");
 
             migrationBuilder.DropTable(
-                name: "TenantPaymentInfoModel");
+                name: "TenantPaymentInfo");
 
             migrationBuilder.DropTable(
                 name: "Tenants");
 
             migrationBuilder.DropTable(
-                name: "DocumentsModel");
+                name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "RoomInfoModel");
+                name: "RoomInfo");
 
             migrationBuilder.DropTable(
                 name: "UserInfo");
 
             migrationBuilder.DropTable(
-                name: "PropertyInfoModel");
+                name: "PropertyInfo");
+
+            migrationBuilder.DropTable(
+                name: "SecurityQuestion");
         }
     }
 }

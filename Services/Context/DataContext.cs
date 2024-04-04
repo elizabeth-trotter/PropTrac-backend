@@ -29,8 +29,9 @@ namespace PropTrac_backend.Services.Context
 
             // Seed predefined security questions
             builder.Entity<SecurityQuestionModel>().HasData(
-                new SecurityQuestionModel { ID = 1, Question = "What is your mother's maiden name?" },
-                new SecurityQuestionModel { ID = 2, Question = "What is the name of your first pet?" },
+                new SecurityQuestionModel { ID = 0, Question = "What is your mother's maiden name?" },
+                new SecurityQuestionModel { ID = 1, Question = "What is the name of your first pet?" },
+                new SecurityQuestionModel { ID = 2, Question = "What was your favorite teacher's name?" },
                 new SecurityQuestionModel { ID = 3, Question = "What was the name of your first stuffed animal?" }
                 // Add more questions as needed
             );

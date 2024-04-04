@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240404014256_init")]
+    [Migration("20240404204331_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -47,7 +47,7 @@ namespace PropTrac_backend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("DocumentsModel");
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.ManagerModel", b =>
@@ -149,7 +149,7 @@ namespace PropTrac_backend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("PropertyInfoModel");
+                    b.ToTable("PropertyInfo");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.RoomInfoModel", b =>
@@ -170,7 +170,41 @@ namespace PropTrac_backend.Migrations
 
                     b.HasIndex("PropertyInfoID");
 
-                    b.ToTable("RoomInfoModel");
+                    b.ToTable("RoomInfo");
+                });
+
+            modelBuilder.Entity("PropTrac_backend.Models.SecurityQuestionModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("SecurityQuestion");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Question = "What is your mother's maiden name?"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Question = "What is the name of your first pet?"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Question = "What was the name of your first stuffed animal?"
+                        });
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.TenantModel", b =>
@@ -259,7 +293,7 @@ namespace PropTrac_backend.Migrations
                     b.HasIndex("TenantID")
                         .IsUnique();
 
-                    b.ToTable("TenantPaymentInfoModel");
+                    b.ToTable("TenantPaymentInfo");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.UserModel", b =>
@@ -285,11 +319,20 @@ namespace PropTrac_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SecurityAnswer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SecurityQuestionID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("SecurityQuestionID");
 
                     b.ToTable("UserInfo");
                 });
@@ -354,6 +397,17 @@ namespace PropTrac_backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("PropTrac_backend.Models.UserModel", b =>
+                {
+                    b.HasOne("PropTrac_backend.Models.SecurityQuestionModel", "SecurityQuestion")
+                        .WithMany()
+                        .HasForeignKey("SecurityQuestionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SecurityQuestion");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.DocumentsModel", b =>
