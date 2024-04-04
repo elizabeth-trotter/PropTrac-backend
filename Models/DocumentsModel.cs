@@ -13,9 +13,12 @@ namespace PropTrac_backend.Models
         public byte[]? Content { get; set; }
         public DateTime UploadDate { get; set; }
 
+        // Connection to TenantModel
+        public TenantModel? Tenant { get; set; }  // Navigation property
+
         public DocumentsModel()
         {
-            
+
         }
     }
 }

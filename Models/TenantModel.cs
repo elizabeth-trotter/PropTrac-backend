@@ -20,19 +20,21 @@ namespace PropTrac_backend.Models
         public UserModel User { get; set; } // Navigation property
 
         // Connection to TenantPaymentInfoModel
-        public TenantPaymentInfoModel TenantPaymentInfo { get; set; } // Navigation property
+        public TenantPaymentInfoModel? TenantPaymentInfo { get; set; } // Navigation property
 
         // Connection to RoomInfoModel
-        public int RoomInfoID { get; set; } // Foreign key
-        public RoomInfoModel RoomInfo { get; set; } // Navigation property
+        public int? RoomInfoID { get; set; } // Foreign key
+        public RoomInfoModel? RoomInfo { get; set; } // Navigation property
 
         // Connection to PropertyInfoModel
-        public int PropertyInfoID { get; set; } // Foreign key
-        public PropertyInfoModel PropertyInfo { get; set; } // Navigation property
+        public int? PropertyInfoID { get; set; } // Foreign key
+        public PropertyInfoModel? PropertyInfo { get; set; } // Navigation property
 
         // // Connection to DocumentsModel
-        public int DocumentID { get; set; } // Foreign key
-        public DocumentsModel Document { get; set; } // Navigation property
+        public int? DocumentID { get; set; } // Foreign key
+        public DocumentsModel? Document { get; set; } // Navigation property
+
+        //By making both the foreign key and navigation property nullable (int? and DocumentsModel?), you ensure that when a DocumentsModel record is deleted, the corresponding DocumentID in TenantModel will be set to NULL. This aligns with the ON DELETE SET NULL cascade action behavior.
 
         public TenantModel()
         {
