@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Services;
 
 namespace PropTrac_backend.Controllers
@@ -18,7 +19,7 @@ namespace PropTrac_backend.Controllers
             _passwordService = passwordService;
         }
 
-        [HttpGet("securityquestion/{questionId}")]
+        [HttpGet("Securityquestion/{questionId}")]
         public IActionResult GetSecurityQuestion(int questionId)
         {
             var question = _passwordService.GetSecurityQuestionById(questionId);
@@ -31,5 +32,34 @@ namespace PropTrac_backend.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost("Requestresetpassword")]
+        public IActionResult RequestResetPassword(RequestResetPasswordDTO requestResetPasswordDTO)
+        {
+            var question = _passwordService.RequestResetPassword(requestResetPasswordDTO);
+            if (question != null)
+            {
+                return Ok(question);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("Resetpassword")]
+        public IActionResult ResetPassword(ResetPasswordDTO resetPasswordDTO)
+        {
+            var success = _passwordService.ResetPassword(resetPasswordDTO);
+            if (success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
