@@ -13,6 +13,11 @@ namespace PropTrac_backend.Models
         public string Hash { get; set; }
         public string Email { get; set; }
         public bool IsManager { get; set; }
+        public string SecurityAnswer { get; set; }
+
+        // Connection to SecurityQuestionModel
+        public int SecurityQuestionID { get; set; } // Foreign key
+        public SecurityQuestionModel SecurityQuestion { get; set; } // Navigation property
 
         // Navigation properties for one-to-one relationship with TenantModel and ManagerModel
         public TenantModel Tenant { get; set; }

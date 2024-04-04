@@ -14,5 +14,7 @@ namespace PropTrac_backend.Models.DTO
         public bool IsManager { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string SecurityAnswer { get; set; }
+        public int SecurityQuestionID { get; set; }
     }
 }

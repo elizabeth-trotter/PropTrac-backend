@@ -12,6 +12,11 @@ namespace PropTrac_backend.Services.Context
         public DbSet<UserModel> UserInfo { get; set; }
         public DbSet<TenantModel> Tenants { get; set; }
         public DbSet<ManagerModel> Managers { get; set; }
+        public DbSet<TenantPaymentInfoModel> TenantPaymentInfo { get; set; }
+        public DbSet<RoomInfoModel> RoomInfo { get; set; }
+        public DbSet<PropertyInfoModel> PropertyInfo { get; set; }
+        public DbSet<DocumentsModel> Documents { get; set; }
+        public DbSet<SecurityQuestionModel> SecurityQuestion { get; set; }
         // add additional models here once known
 
         // creating constructor to inject models into our database
@@ -21,6 +26,14 @@ namespace PropTrac_backend.Services.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            // Seed predefined security questions
+            builder.Entity<SecurityQuestionModel>().HasData(
+                new SecurityQuestionModel { ID = 1, Question = "What is your mother's maiden name?" },
+                new SecurityQuestionModel { ID = 2, Question = "What is the name of your first pet?" },
+                new SecurityQuestionModel { ID = 3, Question = "What was the name of your first stuffed animal?" }
+                // Add more questions as needed
+            );
 
             // Configure relationships if necessary
             // builder.Entity<TenantModel>()
