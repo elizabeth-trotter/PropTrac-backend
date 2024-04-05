@@ -19,7 +19,7 @@ namespace PropTrac_backend.Controllers
             _passwordService = passwordService;
         }
 
-        [HttpGet("Securityquestion/{questionId}")]
+        [HttpGet("SecurityQuestion/{questionId}")]
         public IActionResult GetSecurityQuestion(int questionId)
         {
             var question = _passwordService.GetSecurityQuestionById(questionId);
@@ -33,7 +33,7 @@ namespace PropTrac_backend.Controllers
             }
         }
 
-        [HttpPost("Requestresetpassword")]
+        [HttpPost("RequestReset")]
         public IActionResult RequestResetPassword(RequestResetPasswordDTO requestResetPasswordDTO)
         {
             var question = _passwordService.RequestResetPassword(requestResetPasswordDTO);
@@ -47,7 +47,11 @@ namespace PropTrac_backend.Controllers
             }
         }
 
-        [HttpPost("Resetpassword")]
+        // If you don't want the username to be visible in the URL for security or privacy reasons, you can still use a GET request with a request body. However, traditional HTTP standards do not support sending a body with GET requests.
+
+        // One common workaround is to use a POST request instead of a GET request. Although POST requests are typically used for sending data to the server in the request body, it's not strictly forbidden to use a POST request to retrieve data, especially if you need to keep the data confidential.
+
+        [HttpPut("ResetPassword")]
         public IActionResult ResetPassword(ResetPasswordDTO resetPasswordDTO)
         {
             var success = _passwordService.ResetPassword(resetPasswordDTO);
