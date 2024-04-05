@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240405004246_init")]
+    [Migration("20240405234331_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -319,7 +319,11 @@ namespace PropTrac_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SecurityAnswer")
+                    b.Property<string>("SecurityAnswerHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityAnswerSalt")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

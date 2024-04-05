@@ -99,7 +99,8 @@ namespace PropTrac_backend.Migrations
                     Hash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsManager = table.Column<bool>(type: "bit", nullable: false),
-                    SecurityAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityAnswerSalt = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityAnswerHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SecurityQuestionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -316,7 +316,11 @@ namespace PropTrac_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SecurityAnswer")
+                    b.Property<string>("SecurityAnswerHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityAnswerSalt")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
