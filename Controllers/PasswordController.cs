@@ -57,7 +57,7 @@ namespace PropTrac_backend.Controllers
             var success = _passwordService.ResetPassword(resetPasswordDTO);
             if (success)
             {
-                return Ok();
+                return Ok(success);
             }
             else
             {
