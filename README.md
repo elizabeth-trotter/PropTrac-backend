@@ -1,5 +1,6 @@
 # PropTrac Backend
 
+[Click Here to link to Front End Repo](https://github.com/calebsylvia/PropTrac)
 
 ## API
 
@@ -27,7 +28,7 @@
 | Request Password Reset | `POST`  | /Password/RequestReset  | Body | string UsernameOrEmail |
 | Password Reset | `PUT`  | /Password/ResetPassword  | Body | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
 
-<p align="right">Tables 1 & 2: API endpoints updated April 4, 2024</p>
+<p align="right">Tables 1 & 2: API endpoints updated April 5, 2024</p>
 
 
 ## Database
@@ -36,6 +37,6 @@
 
 <h4 align="center">Entity Relationship Diagram</h4>
 
-![Entity relationship diagram](ERD_V2_3.25.2024.png)
+![Entity relationship diagram](ERD_V2.1_4.05.2024.png)
 
-<p align="right">Figure 1: ERD illustrating database schema updated March 25, 2024</p>
+<p align="right">Figure 2: ERD illustrating database schema updated April 5, 2024</p>
