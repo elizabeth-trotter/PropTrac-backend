@@ -39,6 +39,7 @@ namespace PropTrac_backend.Services
                 UserModel newUser = new UserModel();
 
                 var hashPassword = HashPassword(UserToAdd.Password);
+                var hashSecurityAnswer = HashPassword(UserToAdd.SecurityAnswer);
 
                 newUser.ID = UserToAdd.ID;
                 newUser.Username = UserToAdd.Username;
@@ -46,7 +47,8 @@ namespace PropTrac_backend.Services
                 newUser.Hash = hashPassword.Hash;
                 newUser.Email = UserToAdd.Email;
                 newUser.IsManager = UserToAdd.IsManager;
-                newUser.SecurityAnswer = UserToAdd.SecurityAnswer;
+                newUser.SecurityAnswerSalt = hashSecurityAnswer.Salt;
+                newUser.SecurityAnswerHash = hashSecurityAnswer.Hash;
                 newUser.SecurityQuestionID = UserToAdd.SecurityQuestionID;
 
                 //adds newUser to the UserInfo table in database

@@ -13,7 +13,8 @@ namespace PropTrac_backend.Models
         public string Hash { get; set; }
         public string Email { get; set; }
         public bool IsManager { get; set; }
-        public string SecurityAnswer { get; set; }
+        public string SecurityAnswerSalt { get; set; }
+        public string SecurityAnswerHash { get; set; }
 
         // Connection to SecurityQuestionModel
         public int SecurityQuestionID { get; set; } // Foreign key

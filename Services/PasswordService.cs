@@ -48,13 +48,13 @@ namespace PropTrac_backend.Services
             UserModel foundUser = _userService.GetUserByUsernameOrEmail(resetPasswordDTO.UsernameOrEmail);
             if (foundUser != null)
             {
-                if (foundUser.SecurityAnswer == resetPasswordDTO.SecurityAnswer)
+                if (_userService.VerifyUsersPassword(resetPasswordDTO.SecurityAnswer, foundUser.SecurityAnswerHash, foundUser.SecurityAnswerSalt))
                 {
                     // reset password
                     var hashPassword = _userService.HashPassword(resetPasswordDTO.NewPassword);
                     foundUser.Salt = hashPassword.Salt;
                     foundUser.Hash = hashPassword.Hash;
-                    
+
                     _context.Update<UserModel>(foundUser);
                     result = _context.SaveChanges() != 0;
                 }
