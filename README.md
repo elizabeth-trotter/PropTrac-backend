@@ -13,7 +13,7 @@
 
 | Description | HTTP Method | Endpoint | Parameter Type (Body or URL) | Parameter Requirements |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Create an Account *(Manager or Tenant)*  | `POST`  | /User/AddUser  | Body | int ID, string Username, string Password, string Email, bool IsManager, string FirstName, string LastName |
+| Create an Account *(Manager or Tenant)*  | `POST`  | /User/AddUser  | Body | int ID, string Username, string Password, string Email, bool IsManager, string FirstName, string LastName, string SecurityAnswer, int SecurityQuestionID |
 | Login *(Manager or Tenant)* | `POST`  | /User/Login  | Body | string UsernameOrEmail, string Password |
 | Update User | `PUT`  | /User/Update  | Body | .. |
 | Delete User | `DELETE`  | /User/DeleteUser/{userToDelete}  | URL | .. |
