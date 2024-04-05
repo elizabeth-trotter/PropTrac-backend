@@ -8,12 +8,12 @@ namespace PropTrac_backend.Models
     public class UserModel
     {
         public int ID { get; set; } // Primary Key
-        public string? Username { get; set; }
-        public string? Salt { get; set; }
-        public string? Hash { get; set; }
-        public string? Email { get; set; }
+        public string Username { get; set; }
+        public string Salt { get; set; }
+        public string Hash { get; set; }
+        public string Email { get; set; }
         public bool IsManager { get; set; }
-        public string? SecurityAnswer { get; set; }
+        public string SecurityAnswer { get; set; }
 
         // Connection to SecurityQuestionModel
         public int SecurityQuestionID { get; set; } // Foreign key
