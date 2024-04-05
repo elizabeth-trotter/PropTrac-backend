@@ -190,12 +190,12 @@ namespace PropTrac_backend.Migrations
                         new
                         {
                             ID = 1,
-                            Question = "What is your mother's maiden name?"
+                            Question = "What is the name of your first pet?"
                         },
                         new
                         {
                             ID = 2,
-                            Question = "What is the name of your first pet?"
+                            Question = "What was your favorite teacher's name?"
                         },
                         new
                         {

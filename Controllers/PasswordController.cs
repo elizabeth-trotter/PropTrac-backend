@@ -61,7 +61,7 @@ namespace PropTrac_backend.Controllers
             }
             else
             {
-                return BadRequest();
+                return Unauthorized();
             }
         }
 

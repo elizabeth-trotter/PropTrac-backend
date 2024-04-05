@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Services.Context;
 
@@ -42,27 +43,27 @@ namespace PropTrac_backend.Services
 
         public bool ResetPassword(ResetPasswordDTO resetPasswordDTO)
         {
-            bool success = false;
+            bool result = false;
 
-            var user = _userService.GetUserByUsernameOrEmail(resetPasswordDTO.UsernameOrEmail);
-            if (user != null)
+            UserModel foundUser = _userService.GetUserByUsernameOrEmail(resetPasswordDTO.UsernameOrEmail);
+            if (foundUser != null)
             {
-                if (user.SecurityAnswer == resetPasswordDTO.SecurityAnswer)
+                if (foundUser.SecurityAnswer == resetPasswordDTO.SecurityAnswer)
                 {
                     // reset password
-                    success = true;
+                    var hashPassword = _userService.HashPassword(resetPasswordDTO.NewPassword);
+                    foundUser.Salt = hashPassword.Salt;
+                    foundUser.Hash = hashPassword.Hash;
+                    
+                    _context.Update<UserModel>(foundUser);
+                    result = _context.SaveChanges() != 0;
                 }
             }
 
-            return success;
+            return result;
 
         }
 
         // No need to duplicate HashPassword method
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
     }
 }

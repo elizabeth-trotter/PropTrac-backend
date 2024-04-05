@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240404204331_init")]
+    [Migration("20240405004246_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -193,12 +193,12 @@ namespace PropTrac_backend.Migrations
                         new
                         {
                             ID = 1,
-                            Question = "What is your mother's maiden name?"
+                            Question = "What is the name of your first pet?"
                         },
                         new
                         {
                             ID = 2,
-                            Question = "What is the name of your first pet?"
+                            Question = "What was your favorite teacher's name?"
                         },
                         new
                         {

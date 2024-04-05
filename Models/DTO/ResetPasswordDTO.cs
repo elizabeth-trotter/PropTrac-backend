@@ -9,5 +9,6 @@ namespace PropTrac_backend.Models.DTO
     {
         public string UsernameOrEmail { get; set; }
         public string SecurityAnswer { get; set; }
+        public string NewPassword { get; set; }
     }
 }

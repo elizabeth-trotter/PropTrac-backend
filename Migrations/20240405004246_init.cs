@@ -209,8 +209,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Question" },
                 values: new object[,]
                 {
-                    { 1, "What is your mother's maiden name?" },
-                    { 2, "What is the name of your first pet?" },
+                    { 1, "What is the name of your first pet?" },
+                    { 2, "What was your favorite teacher's name?" },
                     { 3, "What was the name of your first stuffed animal?" }
                 });
 
