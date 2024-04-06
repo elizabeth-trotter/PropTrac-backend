@@ -35,7 +35,7 @@ Base URL: https://proptracapi.azurewebsites.net
 | Response for Reset                  | `POST`      | /Password/ResponseForReset                  | Body           | string UsernameOrEmail, string SecurityAnswer |
 | Password Reset                      | `PUT`       | /Password/ResetPassword                     | Body           | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
 
-<p align="right">Tables 1 & 2: API endpoints updated April 5, 2024</p>
+<p align="right">Tables 1 & 2: API endpoints updated April 6, 2024</p>
 
 
 ## Database
