@@ -2,7 +2,7 @@
 
 **Quick Links:**
 
-[![Static Badge](https://img.shields.io/badge/frontend%20repo-navy?style=for-the-badge&logo=github)](https://github.com/calebsylvia/PropTrac) &ensp; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fprop-trac.vercel.app%2F&up_message=deployed&up_color=blue&down_color=8B0000&style=for-the-badge&logo=vercel&label=frontend)](https://prop-trac.vercel.app/) 
+[![Static Badge](https://img.shields.io/badge/frontend%20repo-navy?style=for-the-badge&logo=github)](https://github.com/calebsylvia/PropTrac) &ensp; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fprop-trac.vercel.app%2F&up_message=development&up_color=blue&down_color=8B0000&style=for-the-badge&logo=vercel&label=frontend)](https://prop-trac.vercel.app/) 
 
 
 ## API
@@ -29,10 +29,10 @@ Base URL: https://proptracapi.azurewebsites.net
 
 | Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
 | -------------                       | ----------- | -------------                               | -------------  | ------------- |
-| Get List of all Security Questions  | `GET`       | /SecurityQuestionList                       | N/a            | None |
+| Get List of all Security Questions  | `GET`       | /Password/SecurityQuestionList              | N/a            | None |
 | Get Security Question by Id         | `GET`       | /Password/SecurityQuestionByID/{questionId} | URL            | int questionID |
 | Request Password Reset              | `POST`      | /Password/RequestReset                      | Body           | string UsernameOrEmail |
-| Response for Reset                  | `POST`      | /ResponseForReset                           | Body           | string UsernameOrEmail, string SecurityAnswer |
+| Response for Reset                  | `POST`      | /Password/ResponseForReset                  | Body           | string UsernameOrEmail, string SecurityAnswer |
 | Password Reset                      | `PUT`       | /Password/ResetPassword                     | Body           | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
 
 <p align="right">Tables 1 & 2: API endpoints updated April 5, 2024</p>
