@@ -1,10 +1,15 @@
 # PropTrac Backend
 
-[Click Here to link to Front End Repo](https://github.com/calebsylvia/PropTrac)
+**Quick Links:**
+
+[![Static Badge](https://img.shields.io/badge/frontend%20repo-navy?style=for-the-badge&logo=github)](https://github.com/calebsylvia/PropTrac) &ensp; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fprop-trac.vercel.app%2F&up_message=deployed&up_color=blue&down_color=8B0000&style=for-the-badge&logo=vercel&label=frontend)](https://prop-trac.vercel.app/) 
+
 
 ## API
 
-**Details:** API is deployed on Azure: https://proptracapi.azurewebsites.net
+**Details:** API is deployed on Azure.
+
+Base URL: https://proptracapi.azurewebsites.net
 
 > [!IMPORTANT]
 > Please view the tables below for specific endpoints/ requests. 
