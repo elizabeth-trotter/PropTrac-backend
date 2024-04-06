@@ -25,6 +25,16 @@ namespace PropTrac_backend.Services
             return securityQuestion != null ? securityQuestion.Question : null;
         }
 
+        public List<string> GetAllSecurityQuestions()
+        {
+            List<string> questionList = new();
+            foreach (var row in _context.SecurityQuestion)
+            {
+                questionList.Add(row.Question);
+            }
+            return questionList != null ? questionList : null;
+        }
+
         public string RequestResetPassword(RequestResetPasswordDTO requestResetPasswordDTO)
         {
             var user = _userService.GetUserByUsernameOrEmail(requestResetPasswordDTO.UsernameOrEmail);

@@ -17,21 +17,22 @@ Base URL: https://proptracapi.azurewebsites.net
 
 <h4 align="center">Table 1: User Controller Endpoints</h4>
 
-| Description | HTTP Method | Endpoint | Parameter Type (Body or URL) | Parameter Requirements |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| Create an Account *(Manager or Tenant)*  | `POST`  | /User/AddUser  | Body | int ID, string Username, string Password, string Email, bool IsManager, string FirstName, string LastName, string SecurityAnswer, int SecurityQuestionID |
-| Login *(Manager or Tenant)* | `POST`  | /User/Login  | Body | string UsernameOrEmail, string Password |
-| Update User | `PUT`  | /User/Update  | Body | .. |
-| Delete User | `DELETE`  | /User/DeleteUser/{userToDelete}  | URL | .. |
-| Update Username | `PUT`  | /User/UpdateUser/{id}/{username}  | URL | .. |
+| Description                              | HTTP Method | Endpoint                          | Parameter Type | Parameter Requirements |
+| -------------                            | ----------- | -------------                     | -------------  | ------------- |
+| Create an Account *(Manager or Tenant)*  | `POST`      | /User/AddUser                     | Body           | int ID, string Username, string Password, string Email, bool IsManager, string FirstName, string LastName, string SecurityAnswer, int SecurityQuestionID |
+| Login *(Manager or Tenant)*              | `POST`      | /User/Login                       | Body           | string UsernameOrEmail, string Password |
+| Update User                              | `PUT`       | /User/Update                      | Body           | .. |
+| Delete User                              | `DELETE`    | /User/DeleteUser/{userToDelete}   | URL            | .. |
+| Update Username                          | `PUT`       | /User/UpdateUser/{id}/{username}  | URL            | .. |
 
 <h4 align="center">Table 2: Password Controller Endpoints</h4>
 
-| Description | HTTP Method | Endpoint | Parameter Type (Body or URL) | Parameter Requirements |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| Get Security Questions  | `GET`  | /Password/SecurityQuestion/{questionId}  | URL | int questionID |
-| Request Password Reset | `POST`  | /Password/RequestReset  | Body | string UsernameOrEmail |
-| Password Reset | `PUT`  | /Password/ResetPassword  | Body | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
+| Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
+| -------------                       | ----------- | -------------                               | -------------  | ------------- |
+| Get List of all Security Questions  | `GET`       | /SecurityQuestionList                       | N/a            | None |
+| Get Security Question by Id         | `GET`       | /Password/SecurityQuestionByID/{questionId} | URL            | int questionID |
+| Request Password Reset              | `POST`      | /Password/RequestReset                      | Body           | string UsernameOrEmail |
+| Password Reset                      | `PUT`       | /Password/ResetPassword                     | Body           | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
 
 <p align="right">Tables 1 & 2: API endpoints updated April 5, 2024</p>
 
