@@ -61,6 +61,20 @@ namespace PropTrac_backend.Controllers
             }
         }
 
+        [HttpPost("ResponseForReset")]
+        public IActionResult ResponseForReset(ResponseForResetDTO responseForResetDTO)
+        {
+            var verify = _passwordService.ResponseForReset(responseForResetDTO);
+            if (verify)
+            {
+                return Ok(verify);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
         // If you don't want the username to be visible in the URL for security or privacy reasons, you can still use a GET request with a request body. However, traditional HTTP standards do not support sending a body with GET requests.
 
         // One common workaround is to use a POST request instead of a GET request. Although POST requests are typically used for sending data to the server in the request body, it's not strictly forbidden to use a POST request to retrieve data, especially if you need to keep the data confidential.

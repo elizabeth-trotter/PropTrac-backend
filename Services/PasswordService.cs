@@ -51,6 +51,22 @@ namespace PropTrac_backend.Services
 
         // No need to duplicate GetUserByUsernameOrEmail method
 
+        public bool ResponseForReset(ResponseForResetDTO responseForResetDTO)
+        {
+            bool result = false;
+
+            UserModel foundUser = _userService.GetUserByUsernameOrEmail(responseForResetDTO.UsernameOrEmail);
+            if (foundUser != null)
+            {
+                if (_userService.VerifyUsersPassword(responseForResetDTO.SecurityAnswer, foundUser.SecurityAnswerHash, foundUser.SecurityAnswerSalt))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
         public bool ResetPassword(ResetPasswordDTO resetPasswordDTO)
         {
             bool result = false;
@@ -71,7 +87,6 @@ namespace PropTrac_backend.Services
             }
 
             return result;
-
         }
 
         // No need to duplicate HashPassword method
