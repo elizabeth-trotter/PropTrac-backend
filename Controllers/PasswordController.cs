@@ -19,20 +19,6 @@ namespace PropTrac_backend.Controllers
             _passwordService = passwordService;
         }
 
-        [HttpGet("SecurityQuestionByID/{questionId}")]
-        public IActionResult GetSecurityQuestion(int questionId)
-        {
-            var question = _passwordService.GetSecurityQuestionById(questionId);
-            if (question != null)
-            {
-                return Ok(question);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
         [HttpGet("SecurityQuestionList")]
         public IActionResult GetAllSecurityQuestions()
         {

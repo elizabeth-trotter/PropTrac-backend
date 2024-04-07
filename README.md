@@ -30,7 +30,6 @@ Base URL: https://proptracapi.azurewebsites.net
 | Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
 | -------------                       | ----------- | -------------                               | -------------  | ------------- |
 | Get List of all Security Questions  | `GET`       | /Password/SecurityQuestionList              | N/a            | None |
-| Get Security Question by Id         | `GET`       | /Password/SecurityQuestionByID/{questionId} | URL            | int questionID |
 | Request Password Reset              | `POST`      | /Password/RequestReset                      | Body           | string UsernameOrEmail |
 | Response for Reset                  | `POST`      | /Password/ResponseForReset                  | Body           | string UsernameOrEmail, string SecurityAnswer |
 | Password Reset                      | `PUT`       | /Password/ResetPassword                     | Body           | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
