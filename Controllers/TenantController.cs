@@ -9,7 +9,7 @@ using PropTrac_backend.Services;
 
 namespace PropTrac_backend.Controllers
 {
-    [Authorize] //*see note below
+    // [Authorize] //*see note below
     [ApiController]
     [Route("[controller]")]
     public class TenantController : ControllerBase
@@ -26,7 +26,7 @@ namespace PropTrac_backend.Controllers
         public IActionResult GetTenantDashboardInfo()
         {
             // Extract claims from the user's identity
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            // var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             // var username = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
             // var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             // var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
