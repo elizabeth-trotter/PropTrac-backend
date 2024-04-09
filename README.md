@@ -21,7 +21,7 @@ Base URL: https://proptracapi.azurewebsites.net
 | -------------                            | ----------- | -------------                     | -------------  | ------------- |
 | Create an Account *(Manager or Tenant)*  | `POST`      | /User/AddUser                     | Body           | int ID, string Username, string Password, string Email, bool IsManager, string FirstName, string LastName, string SecurityAnswer, int SecurityQuestionID |
 | Login *(Manager or Tenant)*              | `POST`      | /User/Login                       | Body           | string UsernameOrEmail, string Password |
-| Get All User Info (Role)                 | `GET`       | /User/GetUserInfoByUsernameOrEmail| URL            | string UsernameOrEmail |
+| Get All User Info (Role)                 | `GET`       | /User/GetUserInfoByUsernameOrEmail/{usernameOrEmail}| URL            | string UsernameOrEmail |
 | Update User                              | `PUT`       | /User/Update                      | Body           | .. |
 | Delete User                              | `DELETE`    | /User/DeleteUser/{userToDelete}   | URL            | .. |
 | Update Username                          | `PUT`       | /User/UpdateUser/{id}/{username}  | URL            | .. |
@@ -39,7 +39,7 @@ Base URL: https://proptracapi.azurewebsites.net
 
 | Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
 | -------------                       | ----------- | -------------                               | -------------  | ------------- |
-| Get All Tenant Dashboard Info       | `GET`       | /Tenant/GetTenantDashboardInfo              | URL            | int userId |
+| Get All Tenant Dashboard Info       | `GET`       | /Tenant/GetTenantDashboardInfo/{userId}     | URL            | int userId |
 
 <p align="right">Tables 1, 2 & 3: API endpoints updated April 9, 2024</p>
 
