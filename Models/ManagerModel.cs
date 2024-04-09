@@ -16,6 +16,8 @@ namespace PropTrac_backend.Models
         public string? Language { get; set; }
 
         // Connection to UserModel
+        // Explicitly specify foreign key using ForeignKey attribute
+        // [ForeignKey("User")]
         public int UserID { get; set; } // Foreign key
         public UserModel User { get; set; } // Navigation property
 
