@@ -34,7 +34,13 @@ Base URL: https://proptracapi.azurewebsites.net
 | Response for Reset                  | `POST`      | /Password/ResponseForReset                  | Body           | string UsernameOrEmail, string SecurityAnswer |
 | Password Reset                      | `PUT`       | /Password/ResetPassword                     | Body           | string UsernameOrEmail, string SecurityAnswer, string NewPassword |
 
-<p align="right">Tables 1 & 2: API endpoints updated April 6, 2024</p>
+<h4 align="center">Table 3: Tenant Controller Endpoints</h4>
+
+| Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
+| -------------                       | ----------- | -------------                               | -------------  | ------------- |
+| Get All Tenant Dashboard Info       | `GET`       | /Tenant/GetTenantDashboardInfo              | Body           | int userId |
+
+<p align="right">Tables 1, 2 & 3: API endpoints updated April 9, 2024</p>
 
 
 ## Database
