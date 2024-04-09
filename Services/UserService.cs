@@ -254,5 +254,22 @@ namespace PropTrac_backend.Services
 
             return result;
         }
+
+        public UserInfoDTO GetUserInfoByUsernameOrEmail(string usernameOrEmail)
+        {
+            // Query the database to find the user by username or email
+            var user = _context.UserInfo.FirstOrDefault(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
+
+            // Map the UserModel to UserInfoDTO
+            var userInfo = new UserInfoDTO
+            {
+                ID = user.ID,
+                Username = user.Username,
+                Email = user.Email,
+                IsManager = user.IsManager
+            };
+
+            return userInfo;
+        }
     }
 }

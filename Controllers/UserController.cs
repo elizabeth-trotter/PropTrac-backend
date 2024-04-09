@@ -68,5 +68,20 @@ namespace PropTrac_backend.Controllers
         // {
         //     return _data.GetUserIdDTOByUsername(username);
         // }
+
+        [HttpGet]
+        [Route("GetUserInfoByUsernameOrEmail/{usernameOrEmail}")]
+        public IActionResult GetUserInfoByUsernameOrEmail(string usernameOrEmail)
+        {
+            // Check if the user exists
+            var userExists = _data.DoesUserExist(usernameOrEmail);
+
+            if (!userExists)
+            {
+                return NotFound("User not found");
+            }
+
+            return Ok(_data.GetUserInfoByUsernameOrEmail(usernameOrEmail));
+        }
     }
 }
