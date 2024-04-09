@@ -148,10 +148,17 @@ namespace PropTrac_backend.Services
                 if (VerifyUsersPassword(User.Password, foundUser.Hash, foundUser.Salt))
                 {
                     //anyone with this code can access the login
-                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+                    // var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+
+                    var secretKey = new byte[32]; // Use at least 256 bits (32 bytes) for the secret key
+                    using (var rng = new RNGCryptoServiceProvider())
+                    {
+                        rng.GetBytes(secretKey);
+                    }
+                    var symmetricSecurityKey = new SymmetricSecurityKey(secretKey);
 
                     //sign in credentials
-                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var signinCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
                     //generate new token and log user out after 30 min
                     var tokeOptions = new JwtSecurityToken(
