@@ -22,6 +22,7 @@ namespace PropTrac_backend.Controllers
         }
 
         [HttpGet]
+        [Route("GetTenantDashboardInfo")]
         public IActionResult GetTenantDashboardInfo()
         {
             // Extract claims from the user's identity
