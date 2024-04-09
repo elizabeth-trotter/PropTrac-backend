@@ -25,7 +25,7 @@ namespace PropTrac_backend.Controllers
         }
 
         [HttpGet]
-        [Route("GetTenantDashboardInfo")]
+        [Route("GetTenantDashboardInfo/{userId}")]
         public IActionResult GetTenantDashboardInfo(int userId)
         {
             // Check if the user exists
