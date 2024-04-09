@@ -157,8 +157,15 @@ namespace PropTrac_backend.Services
                     var tokeOptions = new JwtSecurityToken(
                         issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
-                        claims: new List<Claim>(), // Claims can be added here if needed
-                        expires: DateTime.Now.AddMinutes(30), // Set token expiration time (e.g., 30 minutes)
+                        claims: new List<Claim>{
+                            new Claim(ClaimTypes.NameIdentifier, foundUser.ID.ToString()), // User ID
+                            new Claim(ClaimTypes.Name, foundUser.Username), // Username
+                            new Claim(ClaimTypes.Email, foundUser.Email), // Email
+                            new Claim("IsManager", foundUser.IsManager.ToString(), ClaimValueTypes.Boolean) // Custom claim for IsManager
+                            // new Claim(ClaimTypes.Role, foundUser.IsManager ? "Manager" : "Tenant") // Assign "Manager" if true, "Tenant" if false
+                            // Add other custom claims as needed
+                        },
+                        expires: DateTime.Now.AddMinutes(60), // Set token expiration time (e.g., 30 minutes)
                         signingCredentials: signinCredentials // Set signing credentials
                     );
 
