@@ -14,8 +14,8 @@ namespace PropTrac_backend.Models
         public TenantModel? Tenant { get; set; }  // Navigation property
 
         // Connection to PropertyInfoModel
-        public int PropertyInfoID { get; set; } // Foreign key
-        public PropertyInfoModel PropertyInfo { get; set; } // Navigation property
+        public int? PropertyInfoID { get; set; } // Foreign key
+        public PropertyInfoModel? PropertyInfo { get; set; } // Navigation property
 
         public RoomInfoModel()
         {

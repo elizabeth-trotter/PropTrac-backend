@@ -76,7 +76,7 @@ namespace PropTrac_backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Mortage = table.Column<int>(type: "int", nullable: false),
                     MaintenceCosts = table.Column<int>(type: "int", nullable: false),
-                    PropertyInfoID = table.Column<int>(type: "int", nullable: true)
+                    PropertyInfoID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +85,8 @@ namespace PropTrac_backend.Migrations
                         name: "FK_PropertyExpense_PropertyInfo_PropertyInfoID",
                         column: x => x.PropertyInfoID,
                         principalTable: "PropertyInfo",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,7 +96,7 @@ namespace PropTrac_backend.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Rent = table.Column<int>(type: "int", nullable: false),
-                    PropertyInfoID = table.Column<int>(type: "int", nullable: true)
+                    PropertyInfoID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +105,8 @@ namespace PropTrac_backend.Migrations
                         name: "FK_PropertyIncome_PropertyInfo_PropertyInfoID",
                         column: x => x.PropertyInfoID,
                         principalTable: "PropertyInfo",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,7 +116,7 @@ namespace PropTrac_backend.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoomRent = table.Column<int>(type: "int", nullable: false),
-                    PropertyInfoID = table.Column<int>(type: "int", nullable: false)
+                    PropertyInfoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,8 +125,7 @@ namespace PropTrac_backend.Migrations
                         name: "FK_RoomInfo_PropertyInfo_PropertyInfoID",
                         column: x => x.PropertyInfoID,
                         principalTable: "PropertyInfo",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -227,8 +228,8 @@ namespace PropTrac_backend.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ManagerID = table.Column<int>(type: "int", nullable: false),
-                    DocumentsID = table.Column<int>(type: "int", nullable: false)
+                    ManagerID = table.Column<int>(type: "int", nullable: true),
+                    DocumentsID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -237,14 +238,12 @@ namespace PropTrac_backend.Migrations
                         name: "FK_ManagerDocuments_Documents_DocumentsID",
                         column: x => x.DocumentsID,
                         principalTable: "Documents",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_ManagerDocuments_Managers_ManagerID",
                         column: x => x.ManagerID,
                         principalTable: "Managers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -254,7 +253,7 @@ namespace PropTrac_backend.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MonthlyRentRecieved = table.Column<int>(type: "int", nullable: false),
-                    ManagerID = table.Column<int>(type: "int", nullable: true)
+                    ManagerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,7 +262,8 @@ namespace PropTrac_backend.Migrations
                         name: "FK_ManagerFinance_Managers_ManagerID",
                         column: x => x.ManagerID,
                         principalTable: "Managers",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -272,8 +272,8 @@ namespace PropTrac_backend.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ManagerID = table.Column<int>(type: "int", nullable: false),
-                    PropertyInfoID = table.Column<int>(type: "int", nullable: false)
+                    ManagerID = table.Column<int>(type: "int", nullable: true),
+                    PropertyInfoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -282,14 +282,12 @@ namespace PropTrac_backend.Migrations
                         name: "FK_ManagerProperties_Managers_ManagerID",
                         column: x => x.ManagerID,
                         principalTable: "Managers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_ManagerProperties_PropertyInfo_PropertyInfoID",
                         column: x => x.PropertyInfoID,
                         principalTable: "PropertyInfo",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -320,19 +318,10 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Content", "Name", "Type", "UploadDate" },
                 values: new object[,]
                 {
-                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3308) },
-                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3313) },
-                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3316) },
-                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3319) }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ManagerFinance",
-                columns: new[] { "ID", "ManagerID", "MonthlyRentRecieved" },
-                values: new object[,]
-                {
-                    { 3, 3, 2800 },
-                    { 4, 4, 2000 }
+                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3306) },
+                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3313) },
+                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3318) },
+                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3324) }
                 });
 
             migrationBuilder.InsertData(
@@ -412,8 +401,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "DocumentsID", "FirstName", "LastName", "LeaseEnd", "LeaseStart", "LeaseType", "Phone", "PropertyInfoID", "RoomInfoID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3088), new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3020), "Annual", "123-456-7890", 1, null, 3 },
-                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3101), new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3100), "Monthly", "987-654-3210", 2, 1, 4 }
+                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3104), new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3030), "Annual", "123-456-7890", 1, null, 3 },
+                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3118), new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3116), "Monthly", "987-654-3210", 2, 1, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -450,8 +439,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Balance", "DaysRemaining", "DueDate", "PaymentRecieved", "TenantID" },
                 values: new object[,]
                 {
-                    { 1, 1000, 7, new DateTime(2024, 4, 16, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3123), false, 1 },
-                    { 2, 1500, 9, new DateTime(2024, 4, 18, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3129), false, 2 }
+                    { 1, 1000, 7, new DateTime(2024, 4, 16, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3141), false, 1 },
+                    { 2, 1500, 9, new DateTime(2024, 4, 18, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3147), false, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -462,21 +451,18 @@ namespace PropTrac_backend.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerDocuments_ManagerID",
                 table: "ManagerDocuments",
-                column: "ManagerID",
-                unique: true);
+                column: "ManagerID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerFinance_ManagerID",
                 table: "ManagerFinance",
                 column: "ManagerID",
-                unique: true,
-                filter: "[ManagerID] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerProperties_ManagerID",
                 table: "ManagerProperties",
-                column: "ManagerID",
-                unique: true);
+                column: "ManagerID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerProperties_PropertyInfoID",
@@ -493,15 +479,13 @@ namespace PropTrac_backend.Migrations
                 name: "IX_PropertyExpense_PropertyInfoID",
                 table: "PropertyExpense",
                 column: "PropertyInfoID",
-                unique: true,
-                filter: "[PropertyInfoID] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PropertyIncome_PropertyInfoID",
                 table: "PropertyIncome",
                 column: "PropertyInfoID",
-                unique: true,
-                filter: "[PropertyInfoID] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoomInfo_PropertyInfoID",

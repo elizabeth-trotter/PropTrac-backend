@@ -30,7 +30,26 @@ namespace PropTrac_backend.Services.Context
         // this function will build out our table in the database
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            // Configure relationships if necessary
+            // builder.Entity<TenantModel>()
+            //     .HasOne(t => t.User)
+            //     .WithOne(u => u.Tenant)
+            //     .HasForeignKey<TenantModel>(t => t.UserID);
+
+            // builder.Entity<ManagerModel>()
+            //     .HasOne(m => m.User)
+            //     .WithOne(u => u.Manager)
+            //     .HasForeignKey<ManagerModel>(m => m.UserID);
+
+                        
+            // Configuration for model relationships, keys, indexes, etc.
+            // builder.Entity<ManagerDocumentsModel>()
+            //     .HasKey(md => md.ID);
+
+            // builder.Entity<ManagerDocumentsModel>()
+            //     .HasOne(md => md.Manager)
+            //     .WithMany(m => m.ManagerDocuments)
+            //     .HasForeignKey(md => md.ManagerID);
 
             // Seed predefined security questions
             builder.Entity<SecurityQuestionModel>().HasData(
@@ -125,16 +144,7 @@ namespace PropTrac_backend.Services.Context
             );
 
 
-            // Configure relationships if necessary
-            // builder.Entity<TenantModel>()
-            //     .HasOne(t => t.User)
-            //     .WithOne(u => u.Tenant)
-            //     .HasForeignKey<TenantModel>(t => t.UserID);
-
-            // builder.Entity<ManagerModel>()
-            //     .HasOne(m => m.User)
-            //     .WithOne(u => u.Manager)
-            //     .HasForeignKey<ManagerModel>(m => m.UserID);
+            base.OnModelCreating(builder);
         }
     }
 }

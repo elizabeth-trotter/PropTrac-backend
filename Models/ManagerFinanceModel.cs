@@ -11,7 +11,7 @@ namespace PropTrac_backend.Models
         public int MonthlyRentRecieved { get; set; }
 
         // Connection to ManagerModel
-        public int? ManagerID { get; set; } // Foreign key
-        public ManagerModel? Manager { get; set; } // Navigation property
+        public int ManagerID { get; set; } // Foreign key
+        public ManagerModel Manager { get; set; } // Navigation property
     }
 }

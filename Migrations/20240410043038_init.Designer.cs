@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240410033558_init")]
+    [Migration("20240410043038_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 1, 2, 3 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3308)
+                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3306)
                         },
                         new
                         {
@@ -64,7 +64,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3313)
+                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3313)
                         },
                         new
                         {
@@ -72,7 +72,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerList",
                             Type = "Manager",
-                            UploadDate = new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3316)
+                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3318)
                         },
                         new
                         {
@@ -80,7 +80,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerDoc",
                             Type = "Finance",
-                            UploadDate = new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3319)
+                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3324)
                         });
                 });
 
@@ -92,18 +92,17 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("DocumentsID")
+                    b.Property<int?>("DocumentsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ManagerID")
+                    b.Property<int?>("ManagerID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("DocumentsID");
 
-                    b.HasIndex("ManagerID")
-                        .IsUnique();
+                    b.HasIndex("ManagerID");
 
                     b.ToTable("ManagerDocuments");
 
@@ -130,7 +129,7 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("ManagerID")
+                    b.Property<int>("ManagerID")
                         .HasColumnType("int");
 
                     b.Property<int>("MonthlyRentRecieved")
@@ -139,8 +138,7 @@ namespace PropTrac_backend.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("ManagerID")
-                        .IsUnique()
-                        .HasFilter("[ManagerID] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("ManagerFinance");
 
@@ -156,18 +154,6 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             ManagerID = 2,
                             MonthlyRentRecieved = 2500
-                        },
-                        new
-                        {
-                            ID = 3,
-                            ManagerID = 3,
-                            MonthlyRentRecieved = 2800
-                        },
-                        new
-                        {
-                            ID = 4,
-                            ManagerID = 4,
-                            MonthlyRentRecieved = 2000
                         });
                 });
 
@@ -242,16 +228,15 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ManagerID")
+                    b.Property<int?>("ManagerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PropertyInfoID")
+                    b.Property<int?>("PropertyInfoID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ManagerID")
-                        .IsUnique();
+                    b.HasIndex("ManagerID");
 
                     b.HasIndex("PropertyInfoID");
 
@@ -298,14 +283,13 @@ namespace PropTrac_backend.Migrations
                     b.Property<int>("Mortage")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PropertyInfoID")
+                    b.Property<int>("PropertyInfoID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("PropertyInfoID")
-                        .IsUnique()
-                        .HasFilter("[PropertyInfoID] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("PropertyExpense");
 
@@ -348,7 +332,7 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("PropertyInfoID")
+                    b.Property<int>("PropertyInfoID")
                         .HasColumnType("int");
 
                     b.Property<int>("Rent")
@@ -357,8 +341,7 @@ namespace PropTrac_backend.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("PropertyInfoID")
-                        .IsUnique()
-                        .HasFilter("[PropertyInfoID] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("PropertyIncome");
 
@@ -534,7 +517,7 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("PropertyInfoID")
+                    b.Property<int?>("PropertyInfoID")
                         .HasColumnType("int");
 
                     b.Property<int>("RoomRent")
@@ -659,8 +642,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 1,
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            LeaseEnd = new DateTime(2025, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3088),
-                            LeaseStart = new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3020),
+                            LeaseEnd = new DateTime(2025, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3104),
+                            LeaseStart = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3030),
                             LeaseType = "Annual",
                             Phone = "123-456-7890",
                             PropertyInfoID = 1,
@@ -672,8 +655,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 2,
                             FirstName = "Bob",
                             LastName = "Williams",
-                            LeaseEnd = new DateTime(2024, 5, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3101),
-                            LeaseStart = new DateTime(2024, 4, 9, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3100),
+                            LeaseEnd = new DateTime(2024, 5, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3118),
+                            LeaseStart = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3116),
                             LeaseType = "Monthly",
                             Phone = "987-654-3210",
                             PropertyInfoID = 2,
@@ -718,7 +701,7 @@ namespace PropTrac_backend.Migrations
                             ID = 1,
                             Balance = 1000,
                             DaysRemaining = 7,
-                            DueDate = new DateTime(2024, 4, 16, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3123),
+                            DueDate = new DateTime(2024, 4, 16, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3141),
                             PaymentRecieved = false,
                             TenantID = 1
                         },
@@ -727,7 +710,7 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             Balance = 1500,
                             DaysRemaining = 9,
-                            DueDate = new DateTime(2024, 4, 18, 20, 35, 58, 489, DateTimeKind.Local).AddTicks(3129),
+                            DueDate = new DateTime(2024, 4, 18, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3147),
                             PaymentRecieved = false,
                             TenantID = 2
                         });
@@ -832,15 +815,11 @@ namespace PropTrac_backend.Migrations
                 {
                     b.HasOne("PropTrac_backend.Models.DocumentsModel", "Documents")
                         .WithMany()
-                        .HasForeignKey("DocumentsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DocumentsID");
 
                     b.HasOne("PropTrac_backend.Models.ManagerModel", "Manager")
-                        .WithOne("ManagerDocuments")
-                        .HasForeignKey("PropTrac_backend.Models.ManagerDocumentsModel", "ManagerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("ManagerDocuments")
+                        .HasForeignKey("ManagerID");
 
                     b.Navigation("Documents");
 
@@ -851,7 +830,9 @@ namespace PropTrac_backend.Migrations
                 {
                     b.HasOne("PropTrac_backend.Models.ManagerModel", "Manager")
                         .WithOne("ManagerFinance")
-                        .HasForeignKey("PropTrac_backend.Models.ManagerFinanceModel", "ManagerID");
+                        .HasForeignKey("PropTrac_backend.Models.ManagerFinanceModel", "ManagerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Manager");
                 });
@@ -870,16 +851,12 @@ namespace PropTrac_backend.Migrations
             modelBuilder.Entity("PropTrac_backend.Models.ManagerPropertiesModel", b =>
                 {
                     b.HasOne("PropTrac_backend.Models.ManagerModel", "Manager")
-                        .WithOne("ManagerProperties")
-                        .HasForeignKey("PropTrac_backend.Models.ManagerPropertiesModel", "ManagerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("ManagerProperties")
+                        .HasForeignKey("ManagerID");
 
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
                         .WithMany()
-                        .HasForeignKey("PropertyInfoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PropertyInfoID");
 
                     b.Navigation("Manager");
 
@@ -890,7 +867,9 @@ namespace PropTrac_backend.Migrations
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
                         .WithOne("PropertyExpense")
-                        .HasForeignKey("PropTrac_backend.Models.PropertyExpenseModel", "PropertyInfoID");
+                        .HasForeignKey("PropTrac_backend.Models.PropertyExpenseModel", "PropertyInfoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PropertyInfo");
                 });
@@ -899,7 +878,9 @@ namespace PropTrac_backend.Migrations
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
                         .WithOne("PropertyIncome")
-                        .HasForeignKey("PropTrac_backend.Models.PropertyIncomeModel", "PropertyInfoID");
+                        .HasForeignKey("PropTrac_backend.Models.PropertyIncomeModel", "PropertyInfoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PropertyInfo");
                 });
@@ -908,9 +889,7 @@ namespace PropTrac_backend.Migrations
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
                         .WithMany()
-                        .HasForeignKey("PropertyInfoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PropertyInfoID");
 
                     b.Navigation("PropertyInfo");
                 });
@@ -973,23 +952,18 @@ namespace PropTrac_backend.Migrations
 
             modelBuilder.Entity("PropTrac_backend.Models.ManagerModel", b =>
                 {
-                    b.Navigation("ManagerDocuments")
-                        .IsRequired();
+                    b.Navigation("ManagerDocuments");
 
-                    b.Navigation("ManagerFinance")
-                        .IsRequired();
+                    b.Navigation("ManagerFinance");
 
-                    b.Navigation("ManagerProperties")
-                        .IsRequired();
+                    b.Navigation("ManagerProperties");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.PropertyInfoModel", b =>
                 {
-                    b.Navigation("PropertyExpense")
-                        .IsRequired();
+                    b.Navigation("PropertyExpense");
 
-                    b.Navigation("PropertyIncome")
-                        .IsRequired();
+                    b.Navigation("PropertyIncome");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.RoomInfoModel", b =>

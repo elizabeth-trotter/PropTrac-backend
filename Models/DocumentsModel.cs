@@ -18,7 +18,7 @@ namespace PropTrac_backend.Models
 
         public DocumentsModel()
         {
-
+            UploadDate = DateTime.Now;
         }
     }
 }

@@ -16,15 +16,13 @@ namespace PropTrac_backend.Models
         public string? Language { get; set; }
 
         // Connection to UserModel
-        // Explicitly specify foreign key using ForeignKey attribute
-        // [ForeignKey("User")]
         public int UserID { get; set; } // Foreign key
         public UserModel User { get; set; } // Navigation property
 
         // Connections To ManagerPropertiesModel, ManagerFinanceModel, ManagerDocumentsModel
-        public ManagerPropertiesModel ManagerProperties { get; set; }
-        public ManagerFinanceModel ManagerFinance { get; set; }
-        public ManagerDocumentsModel ManagerDocuments { get; set; }
+        public ICollection<ManagerPropertiesModel>? ManagerProperties { get; set; } // Ensure this is correctly defined as a collection
+        public ManagerFinanceModel? ManagerFinance { get; set; }
+        public ICollection<ManagerDocumentsModel>? ManagerDocuments { get; set; } // Ensure this is correctly defined as a collection
 
         public ManagerModel()
         {

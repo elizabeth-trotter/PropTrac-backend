@@ -8,10 +8,10 @@ namespace PropTrac_backend.Models
     public class PropertyIncomeModel
     {
         public int ID { get; set; }
-        public int Rent { get; set; }
-        
+        public int Rent { get; set; } = 0;
+
         // Connection to PropertyInfoModel
-        public int? PropertyInfoID { get; set; } // Foreign key
-        public PropertyInfoModel? PropertyInfo { get; set; } // Navigation property
+        public int PropertyInfoID { get; set; } // Foreign key
+        public PropertyInfoModel PropertyInfo { get; set; } // Navigation property
     }
 }
