@@ -43,11 +43,11 @@ namespace PropTrac_backend.Services
                     State = t.PropertyInfo != null ? t.PropertyInfo.State : null,
                     HouseOrRoomType = t.PropertyInfo != null ? t.PropertyInfo.HouseOrRoomType : null,
                     HouseRent = t.PropertyInfo != null ? t.PropertyInfo.HouseRent : null,
-                    DocumentID = t.DocumentID,
-                    Name = t.Document != null ? t.Document.Name : null,
-                    Type = t.Document != null ? t.Document.Type : null,
-                    Content = t.Document != null ? t.Document.Content : null,
-                    UploadDate = t.Document != null ? t.Document.UploadDate : null
+                    DocumentID = t.DocumentsID,
+                    Name = t.Documents != null ? t.Documents.Name : null,
+                    Type = t.Documents != null ? t.Documents.Type : null,
+                    Content = t.Documents != null ? t.Documents.Content : null,
+                    UploadDate = t.Documents != null ? t.Documents.UploadDate : null
                 })
                 .ToList();
 

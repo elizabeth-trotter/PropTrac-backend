@@ -21,8 +21,10 @@ namespace PropTrac_backend.Models
         public int UserID { get; set; } // Foreign key
         public UserModel User { get; set; } // Navigation property
 
-        // Navigation property
-        // junction tables?
+        // Connections To ManagerPropertiesModel, ManagerFinanceModel, ManagerDocumentsModel
+        public ManagerPropertiesModel ManagerProperties { get; set; }
+        public ManagerFinanceModel ManagerFinance { get; set; }
+        public ManagerDocumentsModel ManagerDocuments { get; set; }
 
         public ManagerModel()
         {
