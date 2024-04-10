@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TenantService>();
+builder.Services.AddScoped<ManagerService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyAppString");
 

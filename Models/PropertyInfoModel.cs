@@ -25,6 +25,9 @@ namespace PropTrac_backend.Models
 
         // Navigation properties
 
+        // TenantModel
+        public ICollection<TenantModel> Tenant { get; set; }
+
         // RoomInfoModel
         public ICollection<RoomInfoModel>? RoomInfo { get; set; } // Ensure this is correctly defined as a collection
 

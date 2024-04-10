@@ -20,6 +20,33 @@ namespace PropTrac_backend.Controllers
             _userService = userService;
         }
 
+        // Property Revenue Overview
 
+        // Monthly Profit
+
+        // Property Stats
+        [HttpGet]
+        [Route("GetPropertyStatsByUserID/{userId}")]
+        public IActionResult GetPropertyStatsByUserID(int userId)
+        {
+            // Check if the user exists
+            var userExists = _userService.GetUserById(userId) != null;
+
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            var stats = _managerService.GetPropertyStats(userId);
+
+            if (stats == null)
+            {
+                return Ok("Manager does not exist");
+            }
+
+            return Ok(stats);
+        }
+
+        // Maintenance Requests
     }
 }
