@@ -15,7 +15,7 @@ namespace PropTrac_backend.Models.DTO
         public string? LeaseType { get; set; }
         public DateTime LeaseStart { get; set; }
         public DateTime LeaseEnd { get; set; }
-        
+
         // Connection to TenantPaymentInfoModel
         // ?
 
@@ -39,5 +39,12 @@ namespace PropTrac_backend.Models.DTO
         public string? Type { get; set; }
         public byte[]? Content { get; set; }
         public DateTime? UploadDate { get; set; }
+
+        // Properties from ManagerModel (Tenant -> PropertyInfo -> ManagerProperties -> Manager)
+        public string? ManagerFirst { get; set; }
+        public string? ManagerLast { get; set; }
+        public string? ManagerPhone { get; set; }
+        public string? ManagerEmail { get; set; }
+        
     }
 }

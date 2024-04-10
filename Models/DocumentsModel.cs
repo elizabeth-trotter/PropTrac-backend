@@ -16,6 +16,9 @@ namespace PropTrac_backend.Models
         // Connection to TenantModel
         public TenantModel? Tenant { get; set; }  // Navigation property
 
+        // Connection to ManagerDocumentsModel
+        public ManagerDocumentsModel? ManagerDocuments { get; set; } // Navigation property
+
         public DocumentsModel()
         {
             UploadDate = DateTime.Now;

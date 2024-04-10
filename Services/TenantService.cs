@@ -47,7 +47,12 @@ namespace PropTrac_backend.Services
                     Name = t.Documents != null ? t.Documents.Name : null,
                     Type = t.Documents != null ? t.Documents.Type : null,
                     Content = t.Documents != null ? t.Documents.Content : null,
-                    UploadDate = t.Documents != null ? t.Documents.UploadDate : null
+                    UploadDate = t.Documents != null ? t.Documents.UploadDate : null,
+                    // Tenant -> PropertyInfo -> ManagerProperties -> Manager
+                    // ManagerFirst = t.PropertyInfo.ManagerProperties.Manager != null ? t.PropertyInfo.ManagerProperties.Manager.FirstName : null;
+                    // ManagerLast = t.PropertyInfo.ManagerProperties.Manager != null ? t.PropertyInfo.ManagerProperties.Manager.LastName : null;
+                    // ManagerPhone = t.PropertyInfo.ManagerProperties.Manager != null ? t.PropertyInfo.ManagerProperties.Manager.Phone : null;
+                    // ManagerEmail = t.PropertyInfo.ManagerProperties.Manager != null ? t.PropertyInfo.ManagerProperties.Manager.User.Email : null;
                 })
                 .ToList();
 

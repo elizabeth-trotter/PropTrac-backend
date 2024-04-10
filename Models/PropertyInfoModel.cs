@@ -23,9 +23,17 @@ namespace PropTrac_backend.Models
         public int Expenses { get; set; }
         public int Income { get; set; }
 
-        // Navigation property
+        // Navigation properties
+
+        // RoomInfoModel
+        public RoomInfoModel? RoomInfo { get; set; }
+
+        // ManagerProperties
+        public ManagerPropertiesModel? ManagerProperties { get; set; }
+
         // PropertyExpensesModel
         public PropertyExpenseModel? PropertyExpense { get; set; }
+
         // PropertyIncomeModel
         public PropertyIncomeModel? PropertyIncome { get; set; }
 
