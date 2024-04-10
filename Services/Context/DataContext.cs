@@ -107,9 +107,7 @@ namespace PropTrac_backend.Services.Context
             // Seed dummy data for ManagerFinanceModel
             builder.Entity<ManagerFinanceModel>().HasData(
                 new ManagerFinanceModel { ID = 1, MonthlyRentRecieved = 3000, ManagerID = 1 },
-                new ManagerFinanceModel { ID = 2, MonthlyRentRecieved = 2500, ManagerID = 2 },
-                new ManagerFinanceModel { ID = 3, MonthlyRentRecieved = 2800, ManagerID = 3 },
-                new ManagerFinanceModel { ID = 4, MonthlyRentRecieved = 2000, ManagerID = 4 }
+                new ManagerFinanceModel { ID = 2, MonthlyRentRecieved = 2500, ManagerID = 2 }
             );
 
             // Seed dummy data for DocumentsModel
