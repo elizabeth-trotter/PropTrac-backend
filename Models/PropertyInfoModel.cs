@@ -25,7 +25,9 @@ namespace PropTrac_backend.Models
 
         // Navigation property
         // PropertyExpensesModel
+        public PropertyExpenseModel PropertyExpense { get; set; }
         // PropertyIncomeModel
+        public PropertyIncomeModel PropertyIncome { get; set; }
 
         public PropertyInfoModel()
         {

@@ -17,6 +17,11 @@ namespace PropTrac_backend.Services.Context
         public DbSet<PropertyInfoModel> PropertyInfo { get; set; }
         public DbSet<DocumentsModel> Documents { get; set; }
         public DbSet<SecurityQuestionModel> SecurityQuestion { get; set; }
+        public DbSet<ManagerPropertiesModel> ManagerProperties { get; set; }
+        public DbSet<ManagerFinanceModel> ManagerFinance { get; set; }
+        public DbSet<ManagerDocumentsModel> ManagerDocuments { get; set; }
+        public DbSet<PropertyExpenseModel> PropertyExpense { get; set; }
+        public DbSet<PropertyIncomeModel> PropertyIncome { get; set; }
         // add additional models here once known
 
         // creating constructor to inject models into our database
@@ -34,6 +39,7 @@ namespace PropTrac_backend.Services.Context
                 new SecurityQuestionModel { ID = 3, Question = "What was the name of your first stuffed animal?" }
                 // Add more questions as needed
             );
+
 
             // Configure relationships if necessary
             // builder.Entity<TenantModel>()
