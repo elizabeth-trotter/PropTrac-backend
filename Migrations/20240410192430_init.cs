@@ -318,10 +318,10 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Content", "Name", "Type", "UploadDate" },
                 values: new object[,]
                 {
-                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3306) },
-                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3313) },
-                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3318) },
-                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3324) }
+                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9866) },
+                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9872) },
+                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9876) },
+                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9881) }
                 });
 
             migrationBuilder.InsertData(
@@ -401,8 +401,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "DocumentsID", "FirstName", "LastName", "LeaseEnd", "LeaseStart", "LeaseType", "Phone", "PropertyInfoID", "RoomInfoID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3104), new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3030), "Annual", "123-456-7890", 1, null, 3 },
-                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3118), new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3116), "Monthly", "987-654-3210", 2, 1, 4 }
+                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9626), new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9559), "Annual", "123-456-7890", 1, null, 3 },
+                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9640), new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9638), "Monthly", "987-654-3210", 2, 1, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -439,14 +439,16 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Balance", "DaysRemaining", "DueDate", "PaymentRecieved", "TenantID" },
                 values: new object[,]
                 {
-                    { 1, 1000, 7, new DateTime(2024, 4, 16, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3141), false, 1 },
-                    { 2, 1500, 9, new DateTime(2024, 4, 18, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3147), false, 2 }
+                    { 1, 1000, 7, new DateTime(2024, 4, 17, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9686), false, 1 },
+                    { 2, 1500, 9, new DateTime(2024, 4, 19, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9694), false, 2 }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerDocuments_DocumentsID",
                 table: "ManagerDocuments",
-                column: "DocumentsID");
+                column: "DocumentsID",
+                unique: true,
+                filter: "[DocumentsID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerDocuments_ManagerID",
@@ -467,7 +469,9 @@ namespace PropTrac_backend.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ManagerProperties_PropertyInfoID",
                 table: "ManagerProperties",
-                column: "PropertyInfoID");
+                column: "PropertyInfoID",
+                unique: true,
+                filter: "[PropertyInfoID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Managers_UserID",

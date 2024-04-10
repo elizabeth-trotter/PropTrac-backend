@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240410043038_init")]
+    [Migration("20240410192430_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 1, 2, 3 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3306)
+                            UploadDate = new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9866)
                         },
                         new
                         {
@@ -64,7 +64,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3313)
+                            UploadDate = new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9872)
                         },
                         new
                         {
@@ -72,7 +72,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerList",
                             Type = "Manager",
-                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3318)
+                            UploadDate = new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9876)
                         },
                         new
                         {
@@ -80,7 +80,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerDoc",
                             Type = "Finance",
-                            UploadDate = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3324)
+                            UploadDate = new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9881)
                         });
                 });
 
@@ -100,7 +100,9 @@ namespace PropTrac_backend.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DocumentsID");
+                    b.HasIndex("DocumentsID")
+                        .IsUnique()
+                        .HasFilter("[DocumentsID] IS NOT NULL");
 
                     b.HasIndex("ManagerID");
 
@@ -238,7 +240,9 @@ namespace PropTrac_backend.Migrations
 
                     b.HasIndex("ManagerID");
 
-                    b.HasIndex("PropertyInfoID");
+                    b.HasIndex("PropertyInfoID")
+                        .IsUnique()
+                        .HasFilter("[PropertyInfoID] IS NOT NULL");
 
                     b.ToTable("ManagerProperties");
 
@@ -642,8 +646,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 1,
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            LeaseEnd = new DateTime(2025, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3104),
-                            LeaseStart = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3030),
+                            LeaseEnd = new DateTime(2025, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9626),
+                            LeaseStart = new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9559),
                             LeaseType = "Annual",
                             Phone = "123-456-7890",
                             PropertyInfoID = 1,
@@ -655,8 +659,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 2,
                             FirstName = "Bob",
                             LastName = "Williams",
-                            LeaseEnd = new DateTime(2024, 5, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3118),
-                            LeaseStart = new DateTime(2024, 4, 9, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3116),
+                            LeaseEnd = new DateTime(2024, 5, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9640),
+                            LeaseStart = new DateTime(2024, 4, 10, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9638),
                             LeaseType = "Monthly",
                             Phone = "987-654-3210",
                             PropertyInfoID = 2,
@@ -701,7 +705,7 @@ namespace PropTrac_backend.Migrations
                             ID = 1,
                             Balance = 1000,
                             DaysRemaining = 7,
-                            DueDate = new DateTime(2024, 4, 16, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3141),
+                            DueDate = new DateTime(2024, 4, 17, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9686),
                             PaymentRecieved = false,
                             TenantID = 1
                         },
@@ -710,7 +714,7 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             Balance = 1500,
                             DaysRemaining = 9,
-                            DueDate = new DateTime(2024, 4, 18, 21, 30, 38, 289, DateTimeKind.Local).AddTicks(3147),
+                            DueDate = new DateTime(2024, 4, 19, 12, 24, 30, 684, DateTimeKind.Local).AddTicks(9694),
                             PaymentRecieved = false,
                             TenantID = 2
                         });
@@ -814,8 +818,8 @@ namespace PropTrac_backend.Migrations
             modelBuilder.Entity("PropTrac_backend.Models.ManagerDocumentsModel", b =>
                 {
                     b.HasOne("PropTrac_backend.Models.DocumentsModel", "Documents")
-                        .WithMany()
-                        .HasForeignKey("DocumentsID");
+                        .WithOne("ManagerDocuments")
+                        .HasForeignKey("PropTrac_backend.Models.ManagerDocumentsModel", "DocumentsID");
 
                     b.HasOne("PropTrac_backend.Models.ManagerModel", "Manager")
                         .WithMany("ManagerDocuments")
@@ -855,8 +859,8 @@ namespace PropTrac_backend.Migrations
                         .HasForeignKey("ManagerID");
 
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
-                        .WithMany()
-                        .HasForeignKey("PropertyInfoID");
+                        .WithOne("ManagerProperties")
+                        .HasForeignKey("PropTrac_backend.Models.ManagerPropertiesModel", "PropertyInfoID");
 
                     b.Navigation("Manager");
 
@@ -888,7 +892,7 @@ namespace PropTrac_backend.Migrations
             modelBuilder.Entity("PropTrac_backend.Models.RoomInfoModel", b =>
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
-                        .WithMany()
+                        .WithMany("RoomInfo")
                         .HasForeignKey("PropertyInfoID");
 
                     b.Navigation("PropertyInfo");
@@ -947,6 +951,8 @@ namespace PropTrac_backend.Migrations
 
             modelBuilder.Entity("PropTrac_backend.Models.DocumentsModel", b =>
                 {
+                    b.Navigation("ManagerDocuments");
+
                     b.Navigation("Tenant");
                 });
 
@@ -961,9 +967,13 @@ namespace PropTrac_backend.Migrations
 
             modelBuilder.Entity("PropTrac_backend.Models.PropertyInfoModel", b =>
                 {
+                    b.Navigation("ManagerProperties");
+
                     b.Navigation("PropertyExpense");
 
                     b.Navigation("PropertyIncome");
+
+                    b.Navigation("RoomInfo");
                 });
 
             modelBuilder.Entity("PropTrac_backend.Models.RoomInfoModel", b =>

@@ -26,7 +26,7 @@ namespace PropTrac_backend.Models
         // Navigation properties
 
         // RoomInfoModel
-        public RoomInfoModel? RoomInfo { get; set; }
+        public ICollection<RoomInfoModel>? RoomInfo { get; set; } // Ensure this is correctly defined as a collection
 
         // ManagerProperties
         public ManagerPropertiesModel? ManagerProperties { get; set; }
