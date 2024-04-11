@@ -22,6 +22,8 @@ namespace PropTrac_backend.Services.Context
         public DbSet<ManagerDocumentsModel> ManagerDocuments { get; set; }
         public DbSet<PropertyExpenseModel> PropertyExpense { get; set; }
         public DbSet<PropertyIncomeModel> PropertyIncome { get; set; }
+        public DbSet<PropertyMaintenanceModel> PropertyMaintenance { get; set; }
+        public DbSet<MaintenanceModel> Maintenance { get; set; }
         // add additional models here once known
 
         // creating constructor to inject models into our database
@@ -41,7 +43,7 @@ namespace PropTrac_backend.Services.Context
             //     .WithOne(u => u.Manager)
             //     .HasForeignKey<ManagerModel>(m => m.UserID);
 
-                        
+
             // Configuration for model relationships, keys, indexes, etc.
             // builder.Entity<ManagerDocumentsModel>()
             //     .HasKey(md => md.ID);
@@ -141,6 +143,20 @@ namespace PropTrac_backend.Services.Context
             builder.Entity<ManagerDocumentsModel>().HasData(
                 new ManagerDocumentsModel { ID = 1, ManagerID = 1, DocumentsID = 3 },
                 new ManagerDocumentsModel { ID = 2, ManagerID = 1, DocumentsID = 4 }
+            );
+
+            // Seed dummy data for MaintenanceModel
+            builder.Entity<MaintenanceModel>().HasData(
+                new MaintenanceModel { ID = 1, Status = "To Do", Category = "Plumbing", Priority = "Urgent", DateRequested = DateTime.Now.AddDays(-5), ContractorName = "Plumbing Pros", ContractorEmail = "plumbing@example.com", ContractorPhone = "123-456-7890" },
+                new MaintenanceModel { ID = 2, Status = "In Progress", Category = "Electricity", Priority = "Standard", DateRequested = DateTime.Now.AddDays(-10), ContractorName = "Electricity Experts", ContractorEmail = "electricity@example.com", ContractorPhone = "987-654-3210" },
+                new MaintenanceModel { ID = 3, Status = "Completed", Category = "HVAC", Priority = "Standard", DateRequested = DateTime.Now.AddDays(-15), ContractorName = "HVAC Solutions", ContractorEmail = "hvac@example.com", ContractorPhone = "555-555-5555" }
+            );
+
+            // Seed dummy data for PropertyMaintenanceModel
+            builder.Entity<PropertyMaintenanceModel>().HasData(
+                new PropertyMaintenanceModel { ID = 1, PropertyInfoID = 1, MaintenanceID = 1 },
+                new PropertyMaintenanceModel { ID = 2, PropertyInfoID = 2, MaintenanceID = 2 },
+                new PropertyMaintenanceModel { ID = 3, PropertyInfoID = 1, MaintenanceID = 3 }
             );
 
 

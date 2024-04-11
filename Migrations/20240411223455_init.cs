@@ -30,6 +30,25 @@ namespace PropTrac_backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Maintenance",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Priority = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateRequested = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ContractorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContractorEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContractorPhone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Maintenance", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PropertyInfo",
                 columns: table => new
                 {
@@ -107,6 +126,30 @@ namespace PropTrac_backend.Migrations
                         principalTable: "PropertyInfo",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PropertyMaintenance",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PropertyInfoID = table.Column<int>(type: "int", nullable: true),
+                    MaintenanceID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PropertyMaintenance", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_PropertyMaintenance_Maintenance_MaintenanceID",
+                        column: x => x.MaintenanceID,
+                        principalTable: "Maintenance",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_PropertyMaintenance_PropertyInfo_PropertyInfoID",
+                        column: x => x.PropertyInfoID,
+                        principalTable: "PropertyInfo",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -318,10 +361,20 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Content", "Name", "Type", "UploadDate" },
                 values: new object[,]
                 {
-                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6131) },
-                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6136) },
-                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6140) },
-                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6144) }
+                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6954) },
+                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6959) },
+                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6964) },
+                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6968) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Maintenance",
+                columns: new[] { "ID", "Category", "ContractorEmail", "ContractorName", "ContractorPhone", "DateRequested", "Priority", "Status" },
+                values: new object[,]
+                {
+                    { 1, "Plumbing", "plumbing@example.com", "Plumbing Pros", "123-456-7890", new DateTime(2024, 4, 6, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6999), "Urgent", "To Do" },
+                    { 2, "Electricity", "electricity@example.com", "Electricity Experts", "987-654-3210", new DateTime(2024, 4, 1, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(7004), "Standard", "In Progress" },
+                    { 3, "HVAC", "hvac@example.com", "HVAC Solutions", "555-555-5555", new DateTime(2024, 3, 27, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(7007), "Standard", "Completed" }
                 });
 
             migrationBuilder.InsertData(
@@ -368,6 +421,16 @@ namespace PropTrac_backend.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "PropertyMaintenance",
+                columns: new[] { "ID", "MaintenanceID", "PropertyInfoID" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 3, 1 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "RoomInfo",
                 columns: new[] { "ID", "PropertyInfoID", "RoomRent" },
                 values: new object[,]
@@ -401,8 +464,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "DocumentsID", "FirstName", "LastName", "LeaseEnd", "LeaseStart", "LeaseType", "Phone", "PropertyInfoID", "RoomInfoID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5930), new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5885), "Annual", "123-456-7890", 1, null, 3 },
-                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5940), new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5939), "Monthly", "987-654-3210", 2, 1, 4 }
+                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6679), new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6625), "Annual", "123-456-7890", 1, null, 3 },
+                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6686), new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6685), "Monthly", "987-654-3210", 2, 1, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -439,8 +502,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Balance", "DaysRemaining", "DueDate", "PaymentRecieved", "TenantID" },
                 values: new object[,]
                 {
-                    { 1, 1000, 7, new DateTime(2024, 4, 17, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5961), false, 1 },
-                    { 2, 1500, 9, new DateTime(2024, 4, 19, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5966), false, 2 }
+                    { 1, 1000, 7, new DateTime(2024, 4, 18, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6702), false, 1 },
+                    { 2, 1500, 9, new DateTime(2024, 4, 20, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6707), false, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -490,6 +553,18 @@ namespace PropTrac_backend.Migrations
                 table: "PropertyIncome",
                 column: "PropertyInfoID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PropertyMaintenance_MaintenanceID",
+                table: "PropertyMaintenance",
+                column: "MaintenanceID",
+                unique: true,
+                filter: "[MaintenanceID] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PropertyMaintenance_PropertyInfoID",
+                table: "PropertyMaintenance",
+                column: "PropertyInfoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoomInfo_PropertyInfoID",
@@ -552,10 +627,16 @@ namespace PropTrac_backend.Migrations
                 name: "PropertyIncome");
 
             migrationBuilder.DropTable(
+                name: "PropertyMaintenance");
+
+            migrationBuilder.DropTable(
                 name: "TenantPaymentInfo");
 
             migrationBuilder.DropTable(
                 name: "Managers");
+
+            migrationBuilder.DropTable(
+                name: "Maintenance");
 
             migrationBuilder.DropTable(
                 name: "Tenants");

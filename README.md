@@ -50,6 +50,6 @@ Base URL: https://proptracapi.azurewebsites.net
 
 <h4 align="center">Entity Relationship Diagram</h4>
 
-![Entity relationship diagram](ERD_V2.1_4.05.2024.png)
+![Entity relationship diagram](ERD_V2.2_4.11.2024.png)
 
 <p align="right">Figure 2: ERD illustrating database schema updated April 5, 2024</p>

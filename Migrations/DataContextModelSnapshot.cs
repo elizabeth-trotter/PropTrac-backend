@@ -53,7 +53,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 1, 2, 3 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6131)
+                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6954)
                         },
                         new
                         {
@@ -61,7 +61,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6136)
+                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6959)
                         },
                         new
                         {
@@ -69,7 +69,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerList",
                             Type = "Manager",
-                            UploadDate = new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6140)
+                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6964)
                         },
                         new
                         {
@@ -77,7 +77,79 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerDoc",
                             Type = "Finance",
-                            UploadDate = new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(6144)
+                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6968)
+                        });
+                });
+
+            modelBuilder.Entity("PropTrac_backend.Models.MaintenanceModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContractorEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContractorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContractorPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateRequested")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Maintenance");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Category = "Plumbing",
+                            ContractorEmail = "plumbing@example.com",
+                            ContractorName = "Plumbing Pros",
+                            ContractorPhone = "123-456-7890",
+                            DateRequested = new DateTime(2024, 4, 6, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6999),
+                            Priority = "Urgent",
+                            Status = "To Do"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Category = "Electricity",
+                            ContractorEmail = "electricity@example.com",
+                            ContractorName = "Electricity Experts",
+                            ContractorPhone = "987-654-3210",
+                            DateRequested = new DateTime(2024, 4, 1, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(7004),
+                            Priority = "Standard",
+                            Status = "In Progress"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Category = "HVAC",
+                            ContractorEmail = "hvac@example.com",
+                            ContractorName = "HVAC Solutions",
+                            ContractorPhone = "555-555-5555",
+                            DateRequested = new DateTime(2024, 3, 27, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(7007),
+                            Priority = "Standard",
+                            Status = "Completed"
                         });
                 });
 
@@ -510,6 +582,51 @@ namespace PropTrac_backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PropTrac_backend.Models.PropertyMaintenanceModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int?>("MaintenanceID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PropertyInfoID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MaintenanceID")
+                        .IsUnique()
+                        .HasFilter("[MaintenanceID] IS NOT NULL");
+
+                    b.HasIndex("PropertyInfoID");
+
+                    b.ToTable("PropertyMaintenance");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            MaintenanceID = 1,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            MaintenanceID = 2,
+                            PropertyInfoID = 2
+                        },
+                        new
+                        {
+                            ID = 3,
+                            MaintenanceID = 3,
+                            PropertyInfoID = 1
+                        });
+                });
+
             modelBuilder.Entity("PropTrac_backend.Models.RoomInfoModel", b =>
                 {
                     b.Property<int>("ID")
@@ -643,8 +760,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 1,
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            LeaseEnd = new DateTime(2025, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5930),
-                            LeaseStart = new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5885),
+                            LeaseEnd = new DateTime(2025, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6679),
+                            LeaseStart = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6625),
                             LeaseType = "Annual",
                             Phone = "123-456-7890",
                             PropertyInfoID = 1,
@@ -656,8 +773,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 2,
                             FirstName = "Bob",
                             LastName = "Williams",
-                            LeaseEnd = new DateTime(2024, 5, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5940),
-                            LeaseStart = new DateTime(2024, 4, 10, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5939),
+                            LeaseEnd = new DateTime(2024, 5, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6686),
+                            LeaseStart = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6685),
                             LeaseType = "Monthly",
                             Phone = "987-654-3210",
                             PropertyInfoID = 2,
@@ -702,7 +819,7 @@ namespace PropTrac_backend.Migrations
                             ID = 1,
                             Balance = 1000,
                             DaysRemaining = 7,
-                            DueDate = new DateTime(2024, 4, 17, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5961),
+                            DueDate = new DateTime(2024, 4, 18, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6702),
                             PaymentRecieved = false,
                             TenantID = 1
                         },
@@ -711,7 +828,7 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             Balance = 1500,
                             DaysRemaining = 9,
-                            DueDate = new DateTime(2024, 4, 19, 15, 26, 17, 780, DateTimeKind.Local).AddTicks(5966),
+                            DueDate = new DateTime(2024, 4, 20, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6707),
                             PaymentRecieved = false,
                             TenantID = 2
                         });
@@ -886,6 +1003,21 @@ namespace PropTrac_backend.Migrations
                     b.Navigation("PropertyInfo");
                 });
 
+            modelBuilder.Entity("PropTrac_backend.Models.PropertyMaintenanceModel", b =>
+                {
+                    b.HasOne("PropTrac_backend.Models.MaintenanceModel", "Maintenance")
+                        .WithOne("PropertyMaintenance")
+                        .HasForeignKey("PropTrac_backend.Models.PropertyMaintenanceModel", "MaintenanceID");
+
+                    b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
+                        .WithMany("PropertyMaintenance")
+                        .HasForeignKey("PropertyInfoID");
+
+                    b.Navigation("Maintenance");
+
+                    b.Navigation("PropertyInfo");
+                });
+
             modelBuilder.Entity("PropTrac_backend.Models.RoomInfoModel", b =>
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
@@ -953,6 +1085,11 @@ namespace PropTrac_backend.Migrations
                     b.Navigation("Tenant");
                 });
 
+            modelBuilder.Entity("PropTrac_backend.Models.MaintenanceModel", b =>
+                {
+                    b.Navigation("PropertyMaintenance");
+                });
+
             modelBuilder.Entity("PropTrac_backend.Models.ManagerModel", b =>
                 {
                     b.Navigation("ManagerDocuments");
@@ -969,6 +1106,8 @@ namespace PropTrac_backend.Migrations
                     b.Navigation("PropertyExpense");
 
                     b.Navigation("PropertyIncome");
+
+                    b.Navigation("PropertyMaintenance");
 
                     b.Navigation("RoomInfo");
 
