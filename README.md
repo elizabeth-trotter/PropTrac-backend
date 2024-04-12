@@ -43,10 +43,10 @@ Base URL: https://proptracapi.azurewebsites.net
 
 <h4 align="center">Table 4: Manager Controller Endpoints</h4>
 
-| Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
-| -------------                       | ----------- | -------------                               | -------------  | ------------- |
-| Get Manager Dashboard Property Stats| `GET`       | /Manager/GetPropertyStatsByUserID/{userId}  | URL            | int userId    |
-| Get Manager Dashboard Maintenance   | `GET`       |   | URL            | int userId    |
+| Description                     | HTTP Method | Endpoint                                     | Parameter Type | Parameter Requirements |
+| -------------                   | ----------- | -------------                                | -------------  | ------------- |
+| Manager Dashboard Property Stats| `GET`       | /Manager/GetPropertyStatsByUserID/{userId}   | URL            | int userId    |
+| Manager Dashboard Maintenance   | `GET`       | /Manager/GetMaintenanceStatsByUserID/{userId}| URL            | int userId    |
 
 <p align="right">Tables 1, 2, 3, 4: API endpoints updated April 11, 2024</p>
 

@@ -8,9 +8,9 @@ namespace PropTrac_backend.Models
     public class MaintenanceModel
     {
         public int ID { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } = "To Do";
         public string Category { get; set; }
-        public string Priority { get; set; }
+        public string Priority { get; set; } = "Standard";
         public DateTime DateRequested { get; set; }
         public string? ContractorName { get; set; }
         public string? ContractorEmail { get; set; }

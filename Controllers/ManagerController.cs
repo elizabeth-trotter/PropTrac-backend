@@ -48,5 +48,26 @@ namespace PropTrac_backend.Controllers
         }
 
         // Maintenance Requests
+        [HttpGet]
+        [Route("GetMaintenanceStatsByUserID/{userId}")]
+        public IActionResult GetMaintenanceStatsByUserID(int userId)
+        {
+            // Check if the user exists
+            var userExists = _userService.GetUserById(userId) != null;
+
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            var stats = _managerService.GetMaintenanceStats(userId);
+
+            if (stats == null)
+            {
+                return Ok("Manager does not exist");
+            }
+
+            return Ok(stats);
+        }
     }
 }

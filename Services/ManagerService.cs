@@ -21,7 +21,6 @@ namespace PropTrac_backend.Services
             // Get the manager corresponding to the user ID
             var manager = _context.Managers.SingleOrDefault(m => m.UserID == userId);
 
-            // If manager is not found, return counts as 0
             if (manager == null)
             {
                 return null;
@@ -58,8 +57,7 @@ namespace PropTrac_backend.Services
                     {
                         var roomIds = _context.RoomInfo
                             .Where(r => r.PropertyInfoID == propertyId)
-                            .Select(r => r.ID)
-                            .ToList();
+                            .Select(r => r.ID);
 
                         if (!_context.Tenants.Any(t => t.RoomInfoID.HasValue && roomIds.Contains(t.RoomInfoID.Value)))
                         {
@@ -72,7 +70,6 @@ namespace PropTrac_backend.Services
             // Get the count of properties managed by the manager
             var propertiesCount = propertyIds.Count;
 
-            // Return the property statistics
             return new PropertyStatsDTO
             {
                 ActiveTenants = activeTenantsCount,
@@ -81,9 +78,42 @@ namespace PropTrac_backend.Services
             };
         }
 
-        public MaintenanceStatsDTO GetMaintenanceStats(int userId)
+        public List<MaintenanceStatsDTO> GetMaintenanceStats(int userId)
         {
-            return null;
+            // Get the manager corresponding to the user ID
+            var manager = _context.Managers.SingleOrDefault(m => m.UserID == userId);
+
+            if (manager == null)
+            {
+                return null;
+            }
+
+            // Get the property IDs managed by the manager
+            var propertyIds = _context.ManagerProperties
+                .Where(mp => mp.ManagerID == manager.ID)
+                .Select(mp => mp.PropertyInfoID);
+
+            // Retrieve all maintenance IDs associated with the properties managed by the manager
+            var maintenanceIDs = _context.PropertyMaintenance
+                .Where(pm => propertyIds.Contains(pm.PropertyInfoID))
+                .Select(pm => pm.MaintenanceID);
+
+            // Retrieve all maintenance requests associated with the properties managed by the manager
+            var maintenanceRequests = _context.Maintenance
+                .Where(m => maintenanceIDs.Contains(m.ID));
+
+            // Map each maintenance request to a MaintenanceStatsDTO object
+            var maintenanceStats = maintenanceRequests.Select(mr => new MaintenanceStatsDTO
+            {
+                ID = mr.ID,
+                Status = mr.Status,
+                Category = mr.Category,
+                Priority = mr.Priority,
+                DateRequested = mr.DateRequested,
+                PropertyInfoID = mr.PropertyMaintenance.PropertyInfo.ID
+            }).ToList();
+
+            return maintenanceStats;
         }
 
     }
