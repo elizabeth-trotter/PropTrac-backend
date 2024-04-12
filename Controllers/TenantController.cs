@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PropTrac_backend.Models.DTO;
+using PropTrac_backend.Models.DTO.TenantDashboard;
 using PropTrac_backend.Services;
 
 namespace PropTrac_backend.Controllers
@@ -44,6 +45,12 @@ namespace PropTrac_backend.Controllers
             }
 
             return Ok(tenants);
+        }
+
+        [HttpPost]
+        [Route("AddMaintenanceRequest")]
+        public bool AddMaintenanceRequest(TenantMaintenanceDTO request){
+            return _tenantService.AddMaintenanceRequest(request);
         }
 
         // [HttpGet]

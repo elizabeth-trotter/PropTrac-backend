@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
+using PropTrac_backend.Models.DTO.TenantDashboard;
 using PropTrac_backend.Services.Context;
 
 namespace PropTrac_backend.Services
@@ -57,6 +58,39 @@ namespace PropTrac_backend.Services
 
 
             return tenants;
+        }
+
+        public bool DoesRequestExist(TenantMaintenanceDTO tenantMaintenanceDTO)
+        {
+            //check if request exists
+            //if 1 matches, then return the item
+            //if no item matches, then return null
+
+            return _context.Maintenance.SingleOrDefault(request => request.Description == tenantMaintenanceDTO.Description) != null;
+        }
+
+        public bool AddMaintenanceRequest(TenantMaintenanceDTO request)
+        {
+            bool result = false;
+
+            //if request doesn't exist, add request
+            if (!DoesRequestExist(request))
+            {
+                MaintenanceModel maintenanceModel = new();
+
+                maintenanceModel.Description = request.Description;
+                maintenanceModel.Priority = request.Priority;
+                maintenanceModel.Category = request.Category;
+                maintenanceModel.Image = request.Image;
+
+                //adds new request to the Maintenance table in database
+                _context.Maintenance.Add(maintenanceModel);
+
+                //save into database, return of number of entries written into database
+                result = _context.SaveChanges() != 0;
+            }
+
+            return result;
         }
     }
 }
