@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PropTrac_backend.Models.DTO;
+using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Services.Context;
 
 namespace PropTrac_backend.Services
@@ -78,49 +79,12 @@ namespace PropTrac_backend.Services
                 OpenListings = openListingsCount,
                 Properties = propertiesCount
             };
-
-            //     // Get the manager with the specified user ID
-            //     var manager = _context.Managers.SingleOrDefault(m => m.UserID == userId);
-
-            //     if (manager == null)
-            //     {
-            //         return null;
-            //     }
-
-            //     // LINQ Method Syntax
-
-            //     // Get the county of properties by the manager
-            //     var propertyCount = _context.ManagerProperties.Count(mp => mp.Manager.UserID == userId);
-
-            //     // Get the count of open listings with the properties manager by the the manager
-            //     var propertyIds = _context.ManagerProperties
-            //         .Where(mp => mp.ManagerID == manager.ID)
-            //         .Select(mp => mp.PropertyInfoID)
-            //         .ToList();
-
-            //     var listingCount = _context.PropertyInfo
-            //         .Where(pi => propertyIds.Contains(pi.ID) && !_context.Tenants.Any(t => t.PropertyInfoID == pi.ID))
-            //         .Count();
-
-            //     // Get the count of tenants associated with the properties managed by the manager
-            //     var tenantCount = _context.Tenants
-            //         .Count(t => _context.ManagerProperties
-            //             .Any(mp => mp.ManagerID == manager.ID && mp.PropertyInfoID == t.PropertyInfoID));
-
-            //     // Create a PropertyStatsDTO object
-            //     var propertyStats = new PropertyStatsDTO
-            //     {
-            //         ActiveTenants = tenantCount,
-            //         OpenListings = listingCount,
-            //         Properties = propertyCount
-            //     };
-
-            //     return propertyStats;
-            // }
-
-            // public bool DoesManagerExist(){
-
-            // }
         }
+
+        public MaintenanceStatsDTO GetMaintenanceStats(int userId)
+        {
+            return null;
+        }
+
     }
 }
