@@ -19,7 +19,7 @@ builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(conne
 
 builder.Services.AddCors(options => options.AddPolicy("PropTracPolicy", 
     builder => {
-        builder.WithOrigins("http://localhost:5280", "http://localhost:3000", "https://prop-trac.vercel.app", "https://proptrac.vercel.app")
+        builder.WithOrigins("http://localhost:5280", "http://localhost:3000", "https://prop-trac.vercel.app", "https://proptrac.vercel.app", "https://proptrac-app.vercel.app")
         .AllowAnyHeader()
         .AllowAnyMethod();
     }));
