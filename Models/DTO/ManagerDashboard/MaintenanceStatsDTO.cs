@@ -13,6 +13,7 @@ namespace PropTrac_backend.Models.DTO.ManagerDashboard
         public string Priority { get; set; }
         public string Description { get; set; }
         public DateTime DateRequested { get; set; }
+        public int UserID { get; set; }
 
         public int PropertyInfoID { get; set; }
     }

@@ -40,6 +40,7 @@ Base URL: https://proptracapi.azurewebsites.net
 | Description                         | HTTP Method | Endpoint                                    | Parameter Type | Parameter Requirements |
 | -------------                       | ----------- | -------------                               | -------------  | ------------- |
 | Get All Tenant Dashboard Info       | `GET`       | /Tenant/GetTenantDashboardInfo/{userId}     | URL            | int userId |
+| Submit Maintenance Request          | `POST`      | /Tenant/AddMaintenanceRequest               | Body           | string Description, string Priority, string Category, byte[]? Image, int UserID |
 
 <h4 align="center">Table 4: Manager Controller Endpoints</h4>
 
@@ -48,7 +49,7 @@ Base URL: https://proptracapi.azurewebsites.net
 | Manager Dashboard Property Stats| `GET`       | /Manager/GetPropertyStatsByUserID/{userId}   | URL            | int userId    |
 | Manager Dashboard Maintenance   | `GET`       | /Manager/GetMaintenanceStatsByUserID/{userId}| URL            | int userId    |
 
-<p align="right">Tables 1, 2, 3, 4: API endpoints updated April 11, 2024</p>
+<p align="right">Tables 1, 2, 3, 4: API endpoints updated April 12, 2024</p>
 
 
 ## Database
@@ -57,6 +58,6 @@ Base URL: https://proptracapi.azurewebsites.net
 
 <h4 align="center">Entity Relationship Diagram</h4>
 
-![Entity relationship diagram](ERD_V2.2_4.11.2024.png)
+![Entity relationship diagram](ERD_V2.3_4.12.2024.png)
 
-<p align="right">Figure 2: ERD illustrating database schema updated April 11, 2024</p>
+<p align="right">Figure 2: ERD illustrating database schema updated April 12, 2024</p>

@@ -76,12 +76,14 @@ namespace PropTrac_backend.Services
             //if request doesn't exist, add request
             if (!DoesRequestExist(request))
             {
-                MaintenanceModel maintenanceModel = new();
-
-                maintenanceModel.Description = request.Description;
-                maintenanceModel.Priority = request.Priority;
-                maintenanceModel.Category = request.Category;
-                maintenanceModel.Image = request.Image;
+                MaintenanceModel maintenanceModel = new()
+                {
+                    Description = request.Description,
+                    Priority = request.Priority,
+                    Category = request.Category,
+                    Image = request.Image,
+                    UserID = request.UserID
+                };
 
                 //adds new request to the Maintenance table in database
                 _context.Maintenance.Add(maintenanceModel);

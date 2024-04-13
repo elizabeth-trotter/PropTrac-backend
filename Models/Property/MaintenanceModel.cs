@@ -14,6 +14,7 @@ namespace PropTrac_backend.Models
         public string Description { get; set; }
         public byte[]? Image { get; set; }
         public DateTime DateRequested { get; set; }
+        public int UserID { get; set; }
         public string? ContractorName { get; set; }
         public string? ContractorEmail { get; set; }
         public string? ContractorPhone { get; set; }
