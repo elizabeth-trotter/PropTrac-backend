@@ -2,7 +2,7 @@
 
 **Quick Links:**
 
-[![Static Badge](https://img.shields.io/badge/frontend%20repo-navy?style=for-the-badge&logo=github)](https://github.com/calebsylvia/PropTrac) &ensp; ![Website](https://img.shields.io/website?url=https%3A%2F%2Fproptrac-app.vercel.app%2F&up_message=in%20development&up_color=blue&down_color=8B0000&style=for-the-badge&logo=vercel&label=frontend) 
+[![Static Badge](https://img.shields.io/badge/frontend%20repo-navy?style=for-the-badge&logo=github)](https://github.com/calebsylvia/PropTrac) &ensp; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fproptrac-app.vercel.app%2F&up_message=in%20development&up_color=blue&down_color=8B0000&style=for-the-badge&logo=vercel&label=frontend)](https://proptrac-app.vercel.app/)
 
 
 ## API
