@@ -147,9 +147,9 @@ namespace PropTrac_backend.Services.Context
 
             // Seed dummy data for MaintenanceModel
             builder.Entity<MaintenanceModel>().HasData(
-                new MaintenanceModel { ID = 1, Status = "To Do", Category = "Plumbing", Priority = "Urgent", DateRequested = DateTime.Now.AddDays(-5), ContractorName = "Plumbing Pros", ContractorEmail = "plumbing@example.com", ContractorPhone = "123-456-7890" },
-                new MaintenanceModel { ID = 2, Status = "In Progress", Category = "Electricity", Priority = "Standard", DateRequested = DateTime.Now.AddDays(-10), ContractorName = "Electricity Experts", ContractorEmail = "electricity@example.com", ContractorPhone = "987-654-3210" },
-                new MaintenanceModel { ID = 3, Status = "Completed", Category = "HVAC", Priority = "Standard", DateRequested = DateTime.Now.AddDays(-15), ContractorName = "HVAC Solutions", ContractorEmail = "hvac@example.com", ContractorPhone = "555-555-5555" }
+                new MaintenanceModel { ID = 1, Status = "To Do", Category = "Plumbing", Priority = "Urgent", Description = "There's something wrong with the toilet.", DateRequested = DateTime.Now.AddDays(-5), ContractorName = "Plumbing Pros", ContractorEmail = "plumbing@example.com", ContractorPhone = "123-456-7890", UserID = 3 },
+                new MaintenanceModel { ID = 2, Status = "In Progress", Category = "Electricity", Priority = "Standard", Description = "Outlets aren't working", DateRequested = DateTime.Now.AddDays(-10), ContractorName = "Electricity Experts", ContractorEmail = "electricity@example.com", ContractorPhone = "987-654-3210", UserID = 4 },
+                new MaintenanceModel { ID = 3, Status = "Completed", Category = "HVAC", Priority = "Standard", Description = "not sure what's wrong", DateRequested = DateTime.Now.AddDays(-15), ContractorName = "HVAC Solutions", ContractorEmail = "hvac@example.com", ContractorPhone = "555-555-5555", UserID = 3 }
             );
 
             // Seed dummy data for PropertyMaintenanceModel

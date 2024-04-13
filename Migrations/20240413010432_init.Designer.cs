@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240411223455_init")]
+    [Migration("20240413010432_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 1, 2, 3 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6954)
+                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3129)
                         },
                         new
                         {
@@ -64,7 +64,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6959)
+                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3135)
                         },
                         new
                         {
@@ -72,7 +72,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerList",
                             Type = "Manager",
-                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6964)
+                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3138)
                         },
                         new
                         {
@@ -80,7 +80,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerDoc",
                             Type = "Finance",
-                            UploadDate = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6968)
+                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3143)
                         });
                 });
 
@@ -108,6 +108,13 @@ namespace PropTrac_backend.Migrations
                     b.Property<DateTime>("DateRequested")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Priority")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -115,6 +122,9 @@ namespace PropTrac_backend.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -128,9 +138,11 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "plumbing@example.com",
                             ContractorName = "Plumbing Pros",
                             ContractorPhone = "123-456-7890",
-                            DateRequested = new DateTime(2024, 4, 6, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6999),
+                            DateRequested = new DateTime(2024, 4, 7, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3180),
+                            Description = "There's something wrong with the toilet.",
                             Priority = "Urgent",
-                            Status = "To Do"
+                            Status = "To Do",
+                            UserID = 3
                         },
                         new
                         {
@@ -139,9 +151,11 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "electricity@example.com",
                             ContractorName = "Electricity Experts",
                             ContractorPhone = "987-654-3210",
-                            DateRequested = new DateTime(2024, 4, 1, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(7004),
+                            DateRequested = new DateTime(2024, 4, 2, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3186),
+                            Description = "Outlets aren't working",
                             Priority = "Standard",
-                            Status = "In Progress"
+                            Status = "In Progress",
+                            UserID = 4
                         },
                         new
                         {
@@ -150,9 +164,11 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "hvac@example.com",
                             ContractorName = "HVAC Solutions",
                             ContractorPhone = "555-555-5555",
-                            DateRequested = new DateTime(2024, 3, 27, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(7007),
+                            DateRequested = new DateTime(2024, 3, 28, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3190),
+                            Description = "not sure what's wrong",
                             Priority = "Standard",
-                            Status = "Completed"
+                            Status = "Completed",
+                            UserID = 3
                         });
                 });
 
@@ -763,8 +779,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 1,
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            LeaseEnd = new DateTime(2025, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6679),
-                            LeaseStart = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6625),
+                            LeaseEnd = new DateTime(2025, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2907),
+                            LeaseStart = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2843),
                             LeaseType = "Annual",
                             Phone = "123-456-7890",
                             PropertyInfoID = 1,
@@ -776,8 +792,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 2,
                             FirstName = "Bob",
                             LastName = "Williams",
-                            LeaseEnd = new DateTime(2024, 5, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6686),
-                            LeaseStart = new DateTime(2024, 4, 11, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6685),
+                            LeaseEnd = new DateTime(2024, 5, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2919),
+                            LeaseStart = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2918),
                             LeaseType = "Monthly",
                             Phone = "987-654-3210",
                             PropertyInfoID = 2,
@@ -822,7 +838,7 @@ namespace PropTrac_backend.Migrations
                             ID = 1,
                             Balance = 1000,
                             DaysRemaining = 7,
-                            DueDate = new DateTime(2024, 4, 18, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6702),
+                            DueDate = new DateTime(2024, 4, 19, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2937),
                             PaymentRecieved = false,
                             TenantID = 1
                         },
@@ -831,7 +847,7 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             Balance = 1500,
                             DaysRemaining = 9,
-                            DueDate = new DateTime(2024, 4, 20, 15, 34, 55, 26, DateTimeKind.Local).AddTicks(6707),
+                            DueDate = new DateTime(2024, 4, 21, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2942),
                             PaymentRecieved = false,
                             TenantID = 2
                         });
