@@ -20,10 +20,59 @@ namespace PropTrac_backend.Controllers
             _userService = userService;
         }
 
+        // Six Month Profit Or Loss
+        [HttpGet]
+        [Route("GetPastSixMonthsProfitOrLoss/{userId}/{month}/{year}")]
+        public IActionResult GetPastSixMonthsProfitOrLoss(int userId, int month, int year)
+        {
+            // Check if the user exists
+            var userExists = _userService.GetUserById(userId) != null;
+
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            // Check if the manager exists
+            var manager = _managerService.GetManagerByUserId(userId);
+
+            if (manager == null)
+            {
+                return Unauthorized("User is not an authorized Manager");
+            }
+
+            var profitOrLossStatement = _managerService.GetPastSixMonthsProfitOrLoss(userId, month, year);
+            return Ok(profitOrLossStatement);
+        }
+
+        // Projected
+        [HttpGet]
+        [Route("GetProjectedProfitOrLoss/{userId}/{month}/{year}")]
+        public IActionResult GetProjectedProfitOrLoss(int userId, int month, int year){
+            // Check if the user exists
+            var userExists = _userService.GetUserById(userId) != null;
+
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            // Check if the manager exists
+            var manager = _managerService.GetManagerByUserId(userId);
+
+            if (manager == null)
+            {
+                return Unauthorized("User is not an authorized Manager");
+            }
+
+            var profitOrLossStatement = _managerService.GetProjectedProfitOrLoss(userId, month, year);
+            return Ok(profitOrLossStatement);
+        }
+
         // Monthly Profit Or Loss
         [HttpGet]
-        [Route("GetMontlyProfitOrLossByUserID/{userId}/{month}/{year}")]
-        public IActionResult GetMontlyProfitOrLossByUserID(int userId, int month, int year)
+        [Route("GetMonthlyProfitOrLoss/{userId}/{month}/{year}")]
+        public IActionResult GetMonthlyProfitOrLoss(int userId, int month, int year)
         {
             // Check if the user exists
             var userExists = _userService.GetUserById(userId) != null;

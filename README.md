@@ -45,12 +45,15 @@ Base URL: https://proptracapi.azurewebsites.net
 
 <h4 align="center">Table 4: Manager Controller Endpoints</h4>
 
-| Description                     | HTTP Method | Endpoint                                     | Parameter Type | Parameter Requirements |
-| -------------                   | ----------- | -------------                                | -------------  | ------------- |
-| Manager Dashboard Property Stats| `GET`       | /Manager/GetPropertyStatsByUserID/{userId}   | URL            | int userId    |
-| Manager Dashboard Maintenance   | `GET`       | /Manager/GetMaintenanceStatsByUserID/{userId}| URL            | int userId    |
+| Description                               | HTTP Method | Endpoint                                     | Parameter Type | Parameter Requirements |
+| -------------                             | ----------- | -------------                                | -------------  | ------------- |
+| Manager Dashboard Property Stats          | `GET`       | /Manager/GetPropertyStatsByUserID/{userId}   | URL            | int userId    |
+| Manager Dashboard Maintenance             | `GET`       | /Manager/GetMaintenanceStatsByUserID/{userId}| URL            | int userId    |
+| Manager Dashboard Month Profit Or Loss    | `GET`       | /Manager/GetMonthlyProfitOrLoss/{userId}/{month}/{year}| URL            | int userId, int month, int year    |
+| Manager Dashboard Profit Or Loss Overview | `GET`       | /Manager/GetPastSixMonthsProfitOrLoss/{userId}/{month}/{year}| URL            | int userId, int month, int year    |
+| Manager Dashboard Projected Overview      | `GET`       | /Manager/GetProjectedProfitOrLoss/{userId}/{month}/{year}| URL            | int userId, int month, int year    |
 
-<p align="right">Tables 1, 2, 3, 4: API endpoints updated April 12, 2024</p>
+<p align="right">Tables 1, 2, 3, 4: API endpoints updated April 15, 2024</p>
 
 
 ## Database
