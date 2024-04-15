@@ -13,6 +13,7 @@ Base URL: https://proptracapi.azurewebsites.net
 
 > [!IMPORTANT]
 > Please view the tables below for specific endpoints/ requests. 
+> - These endpoints are for the internal team only
 
 
 <h4 align="center">Table 1: User Controller Endpoints</h4>
@@ -54,7 +55,7 @@ Base URL: https://proptracapi.azurewebsites.net
 
 ## Database
 
-**Details:** Database is Azure SQL. (Basic Free Plan)
+**Details:** Database is Azure SQL. (5gb max)
 
 <h4 align="center">Entity Relationship Diagram</h4>
 

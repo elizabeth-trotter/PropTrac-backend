@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PropTrac_backend.Models.Property;
 
 namespace PropTrac_backend.Models
 {
@@ -20,8 +21,6 @@ namespace PropTrac_backend.Models
         public int Sqft { get; set; }
         public string AmenFeatList { get; set; }
         public string Description { get; set; }
-        public int Expenses { get; set; }
-        public int Income { get; set; }
 
         // Navigation properties
 
@@ -34,11 +33,12 @@ namespace PropTrac_backend.Models
         // ManagerProperties
         public ManagerPropertiesModel? ManagerProperties { get; set; }
 
-        // PropertyExpensesModel
-        public PropertyExpenseModel? PropertyExpense { get; set; }
+        // MonthlyPropertyFinanceModel
+        public MonthlyPropertyFinanceModel MonthlyPropertyFinance { get; set; }
 
-        // PropertyIncomeModel
-        public PropertyIncomeModel? PropertyIncome { get; set; }
+        // PropertyExpenseIncomeEntryModel
+        public ICollection<PropertyExpenseModel>? PropertyExpense { get; set; }
+        public ICollection<PropertyIncomeModel>? PropertyIncome { get; set; }
 
         // PropertyMaintenanceModel
         public ICollection<PropertyMaintenanceModel>? PropertyMaintenance { get; set; } // Ensure this is correctly defined as a collection

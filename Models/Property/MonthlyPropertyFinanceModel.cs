@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 
 namespace PropTrac_backend.Models.Property
 {
-    public class PropertyIncomeModel
+    public class MonthlyPropertyFinanceModel
     {
         public int ID { get; set; }
         public int PropertyInfoID { get; set; }
-        public DateTime Date { get; set; }
-        public int Amount { get; set; }
-        public string Description { get; set; }
-        public bool IsRecurring { get; set; } // Flag for recurring expenses
-        public bool IsFixedAmount { get; set; } // Flag for fixed or averaged amount
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int ExpenseAmount { get; set; }
+        public int IncomeAmount { get; set; }
 
         // Navigation property to PropertyInfoModel
         public PropertyInfoModel PropertyInfo { get; set; }

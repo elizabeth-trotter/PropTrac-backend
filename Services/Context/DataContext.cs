@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PropTrac_backend.Models;
+using PropTrac_backend.Models.Property;
 
 namespace PropTrac_backend.Services.Context
 {
@@ -20,6 +21,7 @@ namespace PropTrac_backend.Services.Context
         public DbSet<ManagerPropertiesModel> ManagerProperties { get; set; }
         public DbSet<ManagerFinanceModel> ManagerFinance { get; set; }
         public DbSet<ManagerDocumentsModel> ManagerDocuments { get; set; }
+        public DbSet<MonthlyPropertyFinanceModel> MonthlyPropertyFinance { get; set; }
         public DbSet<PropertyExpenseModel> PropertyExpense { get; set; }
         public DbSet<PropertyIncomeModel> PropertyIncome { get; set; }
         public DbSet<PropertyMaintenanceModel> PropertyMaintenance { get; set; }
@@ -95,26 +97,32 @@ namespace PropTrac_backend.Services.Context
 
             // Seed dummy data for PropertyInfoModel
             builder.Entity<PropertyInfoModel>().HasData(
-                new PropertyInfoModel { ID = 1, HouseNumber = "123", Street = "Main St", City = "Anytown", Zip = "12345", State = "CA", HouseOrRoomType = "House", HouseRent = 2000, Rooms = 3, Baths = 2, Sqft = 1800, AmenFeatList = "Swimming Pool, Gym", Description = "Spacious family house", Expenses = 1800, Income = 2500 },
-                new PropertyInfoModel { ID = 2, HouseNumber = "456", Street = "Oak St", City = "Otherville", Zip = "54321", State = "NY", HouseOrRoomType = "Rooms", HouseRent = 1500, Rooms = 2, Baths = 1, Sqft = 1000, AmenFeatList = "Laundry, Parking, Backyard", Description = "Cozy condo with rooms for rent", Expenses = 1450, Income = 1800 },
-                new PropertyInfoModel { ID = 3, HouseNumber = "789", Street = "Pine St", City = "Smalltown", Zip = "67890", State = "TX", HouseOrRoomType = "House", HouseRent = 1800, Rooms = 2, Baths = 1, Sqft = 1200, AmenFeatList = "Garage, Patio", Description = "Charming cottage", Expenses = 1500, Income = 2000 },
-                new PropertyInfoModel { ID = 4, HouseNumber = "101", Street = "Maple St", City = "Villageton", Zip = "98765", State = "FL", HouseOrRoomType = "House", HouseRent = 1200, Rooms = 2, Baths = 1, Sqft = 800, AmenFeatList = "Utilities Included", Description = "Small home", Expenses = 1180, Income = 1400 }
+                new PropertyInfoModel { ID = 1, HouseNumber = "123", Street = "Main St", City = "Anytown", Zip = "12345", State = "CA", HouseOrRoomType = "House", HouseRent = 2000, Rooms = 3, Baths = 2, Sqft = 1800, AmenFeatList = "Swimming Pool, Gym", Description = "Spacious family house" },
+                new PropertyInfoModel { ID = 2, HouseNumber = "456", Street = "Oak St", City = "Otherville", Zip = "54321", State = "NY", HouseOrRoomType = "Rooms", HouseRent = 1500, Rooms = 2, Baths = 1, Sqft = 1000, AmenFeatList = "Laundry, Parking, Backyard", Description = "Cozy condo with rooms for rent" },
+                new PropertyInfoModel { ID = 3, HouseNumber = "789", Street = "Pine St", City = "Smalltown", Zip = "67890", State = "TX", HouseOrRoomType = "House", HouseRent = 1800, Rooms = 2, Baths = 1, Sqft = 1200, AmenFeatList = "Garage, Patio", Description = "Charming cottage" },
+                new PropertyInfoModel { ID = 4, HouseNumber = "101", Street = "Maple St", City = "Villageton", Zip = "98765", State = "FL", HouseOrRoomType = "House", HouseRent = 1200, Rooms = 2, Baths = 1, Sqft = 800, AmenFeatList = "Utilities Included", Description = "Small home" }
             );
 
             // Seed dummy data for PropertyExpenseModel
             builder.Entity<PropertyExpenseModel>().HasData(
-                new PropertyExpenseModel { ID = 1, Mortage = 1500, MaintenceCosts = 300, PropertyInfoID = 1 },
-                new PropertyExpenseModel { ID = 2, Mortage = 1200, MaintenceCosts = 250, PropertyInfoID = 2 },
-                new PropertyExpenseModel { ID = 3, Mortage = 1300, MaintenceCosts = 200, PropertyInfoID = 3 },
-                new PropertyExpenseModel { ID = 4, Mortage = 1000, MaintenceCosts = 180, PropertyInfoID = 4 }
+                new PropertyExpenseModel { ID = 1, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-6), Amount = 300, Description = "Mortgage", IsRecurring = true, IsFixedAmount = true },
+                new PropertyExpenseModel { ID = 2, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-5), Amount = 300, Description = "Mortgage", IsRecurring = true, IsFixedAmount = true },
+                new PropertyExpenseModel { ID = 3, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-4), Amount = 300, Description = "Mortgage", IsRecurring = true, IsFixedAmount = true },
+                new PropertyExpenseModel { ID = 4, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-3), Amount = 300, Description = "Mortgage", IsRecurring = true, IsFixedAmount = true },
+                new PropertyExpenseModel { ID = 5, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-2), Amount = 300, Description = "Mortgage", IsRecurring = true, IsFixedAmount = true },
+                new PropertyExpenseModel { ID = 6, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-1), Amount = 300, Description = "Mortgage", IsRecurring = true, IsFixedAmount = true },
+                new PropertyExpenseModel { ID = 7, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-1), Amount = 200, Description = "Maintenance Repair", IsRecurring = false, IsFixedAmount = false },
+                new PropertyExpenseModel { ID = 8, PropertyInfoID = 1, Date = DateTime.Now, Amount = 250, Description = "Maintenance Repair", IsRecurring = false, IsFixedAmount = false }
             );
 
             // Seed dummy data for PropertyIncomeModel
             builder.Entity<PropertyIncomeModel>().HasData(
-                new PropertyIncomeModel { ID = 1, Rent = 2500, PropertyInfoID = 1 },
-                new PropertyIncomeModel { ID = 2, Rent = 1800, PropertyInfoID = 2 },
-                new PropertyIncomeModel { ID = 3, Rent = 2000, PropertyInfoID = 3 },
-                new PropertyIncomeModel { ID = 4, Rent = 1400, PropertyInfoID = 4 }
+                new PropertyIncomeModel { ID = 1, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-6), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyIncomeModel { ID = 2, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-5), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyIncomeModel { ID = 3, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-4), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyIncomeModel { ID = 4, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-3), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyIncomeModel { ID = 5, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-2), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyIncomeModel { ID = 6, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-1), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true }
             );
 
             // Seed dummy data for ManagerPropertiesModel

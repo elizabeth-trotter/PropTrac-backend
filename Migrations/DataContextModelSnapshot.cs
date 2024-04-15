@@ -53,7 +53,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 1, 2, 3 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3129)
+                            UploadDate = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(281)
                         },
                         new
                         {
@@ -61,7 +61,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3135)
+                            UploadDate = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(287)
                         },
                         new
                         {
@@ -69,7 +69,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerList",
                             Type = "Manager",
-                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3138)
+                            UploadDate = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(314)
                         },
                         new
                         {
@@ -77,7 +77,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerDoc",
                             Type = "Finance",
-                            UploadDate = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3143)
+                            UploadDate = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(319)
                         });
                 });
 
@@ -135,7 +135,7 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "plumbing@example.com",
                             ContractorName = "Plumbing Pros",
                             ContractorPhone = "123-456-7890",
-                            DateRequested = new DateTime(2024, 4, 7, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3180),
+                            DateRequested = new DateTime(2024, 4, 10, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(354),
                             Description = "There's something wrong with the toilet.",
                             Priority = "Urgent",
                             Status = "To Do",
@@ -148,7 +148,7 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "electricity@example.com",
                             ContractorName = "Electricity Experts",
                             ContractorPhone = "987-654-3210",
-                            DateRequested = new DateTime(2024, 4, 2, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3186),
+                            DateRequested = new DateTime(2024, 4, 5, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(361),
                             Description = "Outlets aren't working",
                             Priority = "Standard",
                             Status = "In Progress",
@@ -161,7 +161,7 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "hvac@example.com",
                             ContractorName = "HVAC Solutions",
                             ContractorPhone = "555-555-5555",
-                            DateRequested = new DateTime(2024, 3, 28, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(3190),
+                            DateRequested = new DateTime(2024, 3, 31, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(365),
                             Description = "not sure what's wrong",
                             Priority = "Standard",
                             Status = "Completed",
@@ -358,7 +358,7 @@ namespace PropTrac_backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PropTrac_backend.Models.PropertyExpenseModel", b =>
+            modelBuilder.Entity("PropTrac_backend.Models.Property.MonthlyPropertyFinanceModel", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -366,19 +366,59 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("MaintenceCosts")
+                    b.Property<int>("ExpenseAmount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Mortage")
+                    b.Property<int>("IncomeAmount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Month")
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyInfoID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("PropertyInfoID")
                         .IsUnique();
+
+                    b.ToTable("MonthlyPropertyFinance");
+                });
+
+            modelBuilder.Entity("PropTrac_backend.Models.Property.PropertyExpenseModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFixedAmount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRecurring")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PropertyInfoID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PropertyInfoID");
 
                     b.ToTable("PropertyExpense");
 
@@ -386,34 +426,86 @@ namespace PropTrac_backend.Migrations
                         new
                         {
                             ID = 1,
-                            MaintenceCosts = 300,
-                            Mortage = 1500,
+                            Amount = 300,
+                            Date = new DateTime(2023, 10, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(159),
+                            Description = "Mortgage",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
                             PropertyInfoID = 1
                         },
                         new
                         {
                             ID = 2,
-                            MaintenceCosts = 250,
-                            Mortage = 1200,
-                            PropertyInfoID = 2
+                            Amount = 300,
+                            Date = new DateTime(2023, 11, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(163),
+                            Description = "Mortgage",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
                         },
                         new
                         {
                             ID = 3,
-                            MaintenceCosts = 200,
-                            Mortage = 1300,
-                            PropertyInfoID = 3
+                            Amount = 300,
+                            Date = new DateTime(2023, 12, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(166),
+                            Description = "Mortgage",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
                         },
                         new
                         {
                             ID = 4,
-                            MaintenceCosts = 180,
-                            Mortage = 1000,
-                            PropertyInfoID = 4
+                            Amount = 300,
+                            Date = new DateTime(2024, 1, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(168),
+                            Description = "Mortgage",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Amount = 300,
+                            Date = new DateTime(2024, 2, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(171),
+                            Description = "Mortgage",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Amount = 300,
+                            Date = new DateTime(2024, 3, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(174),
+                            Description = "Mortgage",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 7,
+                            Amount = 200,
+                            Date = new DateTime(2024, 3, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(176),
+                            Description = "Maintenance Repair",
+                            IsFixedAmount = false,
+                            IsRecurring = false,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 8,
+                            Amount = 250,
+                            Date = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(179),
+                            Description = "Maintenance Repair",
+                            IsFixedAmount = false,
+                            IsRecurring = false,
+                            PropertyInfoID = 1
                         });
                 });
 
-            modelBuilder.Entity("PropTrac_backend.Models.PropertyIncomeModel", b =>
+            modelBuilder.Entity("PropTrac_backend.Models.Property.PropertyIncomeModel", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -421,16 +513,28 @@ namespace PropTrac_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("PropertyInfoID")
+                    b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rent")
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFixedAmount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRecurring")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PropertyInfoID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PropertyInfoID")
-                        .IsUnique();
+                    b.HasIndex("PropertyInfoID");
 
                     b.ToTable("PropertyIncome");
 
@@ -438,26 +542,62 @@ namespace PropTrac_backend.Migrations
                         new
                         {
                             ID = 1,
-                            PropertyInfoID = 1,
-                            Rent = 2500
+                            Amount = 2000,
+                            Date = new DateTime(2023, 10, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(197),
+                            Description = "Rent",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
                         },
                         new
                         {
                             ID = 2,
-                            PropertyInfoID = 2,
-                            Rent = 1800
+                            Amount = 2000,
+                            Date = new DateTime(2023, 11, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(200),
+                            Description = "Rent",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
                         },
                         new
                         {
                             ID = 3,
-                            PropertyInfoID = 3,
-                            Rent = 2000
+                            Amount = 2000,
+                            Date = new DateTime(2023, 12, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(203),
+                            Description = "Rent",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
                         },
                         new
                         {
                             ID = 4,
-                            PropertyInfoID = 4,
-                            Rent = 1400
+                            Amount = 2000,
+                            Date = new DateTime(2024, 1, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(206),
+                            Description = "Rent",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Amount = 2000,
+                            Date = new DateTime(2024, 2, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(208),
+                            Description = "Rent",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Amount = 2000,
+                            Date = new DateTime(2024, 3, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(211),
+                            Description = "Rent",
+                            IsFixedAmount = true,
+                            IsRecurring = true,
+                            PropertyInfoID = 1
                         });
                 });
 
@@ -484,9 +624,6 @@ namespace PropTrac_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Expenses")
-                        .HasColumnType("int");
-
                     b.Property<string>("HouseNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -496,9 +633,6 @@ namespace PropTrac_backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HouseRent")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Income")
                         .HasColumnType("int");
 
                     b.Property<int>("Rooms")
@@ -531,11 +665,9 @@ namespace PropTrac_backend.Migrations
                             Baths = 2,
                             City = "Anytown",
                             Description = "Spacious family house",
-                            Expenses = 1800,
                             HouseNumber = "123",
                             HouseOrRoomType = "House",
                             HouseRent = 2000,
-                            Income = 2500,
                             Rooms = 3,
                             Sqft = 1800,
                             State = "CA",
@@ -549,11 +681,9 @@ namespace PropTrac_backend.Migrations
                             Baths = 1,
                             City = "Otherville",
                             Description = "Cozy condo with rooms for rent",
-                            Expenses = 1450,
                             HouseNumber = "456",
                             HouseOrRoomType = "Rooms",
                             HouseRent = 1500,
-                            Income = 1800,
                             Rooms = 2,
                             Sqft = 1000,
                             State = "NY",
@@ -567,11 +697,9 @@ namespace PropTrac_backend.Migrations
                             Baths = 1,
                             City = "Smalltown",
                             Description = "Charming cottage",
-                            Expenses = 1500,
                             HouseNumber = "789",
                             HouseOrRoomType = "House",
                             HouseRent = 1800,
-                            Income = 2000,
                             Rooms = 2,
                             Sqft = 1200,
                             State = "TX",
@@ -585,11 +713,9 @@ namespace PropTrac_backend.Migrations
                             Baths = 1,
                             City = "Villageton",
                             Description = "Small home",
-                            Expenses = 1180,
                             HouseNumber = "101",
                             HouseOrRoomType = "House",
                             HouseRent = 1200,
-                            Income = 1400,
                             Rooms = 2,
                             Sqft = 800,
                             State = "FL",
@@ -776,8 +902,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 1,
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            LeaseEnd = new DateTime(2025, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2907),
-                            LeaseStart = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2843),
+                            LeaseEnd = new DateTime(2025, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(75),
+                            LeaseStart = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(25),
                             LeaseType = "Annual",
                             Phone = "123-456-7890",
                             PropertyInfoID = 1,
@@ -789,8 +915,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 2,
                             FirstName = "Bob",
                             LastName = "Williams",
-                            LeaseEnd = new DateTime(2024, 5, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2919),
-                            LeaseStart = new DateTime(2024, 4, 12, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2918),
+                            LeaseEnd = new DateTime(2024, 5, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(82),
+                            LeaseStart = new DateTime(2024, 4, 15, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(80),
                             LeaseType = "Monthly",
                             Phone = "987-654-3210",
                             PropertyInfoID = 2,
@@ -835,7 +961,7 @@ namespace PropTrac_backend.Migrations
                             ID = 1,
                             Balance = 1000,
                             DaysRemaining = 7,
-                            DueDate = new DateTime(2024, 4, 19, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2937),
+                            DueDate = new DateTime(2024, 4, 22, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(97),
                             PaymentRecieved = false,
                             TenantID = 1
                         },
@@ -844,7 +970,7 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             Balance = 1500,
                             DaysRemaining = 9,
-                            DueDate = new DateTime(2024, 4, 21, 18, 4, 31, 889, DateTimeKind.Local).AddTicks(2942),
+                            DueDate = new DateTime(2024, 4, 24, 11, 5, 24, 747, DateTimeKind.Local).AddTicks(101),
                             PaymentRecieved = false,
                             TenantID = 2
                         });
@@ -997,22 +1123,33 @@ namespace PropTrac_backend.Migrations
                     b.Navigation("PropertyInfo");
                 });
 
-            modelBuilder.Entity("PropTrac_backend.Models.PropertyExpenseModel", b =>
+            modelBuilder.Entity("PropTrac_backend.Models.Property.MonthlyPropertyFinanceModel", b =>
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
-                        .WithOne("PropertyExpense")
-                        .HasForeignKey("PropTrac_backend.Models.PropertyExpenseModel", "PropertyInfoID")
+                        .WithOne("MonthlyPropertyFinance")
+                        .HasForeignKey("PropTrac_backend.Models.Property.MonthlyPropertyFinanceModel", "PropertyInfoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PropertyInfo");
                 });
 
-            modelBuilder.Entity("PropTrac_backend.Models.PropertyIncomeModel", b =>
+            modelBuilder.Entity("PropTrac_backend.Models.Property.PropertyExpenseModel", b =>
                 {
                     b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
-                        .WithOne("PropertyIncome")
-                        .HasForeignKey("PropTrac_backend.Models.PropertyIncomeModel", "PropertyInfoID")
+                        .WithMany("PropertyExpense")
+                        .HasForeignKey("PropertyInfoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PropertyInfo");
+                });
+
+            modelBuilder.Entity("PropTrac_backend.Models.Property.PropertyIncomeModel", b =>
+                {
+                    b.HasOne("PropTrac_backend.Models.PropertyInfoModel", "PropertyInfo")
+                        .WithMany("PropertyIncome")
+                        .HasForeignKey("PropertyInfoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1118,6 +1255,9 @@ namespace PropTrac_backend.Migrations
             modelBuilder.Entity("PropTrac_backend.Models.PropertyInfoModel", b =>
                 {
                     b.Navigation("ManagerProperties");
+
+                    b.Navigation("MonthlyPropertyFinance")
+                        .IsRequired();
 
                     b.Navigation("PropertyExpense");
 
