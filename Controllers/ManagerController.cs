@@ -12,7 +12,7 @@ namespace PropTrac_backend.Controllers
     public class ManagerController : ControllerBase
     {
         private readonly ManagerService _managerService;
-        private readonly UserService _userService; 
+        private readonly UserService _userService;
 
         public ManagerController(ManagerService managerService, UserService userService)
         {
@@ -20,9 +20,30 @@ namespace PropTrac_backend.Controllers
             _userService = userService;
         }
 
-        // Property Revenue Overview
+        // Monthly Profit Or Loss
+        [HttpGet]
+        [Route("GetMontlyProfitOrLossByUserID/{userId}/{month}/{year}")]
+        public IActionResult GetMontlyProfitOrLossByUserID(int userId, int month, int year)
+        {
+            // Check if the user exists
+            var userExists = _userService.GetUserById(userId) != null;
 
-        // Monthly Profit
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            // Check if the manager exists
+            var manager = _managerService.GetManagerByUserId(userId);
+
+            if (manager == null)
+            {
+                return Unauthorized("User is not an authorized Manager");
+            }
+
+            var profitOrLossStatement = _managerService.GetMonthlyProfitOrLoss(userId, month, year);
+            return Ok(profitOrLossStatement);
+        }
 
         // Property Stats
         [HttpGet]
@@ -41,7 +62,7 @@ namespace PropTrac_backend.Controllers
 
             if (stats == null)
             {
-                return Ok("Manager does not exist");
+                return Unauthorized("User is not an authorized Manager");
             }
 
             return Ok(stats);
@@ -64,7 +85,7 @@ namespace PropTrac_backend.Controllers
 
             if (stats == null)
             {
-                return Ok("Manager does not exist");
+                return Unauthorized("User is not an authorized Manager");
             }
 
             return Ok(stats);

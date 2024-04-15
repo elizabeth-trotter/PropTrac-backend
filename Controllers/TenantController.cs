@@ -41,7 +41,7 @@ namespace PropTrac_backend.Controllers
 
             if (!tenants.Any())
             {
-                return Ok("Tenant does not exist");
+                return Unauthorized("Tenant does not exist");
             }
 
             return Ok(tenants);

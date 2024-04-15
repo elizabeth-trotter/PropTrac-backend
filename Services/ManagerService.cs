@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Services.Context;
@@ -16,10 +17,135 @@ namespace PropTrac_backend.Services
             _context = context;
         }
 
+        // Helper method to get the manager by user ID
+        public ManagerModel GetManagerByUserId(int userId)
+        {
+            return _context.Managers.SingleOrDefault(m => m.UserID == userId);
+        }
+
+        // Helper method to get property IDs managed by the manager
+        private IEnumerable<int?> GetPropertyIdsManagedByManager(ManagerModel manager)
+        {
+            return _context.ManagerProperties
+                .Where(mp => mp.ManagerID == manager.ID)
+                .Select(mp => mp.PropertyInfoID)
+                .ToList();
+        }
+
+        public MonthlyProfitOrLossDTO GetMonthlyProfitOrLoss(int userId, int month, int year)
+        {
+            var manager = GetManagerByUserId(userId);
+            var propertyIds = GetPropertyIdsManagedByManager(manager);
+
+            var expenseTotal = 0;
+            foreach (var propertyId in propertyIds)
+            {
+                var expense = _context.PropertyExpense
+                    .Where(e => e.PropertyInfoID == propertyId && e.Date.Month == month && e.Date.Year == year)
+                    .Select(e => e.Amount)
+                    .Sum();
+                expenseTotal += expense;
+            }
+
+            var revenueTotal = 0;
+            foreach (var propertyId in propertyIds)
+            {
+                var revenue = _context.PropertyRevenue
+                    .Where(e => e.PropertyInfoID == propertyId && e.Date.Month == month && e.Date.Year == year)
+                    .Select(e => e.Amount)
+                    .Sum();
+                revenueTotal += revenue;
+            }
+
+            var profitOrLoss = revenueTotal - expenseTotal;
+
+            return new MonthlyProfitOrLossDTO
+            {
+                Month = month,
+                ExpenseTotal = expenseTotal,
+                RevenueTotal = revenueTotal,
+                ProfitOrLossAmount = profitOrLoss
+            };
+        }
+
+        public List<MonthlyProfitOrLossDTO> GetPastSixMonthsProfitOrLoss(int userId, int month, int year)
+        {
+            List<MonthlyProfitOrLossDTO> profitOrLossStatment = new();
+
+            for (int i = 0; i < 6; i++)
+            {
+                month--;
+                if (month == 0)
+                {
+                    month = 12;
+                    year--;
+                }
+
+                var profitOrLoss = GetMonthlyProfitOrLoss(userId, month, year);
+                profitOrLossStatment.Add(profitOrLoss);
+            }
+
+            return profitOrLossStatment;
+        }
+
+        private MonthlyProfitOrLossDTO GetProjectedMonthlyProfitOrLoss(int userId, int month, int year)
+        {
+            var manager = GetManagerByUserId(userId);
+            var propertyIds = GetPropertyIdsManagedByManager(manager);
+
+            var expenseTotal = 0;
+            foreach (var propertyId in propertyIds)
+            {
+                var expense = _context.PropertyExpense
+                    .Where(e => e.PropertyInfoID == propertyId && e.Date.Month == month && e.Date.Year == year && e.IsRecurring && e.IsFixedAmount)
+                    .Select(e => e.Amount)
+                    .Sum();
+                expenseTotal += expense;
+            }
+
+            var revenueTotal = 0;
+            foreach (var propertyId in propertyIds)
+            {
+                var revenue = _context.PropertyRevenue
+                    .Where(e => e.PropertyInfoID == propertyId && e.Date.Month == month && e.Date.Year == year && e.IsRecurring && e.IsFixedAmount)
+                    .Select(e => e.Amount)
+                    .Sum();
+                revenueTotal += revenue;
+            }
+
+            var profitOrLoss = revenueTotal - expenseTotal;
+
+            return new MonthlyProfitOrLossDTO
+            {
+                Month = month,
+                ExpenseTotal = expenseTotal,
+                RevenueTotal = revenueTotal,
+                ProfitOrLossAmount = profitOrLoss
+            };
+        }
+
+        public List<MonthlyProfitOrLossDTO> GetProjectedProfitOrLoss(int userId, int month, int year)
+        {
+            List<MonthlyProfitOrLossDTO> profitOrLossStatment = new();
+
+            for (int i = 0; i < 6; i++)
+            {
+                var profitOrLoss = GetProjectedMonthlyProfitOrLoss(userId, month - 1, year);
+                profitOrLoss = new MonthlyProfitOrLossDTO{
+                    Month = month + i,
+                    ExpenseTotal = profitOrLoss.ExpenseTotal,
+                    RevenueTotal = profitOrLoss.RevenueTotal,
+                    ProfitOrLossAmount = profitOrLoss.ProfitOrLossAmount
+                };
+                profitOrLossStatment.Add(profitOrLoss);
+            }
+
+            return profitOrLossStatment;
+        }
+
         public PropertyStatsDTO GetPropertyStats(int userId)
         {
-            // Get the manager corresponding to the user ID
-            var manager = _context.Managers.SingleOrDefault(m => m.UserID == userId);
+            var manager = GetManagerByUserId(userId);
 
             if (manager == null)
             {
@@ -27,10 +153,7 @@ namespace PropTrac_backend.Services
             }
 
             // Get the property IDs managed by the manager
-            var propertyIds = _context.ManagerProperties
-                .Where(mp => mp.ManagerID == manager.ID)
-                .Select(mp => mp.PropertyInfoID)
-                .ToList();
+            var propertyIds = GetPropertyIdsManagedByManager(manager);
 
             // Get the count of tenants associated with the properties managed by the manager
             var activeTenantsCount = _context.Tenants
@@ -68,7 +191,7 @@ namespace PropTrac_backend.Services
             }
 
             // Get the count of properties managed by the manager
-            var propertiesCount = propertyIds.Count;
+            var propertiesCount = propertyIds.Count();
 
             return new PropertyStatsDTO
             {
@@ -80,18 +203,14 @@ namespace PropTrac_backend.Services
 
         public List<MaintenanceStatsDTO> GetMaintenanceStats(int userId)
         {
-            // Get the manager corresponding to the user ID
-            var manager = _context.Managers.SingleOrDefault(m => m.UserID == userId);
+            var manager = GetManagerByUserId(userId);
 
             if (manager == null)
             {
                 return null;
             }
 
-            // Get the property IDs managed by the manager
-            var propertyIds = _context.ManagerProperties
-                .Where(mp => mp.ManagerID == manager.ID)
-                .Select(mp => mp.PropertyInfoID);
+            var propertyIds = GetPropertyIdsManagedByManager(manager);
 
             // Retrieve all maintenance IDs associated with the properties managed by the manager
             var maintenanceIDs = _context.PropertyMaintenance
@@ -115,6 +234,5 @@ namespace PropTrac_backend.Services
 
             return maintenanceStats;
         }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PropTrac_backend.Models.Property
 {
-    public class PropertyIncomeModel
+    public class PropertyRevenueModel
     {
         public int ID { get; set; }
         public int PropertyInfoID { get; set; }

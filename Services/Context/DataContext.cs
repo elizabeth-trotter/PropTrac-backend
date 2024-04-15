@@ -23,7 +23,7 @@ namespace PropTrac_backend.Services.Context
         public DbSet<ManagerDocumentsModel> ManagerDocuments { get; set; }
         public DbSet<MonthlyPropertyFinanceModel> MonthlyPropertyFinance { get; set; }
         public DbSet<PropertyExpenseModel> PropertyExpense { get; set; }
-        public DbSet<PropertyIncomeModel> PropertyIncome { get; set; }
+        public DbSet<PropertyRevenueModel> PropertyRevenue { get; set; }
         public DbSet<PropertyMaintenanceModel> PropertyMaintenance { get; set; }
         public DbSet<MaintenanceModel> Maintenance { get; set; }
         // add additional models here once known
@@ -115,14 +115,14 @@ namespace PropTrac_backend.Services.Context
                 new PropertyExpenseModel { ID = 8, PropertyInfoID = 1, Date = DateTime.Now, Amount = 250, Description = "Maintenance Repair", IsRecurring = false, IsFixedAmount = false }
             );
 
-            // Seed dummy data for PropertyIncomeModel
-            builder.Entity<PropertyIncomeModel>().HasData(
-                new PropertyIncomeModel { ID = 1, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-6), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
-                new PropertyIncomeModel { ID = 2, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-5), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
-                new PropertyIncomeModel { ID = 3, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-4), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
-                new PropertyIncomeModel { ID = 4, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-3), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
-                new PropertyIncomeModel { ID = 5, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-2), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
-                new PropertyIncomeModel { ID = 6, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-1), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true }
+            // Seed dummy data for PropertyRevenueModel
+            builder.Entity<PropertyRevenueModel>().HasData(
+                new PropertyRevenueModel { ID = 1, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-6), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyRevenueModel { ID = 2, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-5), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyRevenueModel { ID = 3, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-4), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyRevenueModel { ID = 4, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-3), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyRevenueModel { ID = 5, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-2), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true },
+                new PropertyRevenueModel { ID = 6, PropertyInfoID = 1, Date = DateTime.Now.AddMonths(-1), Amount = 2000, Description = "Rent", IsRecurring = true, IsFixedAmount = true }
             );
 
             // Seed dummy data for ManagerPropertiesModel

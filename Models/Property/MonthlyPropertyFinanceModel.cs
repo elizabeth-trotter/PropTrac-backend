@@ -12,7 +12,7 @@ namespace PropTrac_backend.Models.Property
         public int Year { get; set; }
         public int Month { get; set; }
         public int ExpenseAmount { get; set; }
-        public int IncomeAmount { get; set; }
+        public int RevenueAmount { get; set; }
 
         // Navigation property to PropertyInfoModel
         public PropertyInfoModel PropertyInfo { get; set; }

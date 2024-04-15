@@ -36,9 +36,9 @@ namespace PropTrac_backend.Models
         // MonthlyPropertyFinanceModel
         public MonthlyPropertyFinanceModel MonthlyPropertyFinance { get; set; }
 
-        // PropertyExpenseIncomeEntryModel
+        // PropertyExpenseRevenueEntryModel
         public ICollection<PropertyExpenseModel>? PropertyExpense { get; set; }
-        public ICollection<PropertyIncomeModel>? PropertyIncome { get; set; }
+        public ICollection<PropertyRevenueModel>? PropertyRevenue { get; set; }
 
         // PropertyMaintenanceModel
         public ICollection<PropertyMaintenanceModel>? PropertyMaintenance { get; set; } // Ensure this is correctly defined as a collection
