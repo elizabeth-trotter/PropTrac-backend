@@ -34,7 +34,7 @@ PropTrac's database is hosted in `Azure SQL Cloud` alongside the C# MVC API. The
 
 
 ## PropTrac Preview
-![image](https://github.com/et120/PropTrac-backend/assets/148283439/62e049f9-9d8b-432e-8743-1f586a8176f9)
+![PropTrac Login Screen](https://github.com/et120/PropTrac-backend/assets/148283439/62e049f9-9d8b-432e-8743-1f586a8176f9)
 
 <p align="right">Figure 1: Preview of the login screen after hitting end of week 3 milestone</p>
 
