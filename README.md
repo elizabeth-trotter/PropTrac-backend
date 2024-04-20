@@ -13,7 +13,7 @@ PropTrac represents an integrated solution designed to optimize the operational 
 
 ## API 
 
-PropTrac's `API` was built in `C#` following the `Model-View-Controller` (MVC) architecture, and was deployed using Microsoft's PaaS `Azure App Service`.
+PropTrac's `API` was built in `C#` with the `ASP.Net Core` framework following `Model-View-Controller` (MVC) architecture, and was deployed using Microsoft's PaaS `Azure App Service`.
 
 - Endpoints were developed for the **internal team**.
 - Base URL: https://proptracapi.azurewebsites.net
