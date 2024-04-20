@@ -1,11 +1,11 @@
 # PropTrac Backend :house:
 
-**Quick Links:**
+**Quick Links + Status:**
 
-[![Static Badge](https://img.shields.io/badge/frontend%20repo-A2D7E2?style=for-the-badge&logo=github&logoColor=black)](https://github.com/calebsylvia/PropTrac) &ensp;[![Website](https://img.shields.io/website?url=https%3A%2F%2Fproptrac-app.vercel.app%2F&up_message=in%20development&up_color=8DD394&down_color=black&style=for-the-badge&logo=vercel&label=frontend)](https://proptrac-app.vercel.app/) &ensp;[![Static Badge](https://img.shields.io/badge/api_docs-EEE2D1?style=for-the-badge&logo=postman&logoColor=black)](https://documenter.getpostman.com/view/31041768/2sA3Bn5Bzt) &ensp;[![Static Badge](https://img.shields.io/badge/Database%20schema-DE7676?style=for-the-badge&logo=eraser-io)](https://app.eraser.io/workspace/pbzCocdYcajMIkRmPd15?origin=share)
+[![Static Badge](https://img.shields.io/badge/Frontend%20Repo-A2D7E2?style=flat&logo=github&logoColor=black)](https://github.com/calebsylvia/PropTrac) &ensp;[![Website](https://img.shields.io/website?url=https%3A%2F%2Fproptrac-app.vercel.app%2F&up_message=in%20development&up_color=8DD394&down_color=red&style=flat&logo=vercel&label=Application)](https://proptrac-app.vercel.app/) &ensp;[![Static Badge](https://img.shields.io/badge/API_Docs-public-grey?style=flat&logo=postman&logoColor=black&labelColor=EEE2D1)](https://documenter.getpostman.com/view/31041768/2sA3Bn5Bzt) &ensp;[![Static Badge](https://img.shields.io/badge/Database%20Schema-public-gray?style=flat&logo=eraser-io&labelColor=DE7676)](https://app.eraser.io/workspace/pbzCocdYcajMIkRmPd15?origin=share)
 
 ## Overview
-PropTrac represents an integrated solution designed to optimize the operational efficiency of Property Management. A team of three developers is currently working on this full stack application, and completion is projected for June 1, 2024.
+PropTrac represents an integrated solution designed to optimize the operational efficiency of Property Management. The team is currently working on this full stack application, and completion is projected for June 1, 2024.
 
 - This repository houses the backend logic.
 - For the **Frontend component**, please refer to [PropTrac's Repository](https://github.com/calebsylvia/PropTrac) and to observe the current state of progress, visit [PropTrac App (in development)](https://proptrac-app.vercel.app/).
