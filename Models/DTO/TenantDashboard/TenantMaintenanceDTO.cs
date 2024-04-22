@@ -11,7 +11,7 @@ namespace PropTrac_backend.Models.DTO.TenantDashboard
         public string Description { get; set; }
         public string Priority { get; set; }
         public string Category { get; set; }
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
         public int UserID { get; set; }
     }
 }

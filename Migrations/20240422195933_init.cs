@@ -39,7 +39,7 @@ namespace PropTrac_backend.Migrations
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Priority = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateRequested = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     ContractorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -392,10 +392,10 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Content", "Name", "Type", "UploadDate" },
                 values: new object[,]
                 {
-                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8432) },
-                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8437) },
-                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8441) },
-                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8445) }
+                    { 1, new byte[] { 1, 2, 3 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4519) },
+                    { 2, new byte[] { 4, 5, 6 }, "LeaseAgreement", "Lease", new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4525) },
+                    { 3, new byte[] { 4, 5, 6 }, "ManagerList", "Manager", new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4530) },
+                    { 4, new byte[] { 4, 5, 6 }, "ManagerDoc", "Finance", new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4535) }
                 });
 
             migrationBuilder.InsertData(
@@ -403,9 +403,9 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Category", "ContractorEmail", "ContractorName", "ContractorPhone", "DateRequested", "Description", "Image", "Priority", "Status", "UserID" },
                 values: new object[,]
                 {
-                    { 1, "Plumbing", "plumbing@example.com", "Plumbing Pros", "123-456-7890", new DateTime(2024, 4, 10, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8498), "There's something wrong with the toilet.", null, "Urgent", "To Do", 3 },
-                    { 2, "Electricity", "electricity@example.com", "Electricity Experts", "987-654-3210", new DateTime(2024, 4, 5, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8502), "Outlets aren't working", null, "Standard", "In Progress", 4 },
-                    { 3, "HVAC", "hvac@example.com", "HVAC Solutions", "555-555-5555", new DateTime(2024, 3, 31, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8506), "not sure what's wrong", null, "Standard", "Completed", 3 }
+                    { 1, "Plumbing", "plumbing@example.com", "Plumbing Pros", "123-456-7890", new DateTime(2024, 4, 17, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4571), "There's something wrong with the toilet.", null, "Urgent", "To Do", 3 },
+                    { 2, "Electricity", "electricity@example.com", "Electricity Experts", "987-654-3210", new DateTime(2024, 4, 12, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4576), "Outlets aren't working", null, "Standard", "In Progress", 4 },
+                    { 3, "HVAC", "hvac@example.com", "HVAC Solutions", "555-555-5555", new DateTime(2024, 4, 7, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4580), "not sure what's wrong", null, "Standard", "Completed", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -434,14 +434,14 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Amount", "Date", "Description", "IsFixedAmount", "IsRecurring", "PropertyInfoID" },
                 values: new object[,]
                 {
-                    { 1, 300, new DateTime(2023, 10, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8323), "Mortgage", true, true, 1 },
-                    { 2, 300, new DateTime(2023, 11, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8326), "Mortgage", true, true, 1 },
-                    { 3, 300, new DateTime(2023, 12, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8328), "Mortgage", true, true, 1 },
-                    { 4, 300, new DateTime(2024, 1, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8331), "Mortgage", true, true, 1 },
-                    { 5, 300, new DateTime(2024, 2, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8333), "Mortgage", true, true, 1 },
-                    { 6, 300, new DateTime(2024, 3, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8335), "Mortgage", true, true, 1 },
-                    { 7, 200, new DateTime(2024, 3, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8337), "Maintenance Repair", false, false, 1 },
-                    { 8, 250, new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8339), "Maintenance Repair", false, false, 1 }
+                    { 1, 300, new DateTime(2023, 10, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4359), "Mortgage", true, true, 1 },
+                    { 2, 300, new DateTime(2023, 11, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4363), "Mortgage", true, true, 1 },
+                    { 3, 300, new DateTime(2023, 12, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4366), "Mortgage", true, true, 1 },
+                    { 4, 300, new DateTime(2024, 1, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4369), "Mortgage", true, true, 1 },
+                    { 5, 300, new DateTime(2024, 2, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4371), "Mortgage", true, true, 1 },
+                    { 6, 300, new DateTime(2024, 3, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4374), "Mortgage", true, true, 1 },
+                    { 7, 200, new DateTime(2024, 3, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4377), "Maintenance Repair", false, false, 1 },
+                    { 8, 250, new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4380), "Maintenance Repair", false, false, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -459,12 +459,12 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Amount", "Date", "Description", "IsFixedAmount", "IsRecurring", "PropertyInfoID" },
                 values: new object[,]
                 {
-                    { 1, 2000, new DateTime(2023, 10, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8357), "Rent", true, true, 1 },
-                    { 2, 2000, new DateTime(2023, 11, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8360), "Rent", true, true, 1 },
-                    { 3, 2000, new DateTime(2023, 12, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8363), "Rent", true, true, 1 },
-                    { 4, 2000, new DateTime(2024, 1, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8365), "Rent", true, true, 1 },
-                    { 5, 2000, new DateTime(2024, 2, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8367), "Rent", true, true, 1 },
-                    { 6, 2000, new DateTime(2024, 3, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8369), "Rent", true, true, 1 }
+                    { 1, 2000, new DateTime(2023, 10, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4401), "Rent", true, true, 1 },
+                    { 2, 2000, new DateTime(2023, 11, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4406), "Rent", true, true, 1 },
+                    { 3, 2000, new DateTime(2023, 12, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4409), "Rent", true, true, 1 },
+                    { 4, 2000, new DateTime(2024, 1, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4438), "Rent", true, true, 1 },
+                    { 5, 2000, new DateTime(2024, 2, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4440), "Rent", true, true, 1 },
+                    { 6, 2000, new DateTime(2024, 3, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4443), "Rent", true, true, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -501,8 +501,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "DocumentsID", "FirstName", "LastName", "LeaseEnd", "LeaseStart", "LeaseType", "Phone", "PropertyInfoID", "RoomInfoID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8240), new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8165), "Annual", "123-456-7890", 1, null, 3 },
-                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8247), new DateTime(2024, 4, 15, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8246), "Monthly", "987-654-3210", 2, 1, 4 }
+                    { 1, 1, "Alice", "Johnson", new DateTime(2025, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4258), new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4200), "Annual", "123-456-7890", 1, null, 3 },
+                    { 2, 2, "Bob", "Williams", new DateTime(2024, 5, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4265), new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4264), "Monthly", "987-654-3210", 2, 1, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -539,8 +539,8 @@ namespace PropTrac_backend.Migrations
                 columns: new[] { "ID", "Balance", "DaysRemaining", "DueDate", "PaymentRecieved", "TenantID" },
                 values: new object[,]
                 {
-                    { 1, 1000, 7, new DateTime(2024, 4, 22, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8268), false, 1 },
-                    { 2, 1500, 9, new DateTime(2024, 4, 24, 13, 25, 35, 342, DateTimeKind.Local).AddTicks(8273), false, 2 }
+                    { 1, 1000, 7, new DateTime(2024, 4, 29, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4284), false, 1 },
+                    { 2, 1500, 9, new DateTime(2024, 5, 1, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4291), false, 2 }
                 });
 
             migrationBuilder.CreateIndex(

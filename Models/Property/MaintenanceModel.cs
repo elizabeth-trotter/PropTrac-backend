@@ -12,7 +12,7 @@ namespace PropTrac_backend.Models
         public string Category { get; set; }
         public string Priority { get; set; } = "Standard";
         public string Description { get; set; }
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
         public DateTime DateRequested { get; set; }
         public int UserID { get; set; }
         public string? ContractorName { get; set; }
