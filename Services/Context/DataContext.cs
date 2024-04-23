@@ -92,7 +92,9 @@ namespace PropTrac_backend.Services.Context
             // Seed dummy data for RoomInfoModel
             builder.Entity<RoomInfoModel>().HasData(
                 new RoomInfoModel { ID = 1, RoomRent = 800, PropertyInfoID = 2 },
-                new RoomInfoModel { ID = 2, RoomRent = 700, PropertyInfoID = 2 }
+                new RoomInfoModel { ID = 2, RoomRent = 700, PropertyInfoID = 2 },
+                new RoomInfoModel { ID = 3, RoomRent = 800, PropertyInfoID = 6 },
+                new RoomInfoModel { ID = 4, RoomRent = 800, PropertyInfoID = 6 }
             );
 
             // Seed dummy data for PropertyInfoModel
@@ -100,7 +102,11 @@ namespace PropTrac_backend.Services.Context
                 new PropertyInfoModel { ID = 1, HouseNumber = "123", Street = "Main St", City = "Anytown", Zip = "12345", State = "CA", HouseOrRoomType = "House", HouseRent = 2000, Rooms = 3, Baths = 2, Sqft = 1800, AmenFeatList = "Swimming Pool, Gym", Description = "Spacious family house" },
                 new PropertyInfoModel { ID = 2, HouseNumber = "456", Street = "Oak St", City = "Otherville", Zip = "54321", State = "NY", HouseOrRoomType = "Rooms", HouseRent = 1500, Rooms = 2, Baths = 1, Sqft = 1000, AmenFeatList = "Laundry, Parking, Backyard", Description = "Cozy condo with rooms for rent" },
                 new PropertyInfoModel { ID = 3, HouseNumber = "789", Street = "Pine St", City = "Smalltown", Zip = "67890", State = "TX", HouseOrRoomType = "House", HouseRent = 1800, Rooms = 2, Baths = 1, Sqft = 1200, AmenFeatList = "Garage, Patio", Description = "Charming cottage" },
-                new PropertyInfoModel { ID = 4, HouseNumber = "101", Street = "Maple St", City = "Villageton", Zip = "98765", State = "FL", HouseOrRoomType = "House", HouseRent = 1200, Rooms = 2, Baths = 1, Sqft = 800, AmenFeatList = "Utilities Included", Description = "Small home" }
+                new PropertyInfoModel { ID = 4, HouseNumber = "101", Street = "Maple St", City = "Villageton", Zip = "98765", State = "FL", HouseOrRoomType = "House", HouseRent = 1200, Rooms = 2, Baths = 1, Sqft = 800, AmenFeatList = "Utilities Included", Description = "Small home" },
+                new PropertyInfoModel { ID = 5, HouseNumber = "222", Street = "Cedar St", City = "Hometown", Zip = "54321", State = "CA", HouseOrRoomType = "House", HouseRent = 2200, Rooms = 3, Baths = 2, Sqft = 1700, AmenFeatList = "Fenced Yard, Fireplace", Description = "Classic single-family home" },
+                new PropertyInfoModel { ID = 6, HouseNumber = "333", Street = "Elm St", City = "Homestead", Zip = "12345", State = "NY", HouseOrRoomType = "Rooms", HouseRent = 1600, Rooms = 2, Baths = 1, Sqft = 1100, AmenFeatList = "Shared Kitchen, Pet Friendly", Description = "Roomy apartment for rent" },
+                new PropertyInfoModel { ID = 7, HouseNumber = "444", Street = "Birch St", City = "Villageton", Zip = "98765", State = "FL", HouseOrRoomType = "House", HouseRent = 1500, Rooms = 2, Baths = 1, Sqft = 900, AmenFeatList = "Furnished, Parking", Description = "Quaint cottage available" },
+                new PropertyInfoModel { ID = 8, HouseNumber = "555", Street = "Willow St", City = "Smalltown", Zip = "67890", State = "TX", HouseOrRoomType = "House", HouseRent = 2000, Rooms = 3, Baths = 2, Sqft = 1600, AmenFeatList = "Deck, Garden", Description = "Lovely family home" }
             );
 
             // Seed dummy data for PropertyExpenseModel
@@ -130,7 +136,11 @@ namespace PropTrac_backend.Services.Context
                 new ManagerPropertiesModel { ID = 1, ManagerID = 1, PropertyInfoID = 1 },
                 new ManagerPropertiesModel { ID = 2, ManagerID = 1, PropertyInfoID = 2 },
                 new ManagerPropertiesModel { ID = 3, ManagerID = 2, PropertyInfoID = 3 },
-                new ManagerPropertiesModel { ID = 4, ManagerID = 2, PropertyInfoID = 4 }
+                new ManagerPropertiesModel { ID = 4, ManagerID = 2, PropertyInfoID = 4 },
+                new ManagerPropertiesModel { ID = 5, ManagerID = 1, PropertyInfoID = 5 },
+                new ManagerPropertiesModel { ID = 6, ManagerID = 1, PropertyInfoID = 6 },
+                new ManagerPropertiesModel { ID = 7, ManagerID = 1, PropertyInfoID = 7 },
+                new ManagerPropertiesModel { ID = 8, ManagerID = 1, PropertyInfoID = 8 }
             );
 
             // Seed dummy data for ManagerFinanceModel

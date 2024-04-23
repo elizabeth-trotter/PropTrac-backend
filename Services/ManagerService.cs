@@ -162,8 +162,9 @@ namespace PropTrac_backend.Services
                 .Where(t => propertyIds.Contains(t.PropertyInfoID))
                 .Count();
 
-            // Get the count of open listings with the properties managed by the manager
-            var openListingsCount = 0;
+            // Get the count of properties managed by the manager
+            var propertiesCount = 0;
+
             foreach (var propertyId in propertyIds)
             {
                 var property = _context.PropertyInfo.Find(propertyId);
@@ -172,10 +173,7 @@ namespace PropTrac_backend.Services
                     // If the property type is "house," check if any tenants are assigned
                     if (property.HouseOrRoomType.ToLower() == "house")
                     {
-                        if (!_context.Tenants.Any(t => t.PropertyInfoID == propertyId))
-                        {
-                            openListingsCount++;
-                        }
+                        propertiesCount++;
                     }
                     // If the property type is "rooms," check if any of the associated rooms are unoccupied
                     else if (property.HouseOrRoomType.ToLower() == "rooms")
@@ -184,21 +182,20 @@ namespace PropTrac_backend.Services
                             .Where(r => r.PropertyInfoID == propertyId)
                             .Select(r => r.ID);
 
-                        if (!_context.Tenants.Any(t => t.RoomInfoID.HasValue && roomIds.Contains(t.RoomInfoID.Value)))
+                        foreach (var roomId in roomIds)
                         {
-                            openListingsCount++;
+                            propertiesCount++;
                         }
                     }
                 }
             }
 
-            // Get the count of properties managed by the manager
-            var propertiesCount = propertyIds.Count();
+            var openListings = propertiesCount - activeTenantsCount;
 
             return new PropertyStatsDTO
             {
                 ActiveTenants = activeTenantsCount,
-                OpenListings = openListingsCount,
+                OpenListings = openListings,
                 Properties = propertiesCount
             };
         }
@@ -281,7 +278,7 @@ namespace PropTrac_backend.Services
                     AmenFeatList = p.AmenFeatList,
                     Description = p.Description,
                     TenantID = p.Tenant != null ? p.Tenant.Single(t => t.PropertyInfoID == p.ID).ID : null,
-                    TenantAssigned = p.Tenant != null
+                    TenantAssigned = p.Tenant != null && p.Tenant.SingleOrDefault(t => t.PropertyInfoID == p.ID) != null
                 })
                 .ToList();
 

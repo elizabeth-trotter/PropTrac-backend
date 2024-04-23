@@ -12,7 +12,7 @@ using PropTrac_backend.Services.Context;
 namespace PropTrac_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240422195933_init")]
+    [Migration("20240423020646_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 1, 2, 3 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4519)
+                            UploadDate = new DateTime(2024, 4, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(250)
                         },
                         new
                         {
@@ -64,7 +64,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "LeaseAgreement",
                             Type = "Lease",
-                            UploadDate = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4525)
+                            UploadDate = new DateTime(2024, 4, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(258)
                         },
                         new
                         {
@@ -72,7 +72,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerList",
                             Type = "Manager",
-                            UploadDate = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4530)
+                            UploadDate = new DateTime(2024, 4, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(265)
                         },
                         new
                         {
@@ -80,7 +80,7 @@ namespace PropTrac_backend.Migrations
                             Content = new byte[] { 4, 5, 6 },
                             Name = "ManagerDoc",
                             Type = "Finance",
-                            UploadDate = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4535)
+                            UploadDate = new DateTime(2024, 4, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(272)
                         });
                 });
 
@@ -138,7 +138,7 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "plumbing@example.com",
                             ContractorName = "Plumbing Pros",
                             ContractorPhone = "123-456-7890",
-                            DateRequested = new DateTime(2024, 4, 17, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4571),
+                            DateRequested = new DateTime(2024, 4, 17, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(314),
                             Description = "There's something wrong with the toilet.",
                             Priority = "Urgent",
                             Status = "To Do",
@@ -151,7 +151,7 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "electricity@example.com",
                             ContractorName = "Electricity Experts",
                             ContractorPhone = "987-654-3210",
-                            DateRequested = new DateTime(2024, 4, 12, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4576),
+                            DateRequested = new DateTime(2024, 4, 12, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(320),
                             Description = "Outlets aren't working",
                             Priority = "Standard",
                             Status = "In Progress",
@@ -164,7 +164,7 @@ namespace PropTrac_backend.Migrations
                             ContractorEmail = "hvac@example.com",
                             ContractorName = "HVAC Solutions",
                             ContractorPhone = "555-555-5555",
-                            DateRequested = new DateTime(2024, 4, 7, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4580),
+                            DateRequested = new DateTime(2024, 4, 7, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(325),
                             Description = "not sure what's wrong",
                             Priority = "Standard",
                             Status = "Completed",
@@ -358,6 +358,30 @@ namespace PropTrac_backend.Migrations
                             ID = 4,
                             ManagerID = 2,
                             PropertyInfoID = 4
+                        },
+                        new
+                        {
+                            ID = 5,
+                            ManagerID = 1,
+                            PropertyInfoID = 5
+                        },
+                        new
+                        {
+                            ID = 6,
+                            ManagerID = 1,
+                            PropertyInfoID = 6
+                        },
+                        new
+                        {
+                            ID = 7,
+                            ManagerID = 1,
+                            PropertyInfoID = 7
+                        },
+                        new
+                        {
+                            ID = 8,
+                            ManagerID = 1,
+                            PropertyInfoID = 8
                         });
                 });
 
@@ -430,7 +454,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 1,
                             Amount = 300,
-                            Date = new DateTime(2023, 10, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4359),
+                            Date = new DateTime(2023, 10, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(94),
                             Description = "Mortgage",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -440,7 +464,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 2,
                             Amount = 300,
-                            Date = new DateTime(2023, 11, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4363),
+                            Date = new DateTime(2023, 11, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(102),
                             Description = "Mortgage",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -450,7 +474,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 3,
                             Amount = 300,
-                            Date = new DateTime(2023, 12, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4366),
+                            Date = new DateTime(2023, 12, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(106),
                             Description = "Mortgage",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -460,7 +484,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 4,
                             Amount = 300,
-                            Date = new DateTime(2024, 1, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4369),
+                            Date = new DateTime(2024, 1, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(109),
                             Description = "Mortgage",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -470,7 +494,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 5,
                             Amount = 300,
-                            Date = new DateTime(2024, 2, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4371),
+                            Date = new DateTime(2024, 2, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(113),
                             Description = "Mortgage",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -480,7 +504,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 6,
                             Amount = 300,
-                            Date = new DateTime(2024, 3, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4374),
+                            Date = new DateTime(2024, 3, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(117),
                             Description = "Mortgage",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -490,7 +514,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 7,
                             Amount = 200,
-                            Date = new DateTime(2024, 3, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4377),
+                            Date = new DateTime(2024, 3, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(120),
                             Description = "Maintenance Repair",
                             IsFixedAmount = false,
                             IsRecurring = false,
@@ -500,7 +524,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 8,
                             Amount = 250,
-                            Date = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4380),
+                            Date = new DateTime(2024, 4, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(124),
                             Description = "Maintenance Repair",
                             IsFixedAmount = false,
                             IsRecurring = false,
@@ -546,7 +570,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 1,
                             Amount = 2000,
-                            Date = new DateTime(2023, 10, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4401),
+                            Date = new DateTime(2023, 10, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(150),
                             Description = "Rent",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -556,7 +580,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 2,
                             Amount = 2000,
-                            Date = new DateTime(2023, 11, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4406),
+                            Date = new DateTime(2023, 11, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(156),
                             Description = "Rent",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -566,7 +590,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 3,
                             Amount = 2000,
-                            Date = new DateTime(2023, 12, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4409),
+                            Date = new DateTime(2023, 12, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(160),
                             Description = "Rent",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -576,7 +600,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 4,
                             Amount = 2000,
-                            Date = new DateTime(2024, 1, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4438),
+                            Date = new DateTime(2024, 1, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(163),
                             Description = "Rent",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -586,7 +610,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 5,
                             Amount = 2000,
-                            Date = new DateTime(2024, 2, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4440),
+                            Date = new DateTime(2024, 2, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(166),
                             Description = "Rent",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -596,7 +620,7 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 6,
                             Amount = 2000,
-                            Date = new DateTime(2024, 3, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4443),
+                            Date = new DateTime(2024, 3, 22, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(168),
                             Description = "Rent",
                             IsFixedAmount = true,
                             IsRecurring = true,
@@ -724,6 +748,70 @@ namespace PropTrac_backend.Migrations
                             State = "FL",
                             Street = "Maple St",
                             Zip = "98765"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            AmenFeatList = "Fenced Yard, Fireplace",
+                            Baths = 2,
+                            City = "Hometown",
+                            Description = "Classic single-family home",
+                            HouseNumber = "222",
+                            HouseOrRoomType = "House",
+                            HouseRent = 2200,
+                            Rooms = 3,
+                            Sqft = 1700,
+                            State = "CA",
+                            Street = "Cedar St",
+                            Zip = "54321"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            AmenFeatList = "Shared Kitchen, Pet Friendly",
+                            Baths = 1,
+                            City = "Homestead",
+                            Description = "Roomy apartment for rent",
+                            HouseNumber = "333",
+                            HouseOrRoomType = "Rooms",
+                            HouseRent = 1600,
+                            Rooms = 2,
+                            Sqft = 1100,
+                            State = "NY",
+                            Street = "Elm St",
+                            Zip = "12345"
+                        },
+                        new
+                        {
+                            ID = 7,
+                            AmenFeatList = "Furnished, Parking",
+                            Baths = 1,
+                            City = "Villageton",
+                            Description = "Quaint cottage available",
+                            HouseNumber = "444",
+                            HouseOrRoomType = "House",
+                            HouseRent = 1500,
+                            Rooms = 2,
+                            Sqft = 900,
+                            State = "FL",
+                            Street = "Birch St",
+                            Zip = "98765"
+                        },
+                        new
+                        {
+                            ID = 8,
+                            AmenFeatList = "Deck, Garden",
+                            Baths = 2,
+                            City = "Smalltown",
+                            Description = "Lovely family home",
+                            HouseNumber = "555",
+                            HouseOrRoomType = "House",
+                            HouseRent = 2000,
+                            Rooms = 3,
+                            Sqft = 1600,
+                            State = "TX",
+                            Street = "Willow St",
+                            Zip = "67890"
                         });
                 });
 
@@ -797,13 +885,25 @@ namespace PropTrac_backend.Migrations
                         {
                             ID = 1,
                             PropertyInfoID = 2,
-                            RoomRent = 500
+                            RoomRent = 800
                         },
                         new
                         {
                             ID = 2,
                             PropertyInfoID = 2,
-                            RoomRent = 600
+                            RoomRent = 700
+                        },
+                        new
+                        {
+                            ID = 3,
+                            PropertyInfoID = 6,
+                            RoomRent = 800
+                        },
+                        new
+                        {
+                            ID = 4,
+                            PropertyInfoID = 6,
+                            RoomRent = 800
                         });
                 });
 
@@ -905,8 +1005,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 1,
                             FirstName = "Alice",
                             LastName = "Johnson",
-                            LeaseEnd = new DateTime(2025, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4258),
-                            LeaseStart = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4200),
+                            LeaseEnd = new DateTime(2025, 4, 22, 19, 6, 46, 516, DateTimeKind.Local).AddTicks(9928),
+                            LeaseStart = new DateTime(2024, 4, 22, 19, 6, 46, 516, DateTimeKind.Local).AddTicks(9870),
                             LeaseType = "Annual",
                             Phone = "123-456-7890",
                             PropertyInfoID = 1,
@@ -918,8 +1018,8 @@ namespace PropTrac_backend.Migrations
                             DocumentsID = 2,
                             FirstName = "Bob",
                             LastName = "Williams",
-                            LeaseEnd = new DateTime(2024, 5, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4265),
-                            LeaseStart = new DateTime(2024, 4, 22, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4264),
+                            LeaseEnd = new DateTime(2024, 5, 22, 19, 6, 46, 516, DateTimeKind.Local).AddTicks(9939),
+                            LeaseStart = new DateTime(2024, 4, 22, 19, 6, 46, 516, DateTimeKind.Local).AddTicks(9937),
                             LeaseType = "Monthly",
                             Phone = "987-654-3210",
                             PropertyInfoID = 2,
@@ -964,7 +1064,7 @@ namespace PropTrac_backend.Migrations
                             ID = 1,
                             Balance = 1000,
                             DaysRemaining = 7,
-                            DueDate = new DateTime(2024, 4, 29, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4284),
+                            DueDate = new DateTime(2024, 4, 29, 19, 6, 46, 516, DateTimeKind.Local).AddTicks(9999),
                             PaymentRecieved = false,
                             TenantID = 1
                         },
@@ -973,7 +1073,7 @@ namespace PropTrac_backend.Migrations
                             ID = 2,
                             Balance = 1500,
                             DaysRemaining = 9,
-                            DueDate = new DateTime(2024, 5, 1, 12, 59, 33, 571, DateTimeKind.Local).AddTicks(4291),
+                            DueDate = new DateTime(2024, 5, 1, 19, 6, 46, 517, DateTimeKind.Local).AddTicks(5),
                             PaymentRecieved = false,
                             TenantID = 2
                         });
