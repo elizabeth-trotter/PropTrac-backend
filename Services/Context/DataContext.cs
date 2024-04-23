@@ -91,8 +91,8 @@ namespace PropTrac_backend.Services.Context
 
             // Seed dummy data for RoomInfoModel
             builder.Entity<RoomInfoModel>().HasData(
-                new RoomInfoModel { ID = 1, RoomRent = 500, PropertyInfoID = 2 },
-                new RoomInfoModel { ID = 2, RoomRent = 600, PropertyInfoID = 2 }
+                new RoomInfoModel { ID = 1, RoomRent = 800, PropertyInfoID = 2 },
+                new RoomInfoModel { ID = 2, RoomRent = 700, PropertyInfoID = 2 }
             );
 
             // Seed dummy data for PropertyInfoModel

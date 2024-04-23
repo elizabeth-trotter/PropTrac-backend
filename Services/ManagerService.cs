@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
+using PropTrac_backend.Models.DTO.Properties;
 using PropTrac_backend.Services.Context;
 
 namespace PropTrac_backend.Services
@@ -131,7 +132,8 @@ namespace PropTrac_backend.Services
             for (int i = 0; i < 6; i++)
             {
                 var profitOrLoss = GetProjectedMonthlyProfitOrLoss(userId, month - 1, year);
-                profitOrLoss = new MonthlyProfitOrLossDTO{
+                profitOrLoss = new MonthlyProfitOrLossDTO
+                {
                     Month = month + i,
                     ExpenseTotal = profitOrLoss.ExpenseTotal,
                     RevenueTotal = profitOrLoss.RevenueTotal,
@@ -233,6 +235,61 @@ namespace PropTrac_backend.Services
             }).ToList();
 
             return maintenanceStats;
+        }
+
+        public List<PropertiesDTO> GetAllProperties(int userId)
+        {
+            var roomProperties = _context.PropertyInfo
+                .Where(p => p.ManagerProperties.Manager.User.ID == userId && p.HouseOrRoomType.ToLower() == "rooms")
+                .SelectMany(p => p.RoomInfo.Select(room => new PropertiesDTO
+                {
+                    ID = p.ID,
+                    RoomID = room.ID,
+                    HouseNumber = p.HouseNumber,
+                    Street = p.Street,
+                    City = p.City,
+                    Zip = p.Zip,
+                    State = p.State,
+                    HouseOrRoomType = p.HouseOrRoomType,
+                    HouseRent = p.HouseRent,
+                    RoomRent = room.RoomRent,
+                    Rooms = p.Rooms,
+                    Baths = p.Baths,
+                    Sqft = p.Sqft,
+                    AmenFeatList = p.AmenFeatList,
+                    Description = p.Description,
+                    TenantID = room.Tenant != null ? room.Tenant.ID : null,
+                    TenantAssigned = room.Tenant != null
+                }))
+                .ToList();
+
+            var houseProperties = _context.PropertyInfo
+                .Where(p => p.ManagerProperties.Manager.User.ID == userId && p.HouseOrRoomType.ToLower() != "rooms")
+                .Select(p => new PropertiesDTO
+                {
+                    ID = p.ID,
+                    HouseNumber = p.HouseNumber,
+                    Street = p.Street,
+                    City = p.City,
+                    Zip = p.Zip,
+                    State = p.State,
+                    HouseOrRoomType = p.HouseOrRoomType,
+                    HouseRent = p.HouseRent,
+                    Rooms = p.Rooms,
+                    Baths = p.Baths,
+                    Sqft = p.Sqft,
+                    AmenFeatList = p.AmenFeatList,
+                    Description = p.Description,
+                    TenantID = p.Tenant != null ? p.Tenant.Single(t => t.PropertyInfoID == p.ID).ID : null,
+                    TenantAssigned = p.Tenant != null
+                })
+                .ToList();
+
+            var properties = roomProperties.Concat(houseProperties)
+                .OrderBy(p => p.ID)
+                .ToList();
+
+            return properties;
         }
     }
 }

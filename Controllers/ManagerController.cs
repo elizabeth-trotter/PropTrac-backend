@@ -139,5 +139,28 @@ namespace PropTrac_backend.Controllers
 
             return Ok(stats);
         }
+
+        [HttpGet]
+        [Route("GetAllProperties/{userId}")]
+        public IActionResult GetAllProperties(int userId)
+        {
+            // Check if the user exists
+            var userExists = _userService.GetUserById(userId) != null;
+
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            var manager = _managerService.GetManagerByUserId(userId);
+
+            if (manager == null)
+            {
+                return Unauthorized("User is not an authorized Manager");
+            }
+
+            var properties = _managerService.GetAllProperties(userId);
+            return Ok(properties);
+        }
     }
 }
