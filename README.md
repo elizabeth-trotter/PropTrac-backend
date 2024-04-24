@@ -8,7 +8,19 @@
 PropTrac represents an integrated solution designed to optimize the operational efficiency of Property Management. The team is currently working on this full stack application, and completion is projected for June 1, 2024.
 
 - This repository houses the backend logic.
-- For the **Frontend component**, please refer to [PropTrac's Repository](https://github.com/calebsylvia/PropTrac) and to observe the current state of progress, visit [PropTrac App (in development)](https://proptrac-app.vercel.app/).
+- For the **Frontend component**, please refer to [PropTrac's Repository](https://github.com/calebsylvia/PropTrac) and to observe the current state of progress, visit [PropTrac App (in development)](https://proptrac-app.vercel.app/). Login using the test accounts below.
+
+## Test Accounts
+This project is currently under development, and test accounts have been created for both Property Managers and Tenants to aid in beta testing. 
+
+#### Seed data has been added to the database for the following test accounts:
+
+|  | User Type | Username | Email | Password |
+| --- | --- | --- | --- | --- |
+| 1. | Manager | john_doe | john@example.com | JohnPass12! |
+| 2. | Tenant | alice_johnson | alice@example.com | AlicePass34! |
+
+###### ^ Test account data is for example purposes only and does not contain any real user information
 
 
 ## API 
