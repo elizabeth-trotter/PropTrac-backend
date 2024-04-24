@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.Property;
+using PropTrac_backend.Utilities;
 
 namespace PropTrac_backend.Services.Context
 {
@@ -64,10 +65,15 @@ namespace PropTrac_backend.Services.Context
             );
 
             // Seed dummy data for UserModel
+            var userOnePassword = "JohnPass12!";
+            var hashUserOnePassword = PasswordUtility.HashSeedDataPassword(userOnePassword);
+            var userThreePassword = "AlicePass34!";
+            var hashUserThreePassword = PasswordUtility.HashSeedDataPassword(userThreePassword);
+
             builder.Entity<UserModel>().HasData(
-                new UserModel { ID = 1, Username = "john_doe", Salt = "salt1", Hash = "hash1", Email = "john@example.com", IsManager = true, SecurityAnswerSalt = "security_salt1", SecurityAnswerHash = "security_hash1", SecurityQuestionID = 1 },
+                new UserModel { ID = 1, Username = "john_doe", Salt = hashUserOnePassword.Salt, Hash = hashUserOnePassword.Hash, Email = "john@example.com", IsManager = true, SecurityAnswerSalt = "security_salt1", SecurityAnswerHash = "security_hash1", SecurityQuestionID = 1 },
                 new UserModel { ID = 2, Username = "jane_smith", Salt = "salt2", Hash = "hash2", Email = "jane@example.com", IsManager = true, SecurityAnswerSalt = "security_salt2", SecurityAnswerHash = "security_hash2", SecurityQuestionID = 2 },
-                new UserModel { ID = 3, Username = "alice_johnson", Salt = "salt3", Hash = "hash3", Email = "alice@example.com", IsManager = false, SecurityAnswerSalt = "security_salt3", SecurityAnswerHash = "security_hash3", SecurityQuestionID = 3 },
+                new UserModel { ID = 3, Username = "alice_johnson", Salt = hashUserThreePassword.Salt, Hash = hashUserThreePassword.Hash, Email = "alice@example.com", IsManager = false, SecurityAnswerSalt = "security_salt3", SecurityAnswerHash = "security_hash3", SecurityQuestionID = 3 },
                 new UserModel { ID = 4, Username = "bob_williams", Salt = "salt4", Hash = "hash4", Email = "bob@example.com", IsManager = false, SecurityAnswerSalt = "security_salt4", SecurityAnswerHash = "security_hash4", SecurityQuestionID = 1 }
             );
 
