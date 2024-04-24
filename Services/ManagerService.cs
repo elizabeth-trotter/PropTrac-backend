@@ -289,5 +289,57 @@ namespace PropTrac_backend.Services
 
             return properties;
         }
+
+        public bool AddPropertyByUserID(AddPropertyDTO request)
+        {
+            bool result = false;
+
+            PropertyInfoModel propertyInfoModel = new()
+            {
+                HouseNumber = request.HouseNumber,
+                Street = request.Street,
+                City = request.City,
+                Zip = request.Zip,
+                State = request.State,
+                HouseOrRoomType = request.HouseOrRoomType,
+                HouseRent = request.HouseRent,
+                Rooms = request.Rooms,
+                Baths = request.Baths,
+                Sqft = request.Sqft,
+                AmenFeatList = request.AmenFeatList,
+                Description = request.Description,
+            };
+
+            //adds new request to the PropertyInfo table in database
+            _context.PropertyInfo.Add(propertyInfoModel);
+            // SaveChanges to generate the ID for propertyInfoModel
+            _context.SaveChanges();
+
+            if (request.RoomRent != 0)
+            {
+                RoomInfoModel roomInfoModel = new()
+                {
+                    RoomRent = request.RoomRent,
+                    PropertyInfoID = propertyInfoModel.ID
+                };
+
+                _context.RoomInfo.Add(roomInfoModel);
+            }
+
+            var manager = GetManagerByUserId(request.UserID);
+
+            ManagerPropertiesModel managerPropertiesModel = new()
+            {
+                ManagerID = manager.ID,
+                PropertyInfoID = propertyInfoModel.ID
+            };
+
+            _context.ManagerProperties.Add(managerPropertiesModel);
+
+            //save into database, return of number of entries written into database
+            result = _context.SaveChanges() != 0;
+
+            return result;
+        }
     }
 }

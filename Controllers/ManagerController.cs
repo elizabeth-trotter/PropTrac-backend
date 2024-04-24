@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PropTrac_backend.Models.DTO.Properties;
 using PropTrac_backend.Services;
 
 namespace PropTrac_backend.Controllers
@@ -161,6 +162,28 @@ namespace PropTrac_backend.Controllers
 
             var properties = _managerService.GetAllProperties(userId);
             return Ok(properties);
+        }
+
+        [HttpPost]
+        [Route("AddProperty")]
+        public IActionResult AddProperty(AddPropertyDTO addPropertyDTO)
+        {
+            var userExists = _userService.GetUserById(addPropertyDTO.UserID) != null;
+
+            if (!userExists)
+            {
+                return NotFound("User does not exist");
+            }
+
+            var manager = _managerService.GetManagerByUserId(addPropertyDTO.UserID);
+
+            if (manager == null)
+            {
+                return Unauthorized("User is not an authorized Manager");
+            }
+
+            var result = _managerService.AddPropertyByUserID(addPropertyDTO);
+            return Ok(result);
         }
     }
 }
