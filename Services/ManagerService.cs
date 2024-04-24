@@ -194,6 +194,7 @@ namespace PropTrac_backend.Services
 
             return new PropertyStatsDTO
             {
+                FirstName = manager.FirstName,
                 ActiveTenants = activeTenantsCount,
                 OpenListings = openListings,
                 Properties = propertiesCount
