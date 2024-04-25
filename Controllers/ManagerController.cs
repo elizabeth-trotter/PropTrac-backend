@@ -190,8 +190,23 @@ namespace PropTrac_backend.Controllers
 
         [HttpPut]
         [Route("EditProperty")]
-        public bool EditProperty(EditPropertyDTO editPropertyDTO){
+        public bool EditProperty(EditPropertyDTO editPropertyDTO)
+        {
             return _managerService.EditPropertyByID(editPropertyDTO);
+        }
+
+        [HttpDelete]
+        [Route("DeleteProperty/{propertyId}")]
+        public bool DeleteProperty(int propertyId)
+        {
+            return _managerService.DeletePropertyById(propertyId);
+        }
+
+        [HttpDelete]
+        [Route("DeleteRoom/{propertyId}/{roomId}")]
+        public bool DeleteRoom(int propertyId, int roomId)
+        {
+            return _managerService.DeleteRoomById(propertyId, roomId);
         }
     }
 }

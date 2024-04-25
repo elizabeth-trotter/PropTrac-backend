@@ -318,13 +318,16 @@ namespace PropTrac_backend.Services
 
             if (request.HouseOrRoomType.ToLower() == "rooms")
             {
-                RoomInfoModel roomInfoModel = new()
+                foreach (var roomDTO in request.RoomsList)
                 {
-                    RoomRent = request.RoomRent,
-                    PropertyInfoID = propertyInfoModel.ID
-                };
+                    RoomInfoModel roomInfoModel = new()
+                    {
+                        RoomRent = roomDTO.RoomRent,
+                        PropertyInfoID = propertyInfoModel.ID
+                    };
 
-                _context.RoomInfo.Add(roomInfoModel);
+                    _context.RoomInfo.Add(roomInfoModel);
+                }
             }
 
             var manager = GetManagerByUserId(request.UserID);
@@ -343,33 +346,16 @@ namespace PropTrac_backend.Services
             return result;
         }
 
-        // public bool EditProperty(AddPropertyDTO propertyToUpdate)
-        // {
-        //     // Check if the property exists in the database
-        //     var existingProperty = _context.PropertyInfo.Find(propertyToUpdate.ID);
-
-        //     if (existingProperty == null)
-        //     {
-        //         return false;
-        //     }
-
-        //     PropertyInfoModel prop = new(){
-
-        //     };
-
-        //     // _context.Update<PropertyInfoModel>(propertyToUpdate); //Error - ID being tracked (tries to reattach the entity)
-
-        //     // Mark the existing property as modified
-        //     _context.Entry(existingProperty).CurrentValues.SetValues(propertyToUpdate);
-
-        //     return _context.SaveChanges() != 0;
-        // }
+        private PropertyInfoModel FindPropertyWithRooms(int propertyId)
+        {
+            return _context.PropertyInfo
+                .Include(p => p.RoomInfo)
+                .SingleOrDefault(p => p.ID == propertyId);
+        }
 
         public bool EditPropertyByID(EditPropertyDTO propertyToUpdate)
         {
-            var existingProperty = _context.PropertyInfo
-                .Include(p => p.RoomInfo)
-                .SingleOrDefault(p => p.ID == propertyToUpdate.ID);
+            var existingProperty = FindPropertyWithRooms(propertyToUpdate.ID);
 
             if (existingProperty == null)
             {
@@ -393,15 +379,77 @@ namespace PropTrac_backend.Services
             // Update RoomInfoModel entities
             if (propertyToUpdate.HouseOrRoomType.ToLower() == "rooms")
             {
-                var existingRoom = existingProperty.RoomInfo.SingleOrDefault(room => room.ID == propertyToUpdate.RoomID);
-                if (existingRoom != null)
+                if (propertyToUpdate.RoomsList != null)
                 {
-                    // Update existing room with values from propertyToUpdate
-                    existingRoom.RoomRent = propertyToUpdate.RoomRent;
-                }else{
-                    return false;
+                    // Update existing rooms with values from propertyToUpdate
+                    foreach (var roomDTO in propertyToUpdate.RoomsList)
+                    {
+                        var existingRoom = existingProperty.RoomInfo.SingleOrDefault(room => room.ID == roomDTO.RoomID);
+                        if (existingRoom != null)
+                        {
+                            existingRoom.RoomRent = roomDTO.RoomRent;
+                        }
+                        else
+                        {
+                            return false; // Room not found, return false
+                        }
+                    }
                 }
             }
+
+            // Save changes to the database
+            return _context.SaveChanges() != 0;
+        }
+
+        public bool DeletePropertyById(int propertyId)
+        {
+            var propertyToDelete = FindPropertyWithRooms(propertyId);
+
+            if (propertyToDelete == null)
+            {
+                return false;
+            }
+
+            // Remove all attached rooms
+            if (propertyToDelete.HouseOrRoomType.ToLower() == "rooms")
+            {
+                _context.RoomInfo.RemoveRange(propertyToDelete.RoomInfo);
+            }
+
+            // Remove related entries from ManagerProperties
+            var managerPropertiesToDelete = _context.ManagerProperties
+                .Where(mp => mp.PropertyInfoID == propertyId);
+            _context.ManagerProperties.RemoveRange(managerPropertiesToDelete);
+
+            // Remove the property from the context
+            _context.PropertyInfo.Remove(propertyToDelete);
+
+            // Save changes to the database
+            return _context.SaveChanges() != 0;
+        }
+
+        public bool DeleteRoomById(int propertyId, int roomId)
+        {
+            var propertyToDeleteRoomFrom = FindPropertyWithRooms(propertyId);
+
+            if (propertyToDeleteRoomFrom == null)
+            {
+                return false;
+            }
+
+            // Find the room to delete
+            var roomToDelete = propertyToDeleteRoomFrom.RoomInfo.FirstOrDefault(r => r.ID == roomId);
+            
+            if (roomToDelete == null)
+            {
+                return false;
+            }
+
+            // Remove the room from the property
+            propertyToDeleteRoomFrom.RoomInfo.Remove(roomToDelete);
+
+            // Remove the room from the context
+            _context.RoomInfo.Remove(roomToDelete);
 
             // Save changes to the database
             return _context.SaveChanges() != 0;

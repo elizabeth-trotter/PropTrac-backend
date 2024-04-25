@@ -20,7 +20,12 @@ namespace PropTrac_backend.Models.DTO.Properties
         public int Sqft { get; set; }
         public string AmenFeatList { get; set; }
         public string Description { get; set; }
-        public int RoomRent { get; set; } = 0;
         public int UserID { get; set; }
+        public List<RoomRentDTO>? RoomsList { get; set; }
+    }
+
+    public class RoomRentDTO
+    {
+        public int RoomRent { get; set; }
     }
 }
