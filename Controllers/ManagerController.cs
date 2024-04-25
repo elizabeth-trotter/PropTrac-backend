@@ -196,17 +196,17 @@ namespace PropTrac_backend.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteProperty/{propertyId}")]
-        public bool DeleteProperty(int propertyId)
+        [Route("DeleteProperty")]
+        public bool DeleteProperty(DeletePropertyDTO deletePropertyDTO)
         {
-            return _managerService.DeletePropertyById(propertyId);
+            return _managerService.DeletePropertyById(deletePropertyDTO.PropertyID);
         }
 
         [HttpDelete]
-        [Route("DeleteRoom/{propertyId}/{roomId}")]
-        public bool DeleteRoom(int propertyId, int roomId)
+        [Route("DeleteRoom")]
+        public bool DeleteRoom(DeleteRoomDTO deleteRoomDTO)
         {
-            return _managerService.DeleteRoomById(propertyId, roomId);
+            return _managerService.DeleteRoomById(deleteRoomDTO.PropertyID, deleteRoomDTO.RoomID);
         }
     }
 }
