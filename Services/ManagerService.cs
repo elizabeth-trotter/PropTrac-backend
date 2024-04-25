@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
@@ -315,7 +316,7 @@ namespace PropTrac_backend.Services
             // SaveChanges to generate the ID for propertyInfoModel
             _context.SaveChanges();
 
-            if (request.RoomRent != 0)
+            if (request.HouseOrRoomType.ToLower() == "rooms")
             {
                 RoomInfoModel roomInfoModel = new()
                 {
@@ -342,22 +343,67 @@ namespace PropTrac_backend.Services
             return result;
         }
 
-        public bool EditProperty(PropertyInfoModel propertyToUpdate)
+        // public bool EditProperty(AddPropertyDTO propertyToUpdate)
+        // {
+        //     // Check if the property exists in the database
+        //     var existingProperty = _context.PropertyInfo.Find(propertyToUpdate.ID);
+
+        //     if (existingProperty == null)
+        //     {
+        //         return false;
+        //     }
+
+        //     PropertyInfoModel prop = new(){
+
+        //     };
+
+        //     // _context.Update<PropertyInfoModel>(propertyToUpdate); //Error - ID being tracked (tries to reattach the entity)
+
+        //     // Mark the existing property as modified
+        //     _context.Entry(existingProperty).CurrentValues.SetValues(propertyToUpdate);
+
+        //     return _context.SaveChanges() != 0;
+        // }
+
+        public bool EditPropertyByID(EditPropertyDTO propertyToUpdate)
         {
-            // Check if the property exists in the database
-            var existingProperty = _context.PropertyInfo.Find(propertyToUpdate.ID);
+            var existingProperty = _context.PropertyInfo
+                .Include(p => p.RoomInfo)
+                .SingleOrDefault(p => p.ID == propertyToUpdate.ID);
 
             if (existingProperty == null)
             {
-                // Property does not exist, return false
-                return false;
+                return false; // Property not found, return false
             }
 
-            // _context.Update<PropertyInfoModel>(propertyToUpdate); //Error - ID being tracked (tries to reattach the entity)
+            // Update PropertyInfoModel properties
+            existingProperty.HouseNumber = propertyToUpdate.HouseNumber;
+            existingProperty.Street = propertyToUpdate.Street;
+            existingProperty.City = propertyToUpdate.City;
+            existingProperty.Zip = propertyToUpdate.Zip;
+            existingProperty.State = propertyToUpdate.State;
+            existingProperty.HouseOrRoomType = propertyToUpdate.HouseOrRoomType;
+            existingProperty.HouseRent = propertyToUpdate.HouseRent;
+            existingProperty.Rooms = propertyToUpdate.Rooms;
+            existingProperty.Baths = propertyToUpdate.Baths;
+            existingProperty.Sqft = propertyToUpdate.Sqft;
+            existingProperty.AmenFeatList = propertyToUpdate.AmenFeatList;
+            existingProperty.Description = propertyToUpdate.Description;
 
-            // Mark the existing property as modified
-            _context.Entry(existingProperty).CurrentValues.SetValues(propertyToUpdate);
+            // Update RoomInfoModel entities
+            if (propertyToUpdate.HouseOrRoomType.ToLower() == "rooms")
+            {
+                var existingRoom = existingProperty.RoomInfo.SingleOrDefault(room => room.ID == propertyToUpdate.RoomID);
+                if (existingRoom != null)
+                {
+                    // Update existing room with values from propertyToUpdate
+                    existingRoom.RoomRent = propertyToUpdate.RoomRent;
+                }else{
+                    return false;
+                }
+            }
 
+            // Save changes to the database
             return _context.SaveChanges() != 0;
         }
     }

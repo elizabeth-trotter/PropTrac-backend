@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PropTrac_backend.Models.DTO.Properties
 {
-    public class AddPropertyDTO
+    public class EditPropertyDTO
     {
         public int ID { get; set; }
         public string HouseNumber { get; set; }
@@ -21,6 +21,6 @@ namespace PropTrac_backend.Models.DTO.Properties
         public string AmenFeatList { get; set; }
         public string Description { get; set; }
         public int RoomRent { get; set; } = 0;
-        public int UserID { get; set; }
+        public int RoomID { get; set; }
     }
 }

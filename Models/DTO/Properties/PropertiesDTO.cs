@@ -7,7 +7,7 @@ namespace PropTrac_backend.Models.DTO.Properties
 {
     public class PropertiesDTO
     {
-        public int ID { get; set; } // Primary Key
+        public int ID { get; set; }
         public int? RoomID { get; set; }
         public string HouseNumber { get; set; }
         public string Street { get; set; }

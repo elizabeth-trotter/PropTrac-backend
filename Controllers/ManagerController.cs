@@ -190,8 +190,8 @@ namespace PropTrac_backend.Controllers
 
         [HttpPut]
         [Route("EditProperty")]
-        public bool EditProperty(PropertyInfoModel propertyInfoModel){
-            return _managerService.EditProperty(propertyInfoModel);
+        public bool EditProperty(EditPropertyDTO editPropertyDTO){
+            return _managerService.EditPropertyByID(editPropertyDTO);
         }
     }
 }
