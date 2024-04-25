@@ -341,5 +341,24 @@ namespace PropTrac_backend.Services
 
             return result;
         }
+
+        public bool EditProperty(PropertyInfoModel propertyToUpdate)
+        {
+            // Check if the property exists in the database
+            var existingProperty = _context.PropertyInfo.Find(propertyToUpdate.ID);
+
+            if (existingProperty == null)
+            {
+                // Property does not exist, return false
+                return false;
+            }
+
+            // _context.Update<PropertyInfoModel>(propertyToUpdate); //Error - ID being tracked (tries to reattach the entity)
+
+            // Mark the existing property as modified
+            _context.Entry(existingProperty).CurrentValues.SetValues(propertyToUpdate);
+
+            return _context.SaveChanges() != 0;
+        }
     }
 }

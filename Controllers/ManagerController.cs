@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO.Properties;
 using PropTrac_backend.Services;
 
@@ -49,7 +50,8 @@ namespace PropTrac_backend.Controllers
         // Projected
         [HttpGet]
         [Route("GetProjectedProfitOrLoss/{userId}/{month}/{year}")]
-        public IActionResult GetProjectedProfitOrLoss(int userId, int month, int year){
+        public IActionResult GetProjectedProfitOrLoss(int userId, int month, int year)
+        {
             // Check if the user exists
             var userExists = _userService.GetUserById(userId) != null;
 
@@ -184,6 +186,12 @@ namespace PropTrac_backend.Controllers
 
             var result = _managerService.AddPropertyByUserID(addPropertyDTO);
             return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("EditProperty")]
+        public bool EditProperty(PropertyInfoModel propertyInfoModel){
+            return _managerService.EditProperty(propertyInfoModel);
         }
     }
 }

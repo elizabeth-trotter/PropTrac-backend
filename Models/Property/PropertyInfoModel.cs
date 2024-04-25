@@ -25,7 +25,7 @@ namespace PropTrac_backend.Models
         // Navigation properties
 
         // TenantModel
-        public ICollection<TenantModel> Tenant { get; set; } // Ensure this is correctly defined as a collection
+        public ICollection<TenantModel>? Tenant { get; set; } // Ensure this is correctly defined as a collection
 
         // RoomInfoModel
         public ICollection<RoomInfoModel>? RoomInfo { get; set; } // Ensure this is correctly defined as a collection
@@ -34,7 +34,7 @@ namespace PropTrac_backend.Models
         public ManagerPropertiesModel? ManagerProperties { get; set; }
 
         // MonthlyPropertyFinanceModel
-        public MonthlyPropertyFinanceModel MonthlyPropertyFinance { get; set; }
+        public MonthlyPropertyFinanceModel? MonthlyPropertyFinance { get; set; }
 
         // PropertyExpenseRevenueEntryModel
         public ICollection<PropertyExpenseModel>? PropertyExpense { get; set; }
