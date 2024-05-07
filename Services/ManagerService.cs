@@ -473,6 +473,7 @@ namespace PropTrac_backend.Services
                 managerInfo.Email = manager.User.Email;
             }
 
+            managerInfo.ID = manager.UserID;
             managerInfo.FirstName = manager.FirstName;
             managerInfo.LastName = manager.LastName;
             managerInfo.Phone = manager.Phone;
@@ -481,6 +482,31 @@ namespace PropTrac_backend.Services
             managerInfo.Language = manager.Language;
 
             return managerInfo;
+        }
+
+        public bool EditManagerInfo(ManagerAccountInfoDTO managerToUpdate)
+        {
+            var manager = GetManagerByUserId(managerToUpdate.ID);
+
+            if (manager == null)
+            {
+                return false;
+            }
+
+            if (manager.User != null && manager.User.Email != null)
+            {
+                manager.User.Email = managerToUpdate.Email;
+            }
+
+            manager.FirstName = managerToUpdate.FirstName;
+            manager.LastName = managerToUpdate.LastName;
+            manager.Phone = managerToUpdate.Phone;
+            manager.Role = managerToUpdate.Role;
+            manager.Location = managerToUpdate.Location;
+            manager.Language = managerToUpdate.Language;
+
+            // Save changes to the database
+            return _context.SaveChanges() != 0;
         }
     }
 }

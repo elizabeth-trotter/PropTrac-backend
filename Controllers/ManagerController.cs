@@ -215,5 +215,11 @@ namespace PropTrac_backend.Controllers
         public ManagerAccountInfoDTO GetManagerInfo(int userId){
             return _managerService.GetManagerInfo(userId);
         }
+
+        [HttpPut]
+        [Route("EditManagerInfo")]
+        public bool EditManagerInfo(ManagerAccountInfoDTO managerAccountInfoDTO){
+            return _managerService.EditManagerInfo(managerAccountInfoDTO);
+        }
     }
 }
