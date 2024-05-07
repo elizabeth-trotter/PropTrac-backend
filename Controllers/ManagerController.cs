@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PropTrac_backend.Models;
+using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Models.DTO.Properties;
 using PropTrac_backend.Services;
 
@@ -207,6 +208,12 @@ namespace PropTrac_backend.Controllers
         public bool DeleteRoom(DeleteRoomDTO deleteRoomDTO)
         {
             return _managerService.DeleteRoomById(deleteRoomDTO.PropertyID, deleteRoomDTO.RoomID);
+        }
+
+        [HttpGet]
+        [Route("GetManagerInfo/{userId}")]
+        public ManagerAccountInfoDTO GetManagerInfo(int userId){
+            return _managerService.GetManagerInfo(userId);
         }
     }
 }

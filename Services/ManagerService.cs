@@ -439,7 +439,7 @@ namespace PropTrac_backend.Services
 
             // Find the room to delete
             var roomToDelete = propertyToDeleteRoomFrom.RoomInfo.FirstOrDefault(r => r.ID == roomId);
-            
+
             if (roomToDelete == null)
             {
                 return false;
@@ -453,6 +453,34 @@ namespace PropTrac_backend.Services
 
             // Save changes to the database
             return _context.SaveChanges() != 0;
+        }
+
+        public ManagerAccountInfoDTO GetManagerInfo(int userId)
+        {
+            var manager = _context.Managers
+                   .Include(m => m.User) // Eager loading User entity
+                   .SingleOrDefault(m => m.UserID == userId);
+
+            if (manager == null)
+            {
+                return null;
+            }
+
+            var managerInfo = new ManagerAccountInfoDTO();
+
+            if (manager.User != null && manager.User.Email != null)
+            {
+                managerInfo.Email = manager.User.Email;
+            }
+
+            managerInfo.FirstName = manager.FirstName;
+            managerInfo.LastName = manager.LastName;
+            managerInfo.Phone = manager.Phone;
+            managerInfo.Role = manager.Role;
+            managerInfo.Location = manager.Location;
+            managerInfo.Language = manager.Language;
+
+            return managerInfo;
         }
     }
 }
