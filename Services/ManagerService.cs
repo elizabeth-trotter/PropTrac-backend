@@ -7,6 +7,7 @@ using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Models.DTO.Properties;
+using PropTrac_backend.Models.DTO.Tenants;
 using PropTrac_backend.Services.Context;
 
 namespace PropTrac_backend.Services
@@ -507,6 +508,50 @@ namespace PropTrac_backend.Services
 
             // Save changes to the database
             return _context.SaveChanges() != 0;
+        }
+
+        public List<TenantsDTO> GetAllTenantInfo(int userId)
+        {
+            var manager = GetManagerByUserId(userId);
+            var propertyIds = GetPropertyIdsManagedByManager(manager);
+
+            var tenantsList = new List<TenantsDTO>();
+
+            // Use eager loading to include related entities (User and Documents)
+            foreach (var propertyId in propertyIds)
+            {
+                var property = _context.PropertyInfo
+                    .Include(p => p.Tenant) // Include Tenants related to the property
+                        .ThenInclude(t => t.User) // Include User related to the tenant
+                    .Include(p => p.Tenant) // Include Tenants related to the property
+                        .ThenInclude(t => t.Documents) // Include Documents related to the tenant
+                    .FirstOrDefault(p => p.ID == propertyId);
+
+                if (property != null)
+                {
+                    var tenants = _context.Tenants.Where(t => t.PropertyInfoID == propertyId).ToList();
+                    foreach (var tenant in tenants)
+                    {
+                        var tenantDto = new TenantsDTO
+                        {
+                            ID = tenant.ID,
+                            FirstName = tenant.FirstName,
+                            LastName = tenant.LastName,
+                            Phone = tenant.Phone,
+                            LeaseType = tenant.LeaseType,
+                            LeaseStart = tenant.LeaseStart,
+                            LeaseEnd = tenant.LeaseEnd,
+                            Email = tenant.User?.Email ?? "No Email", // Use null-conditional operator and null-coalescing operator
+                            DocumentName = tenant.Documents?.Name ?? "No Document Name", // Use null-conditional operator and null-coalescing operator
+                            DocumentType = tenant.Documents?.Type ?? "No Document Type", // Use null-conditional operator and null-coalescing operator
+                            DocumentContent = tenant.Documents?.Content
+                        };
+                        tenantsList.Add(tenantDto);
+                    }
+                }
+            }
+
+            return tenantsList;
         }
     }
 }

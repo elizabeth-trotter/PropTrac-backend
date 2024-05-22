@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Models.DTO.Properties;
+using PropTrac_backend.Models.DTO.Tenants;
 using PropTrac_backend.Services;
 
 namespace PropTrac_backend.Controllers
@@ -220,6 +221,12 @@ namespace PropTrac_backend.Controllers
         [Route("EditManagerInfo")]
         public bool EditManagerInfo(ManagerAccountInfoDTO managerAccountInfoDTO){
             return _managerService.EditManagerInfo(managerAccountInfoDTO);
+        }
+
+        [HttpGet]
+        [Route("GetAllTenants/{userId}")]
+        public List<TenantsDTO> GetAllTenants(int userId){
+            return _managerService.GetAllTenantInfo(userId);
         }
     }
 }
