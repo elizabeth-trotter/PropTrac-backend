@@ -40,7 +40,7 @@ namespace PropTrac_backend.Services
             var user = _userService.GetUserByUsernameOrEmail(requestResetPasswordDTO.UsernameOrEmail);
             if (user != null)
             {
-                var securityQuestion = GetSecurityQuestionById(user.SecurityQuestionID);
+                var securityQuestion = GetSecurityQuestionById(user.SecurityQuestionID ?? 0);
                 return securityQuestion;
             }
             else

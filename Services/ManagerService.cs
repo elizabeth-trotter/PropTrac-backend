@@ -553,5 +553,37 @@ namespace PropTrac_backend.Services
 
             return tenantsList;
         }
+
+        public bool DoesTenantExist(string email)
+        {
+            //check if request exists
+            //if 1 matches, then return the item
+            //if no item matches, then return null
+
+            return _context.UserInfo.SingleOrDefault(request => request.Email == email) != null;
+        }
+
+        public bool AddTenant(AddTenantDTO addTenantDTO)
+        {
+            bool result = false;
+
+            //if tenant doesn't exist, add tenant
+            if (!DoesTenantExist(addTenantDTO.Email))
+            {
+                UserModel newUserModel = new()
+                {
+                    ID = 0,
+                    
+                };
+
+                //adds new request to the Maintenance table in database
+                _context.UserInfo.Add(newUserModel);
+
+                //save into database, return of number of entries written into database
+                result = _context.SaveChanges() != 0;
+            }
+
+            return result;
+        }
     }
 }

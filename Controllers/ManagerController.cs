@@ -228,7 +228,11 @@ namespace PropTrac_backend.Controllers
         public List<TenantsDTO> GetAllTenants(int userId){
             return _managerService.GetAllTenantInfo(userId);
         }
+        [HttpPost]
+        [Route("AddTenant")]
+        public bool AddTenant(AddTenantDTO addTenantDTO){
+            return _managerService.AddTenant(addTenantDTO);
+        }
 
-        //testing workflow
     }
 }
