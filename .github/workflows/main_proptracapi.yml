@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy ASP.Net Core app to Azure
+name: Build and deploy ASP.Net Core app to Azure Web App - proptracapi
 
 on:
   push:
@@ -52,9 +52,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_295D86F7122D44E2AF1711F14488943E }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3FEBAC17748D428493FAC84C7416D941 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F46A986B56E14A04AE1B086F20F2F3EA }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C4C07D09393E4B61A6F067330B3F0DBD }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_970AF6FB8CC346A2BC2065BB4DACF837 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_81AE72500A054535B7788D2128449918 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
