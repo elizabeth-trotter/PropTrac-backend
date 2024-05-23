@@ -572,15 +572,47 @@ namespace PropTrac_backend.Services
             {
                 UserModel newUserModel = new()
                 {
-                    ID = 0,
-                    
+                    Email = addTenantDTO.Email,
+                    IsManager = false
                 };
 
-                //adds new request to the Maintenance table in database
                 _context.UserInfo.Add(newUserModel);
+                _context.SaveChanges();
 
-                //save into database, return of number of entries written into database
-                result = _context.SaveChanges() != 0;
+                DocumentsModel newDocumentModel = null;
+
+                // Add document if provided
+                if (addTenantDTO.DocumentsContent != null)
+                {
+                    newDocumentModel = new()
+                    {
+                        Name = addTenantDTO.DocumentsName,
+                        Type = addTenantDTO.DocumentsType,
+                        Content = addTenantDTO.DocumentsContent
+                    };
+
+                    _context.Documents.Add(newDocumentModel);
+                    _context.SaveChanges();
+                }
+
+                TenantModel newTenantModel = new()
+                {
+                    FirstName = addTenantDTO.FirstName,
+                    LastName = addTenantDTO.LastName,
+                    Phone = addTenantDTO.Phone,
+                    LeaseType = addTenantDTO.LeaseType,
+                    LeaseStart = addTenantDTO.LeaseStart,
+                    LeaseEnd = addTenantDTO.LeaseEnd,
+                    UserID = newUserModel.ID,
+                    RoomInfoID = addTenantDTO.RoomInfoID,
+                    PropertyInfoID = addTenantDTO.PropertyInfoID,
+                    DocumentsID = newDocumentModel != null ? newDocumentModel.ID : null
+                };
+
+                _context.Tenants.Add(newTenantModel);
+                _context.SaveChanges();
+
+                result = true;
             }
 
             return result;
