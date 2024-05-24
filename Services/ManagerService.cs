@@ -629,10 +629,11 @@ namespace PropTrac_backend.Services
         {
             var manager = GetManagerByUserId(userId);
 
-            if (manager == null){
+            if (manager == null)
+            {
                 return null;
             }
-            
+
             var contractorList = _context.Contractor.Where(contractor => contractor.UserID == userId).ToList();
 
             return contractorList;
@@ -640,9 +641,33 @@ namespace PropTrac_backend.Services
 
         public bool AddContractor(ContractorModel contractorModel)
         {
-            bool result = false;
+            var manager = GetManagerByUserId(contractorModel.UserID);
 
-            return result;
+            if (manager == null)
+            {
+                return false;
+            }
+
+            bool exist = _context.Contractor.SingleOrDefault(request => request.UserID == contractorModel.UserID && request.Name == contractorModel.Name) != null;
+
+            if (!exist)
+            {
+
+                ContractorModel newContractor = new()
+                {
+                    Name = contractorModel.Name,
+                    Email = contractorModel.Email,
+                    Phone = contractorModel.Phone,
+                    Category = contractorModel.Category,
+                    UserID = contractorModel.UserID
+                };
+
+                _context.Contractor.Add(newContractor);
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
 
     }
