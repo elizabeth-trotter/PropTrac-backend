@@ -230,6 +230,7 @@ namespace PropTrac_backend.Services
                 Status = mr.Status,
                 Category = mr.Category,
                 Priority = mr.Priority,
+                Description = mr.Description,
                 DateRequested = mr.DateRequested,
                 PropertyInfoID = mr.PropertyMaintenance.PropertyInfo.ID
             }).ToList();
