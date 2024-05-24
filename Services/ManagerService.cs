@@ -542,6 +542,11 @@ namespace PropTrac_backend.Services
                             LeaseStart = tenant.LeaseStart,
                             LeaseEnd = tenant.LeaseEnd,
                             Email = tenant.User?.Email ?? "No Email", // Use null-conditional operator and null-coalescing operator
+                            HouseNumber = tenant.PropertyInfo?.HouseNumber ?? "No Email", // Use null-conditional operator and null-coalescing operator
+                            Street = tenant.PropertyInfo?.Street ?? "No Email", // Use null-conditional operator and null-coalescing operator
+                            City = tenant.PropertyInfo?.City ?? "No Email", // Use null-conditional operator and null-coalescing operator
+                            State = tenant.PropertyInfo?.State ?? "No Email", // Use null-conditional operator and null-coalescing operator
+                            Zip = tenant.PropertyInfo?.Zip ?? "No Email", // Use null-conditional operator and null-coalescing operator
                             DocumentName = tenant.Documents?.Name ?? "No Document Name", // Use null-conditional operator and null-coalescing operator
                             DocumentType = tenant.Documents?.Type ?? "No Document Type", // Use null-conditional operator and null-coalescing operator
                             DocumentContent = tenant.Documents?.Content
