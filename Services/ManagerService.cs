@@ -541,14 +541,14 @@ namespace PropTrac_backend.Services
                             LeaseType = tenant.LeaseType,
                             LeaseStart = tenant.LeaseStart,
                             LeaseEnd = tenant.LeaseEnd,
-                            Email = tenant.User?.Email ?? "No Email", // Use null-conditional operator and null-coalescing operator
-                            HouseNumber = tenant.PropertyInfo?.HouseNumber ?? "No Email", // Use null-conditional operator and null-coalescing operator
-                            Street = tenant.PropertyInfo?.Street ?? "No Email", // Use null-conditional operator and null-coalescing operator
-                            City = tenant.PropertyInfo?.City ?? "No Email", // Use null-conditional operator and null-coalescing operator
-                            State = tenant.PropertyInfo?.State ?? "No Email", // Use null-conditional operator and null-coalescing operator
-                            Zip = tenant.PropertyInfo?.Zip ?? "No Email", // Use null-conditional operator and null-coalescing operator
-                            DocumentName = tenant.Documents?.Name ?? "No Document Name", // Use null-conditional operator and null-coalescing operator
-                            DocumentType = tenant.Documents?.Type ?? "No Document Type", // Use null-conditional operator and null-coalescing operator
+                            Email = tenant.User?.Email ?? "", // Use null-conditional operator and null-coalescing operator
+                            HouseNumber = tenant.PropertyInfo?.HouseNumber ?? "", // Use null-conditional operator and null-coalescing operator
+                            Street = tenant.PropertyInfo?.Street ?? "", // Use null-conditional operator and null-coalescing operator
+                            City = tenant.PropertyInfo?.City ?? "", // Use null-conditional operator and null-coalescing operator
+                            State = tenant.PropertyInfo?.State ?? "", // Use null-conditional operator and null-coalescing operator
+                            Zip = tenant.PropertyInfo?.Zip ?? "", // Use null-conditional operator and null-coalescing operator
+                            DocumentName = tenant.Documents?.Name ?? "", // Use null-conditional operator and null-coalescing operator
+                            DocumentType = tenant.Documents?.Type ?? "", // Use null-conditional operator and null-coalescing operator
                             DocumentContent = tenant.Documents?.Content
                         };
                         tenantsList.Add(tenantDto);
