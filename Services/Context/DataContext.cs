@@ -27,6 +27,7 @@ namespace PropTrac_backend.Services.Context
         public DbSet<PropertyRevenueModel> PropertyRevenue { get; set; }
         public DbSet<PropertyMaintenanceModel> PropertyMaintenance { get; set; }
         public DbSet<MaintenanceModel> Maintenance { get; set; }
+        public DbSet<ContractorModel> Contractor { get; set; }
         // add additional models here once known
 
         // creating constructor to inject models into our database
