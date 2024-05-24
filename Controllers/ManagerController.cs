@@ -7,6 +7,7 @@ using PropTrac_backend.Models;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Models.DTO.Properties;
 using PropTrac_backend.Models.DTO.Tenants;
+using PropTrac_backend.Models.Property;
 using PropTrac_backend.Services;
 
 namespace PropTrac_backend.Controllers
@@ -232,6 +233,17 @@ namespace PropTrac_backend.Controllers
         [Route("AddTenant")]
         public bool AddTenant(AddTenantDTO addTenantDTO){
             return _managerService.AddTenant(addTenantDTO);
+        }
+
+        [HttpGet]
+        [Route("GetAllContractors/{userId}")]
+        public List<ContractorModel> GetAllContractors(int userId){
+            return _managerService.GetAllContractors(userId);
+        }
+        [HttpPost]
+        [Route("AddContractor")]
+        public bool AddContractor(ContractorModel contractorModel){
+            return _managerService.AddContractor(contractorModel);
         }
 
     }

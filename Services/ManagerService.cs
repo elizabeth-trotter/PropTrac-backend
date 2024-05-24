@@ -8,6 +8,7 @@ using PropTrac_backend.Models.DTO;
 using PropTrac_backend.Models.DTO.ManagerDashboard;
 using PropTrac_backend.Models.DTO.Properties;
 using PropTrac_backend.Models.DTO.Tenants;
+using PropTrac_backend.Models.Property;
 using PropTrac_backend.Services.Context;
 
 namespace PropTrac_backend.Services
@@ -623,5 +624,26 @@ namespace PropTrac_backend.Services
 
             return result;
         }
+
+        public List<ContractorModel> GetAllContractors(int userId)
+        {
+            var manager = GetManagerByUserId(userId);
+
+            if (manager == null){
+                return null;
+            }
+            
+            var contractorList = _context.Contractor.Where(contractor => contractor.UserID == userId).ToList();
+
+            return contractorList;
+        }
+
+        public bool AddContractor(ContractorModel contractorModel)
+        {
+            bool result = false;
+
+            return result;
+        }
+
     }
 }
