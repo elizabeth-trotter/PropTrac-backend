@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PropTrac_backend.Models;
 using PropTrac_backend.Models.Property;
+using PropTrac_backend.Models.Stripe;
 using PropTrac_backend.Utilities;
 
 namespace PropTrac_backend.Services.Context
@@ -28,7 +29,7 @@ namespace PropTrac_backend.Services.Context
         public DbSet<PropertyMaintenanceModel> PropertyMaintenance { get; set; }
         public DbSet<MaintenanceModel> Maintenance { get; set; }
         // add additional models here once known
-
+        public DbSet<StripeAccountModel> StripeAccount { get; set; }
         // creating constructor to inject models into our database
         public DataContext(DbContextOptions options) : base(options) { }
 

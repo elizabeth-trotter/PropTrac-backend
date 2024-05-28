@@ -11,6 +11,7 @@ builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TenantService>();
 builder.Services.AddScoped<ManagerService>();
+builder.Services.AddScoped<StripeService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyAppString");
 
